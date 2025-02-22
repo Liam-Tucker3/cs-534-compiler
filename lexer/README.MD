@@ -6,4 +6,10 @@ For this assignment, I have utilized the **Github Copilot** extention in VSCode,
 - Automating repetitive tasks (i.e. filling all 20+ lines of a toString() function). This avoids me needing to write the same simple logic 20 times
 - Splitting a token.cpp class into two files, token.h and token.cpp
 - Writing extremely basic templates for certain functions
-- Autocompleting certain lines of code, particularly in simple functions
+- Autocompleting certain lines of code, particularly in simple functions like Token::toString
+- Generating the list of C++ keywords
+
+# TODO
+1. Modify lexer.cpp to accept a filename as a parameter and parse the file, rather than one input string
+2. Add extra punctuation to lexer as needed
+3. Modify lexer.cpp to generate vector of Tokens instead of simply printing tokens to string
