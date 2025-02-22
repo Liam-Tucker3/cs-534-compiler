@@ -199,7 +199,10 @@ void parseInput(const std::string &input, std::vector<Token> &tokens, std::vecto
 }
 
 void printTokens(const std::vector<Token> &tokens) {
-    for (Token t : tokens) std::cout << "Line " << t.getLine() << " Char " << t.getIndex() << " | " << t.toString() << std::endl;
+    for (Token t : tokens) {
+        if (t.getToken() == WHITESPACE) continue;
+        std::cout << "Line " << t.getLine() << " Char " << t.getIndex() << " | " << t.toString() << std::endl;
+    }
 }
 
 int main(int argc, char *argv[]) {
