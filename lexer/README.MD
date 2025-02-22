@@ -4,7 +4,7 @@ This project is part one of a semester-long project building a compiler. My goal
 # Running program
 - Compile: g++ lexer.cpp token.cpp -o l
 - To execute: ./l.exe filename.txt
-- expected output: a series of lines written to the terminal of the form **Line <i> Char <j> | <Token>, where <i> and <j> denote the token's location in the file (both 1-indexed) <Token> is the token (and its value, if the token can have multiple values)
+- expected output: a series of lines written to the terminal of the form **Line <i> Char <j> | <Token>**, where <i> and <j> denote the token's location in the file (both 1-indexed) <Token> is the token (and its value, if the token can have multiple values)
 
 # Language specification
 This lexer supports int, string, and char variable types. It reserves the following keywords:
