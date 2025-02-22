@@ -2,8 +2,10 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <set>
+#include <vector>
 #include "token.h"
 
 std::set<char> delimiters = {
@@ -174,24 +176,66 @@ Token identifyToken(const std::string &input, int index) {
 
 
 /* Iterates through input, finds delimiters, and calls function to identify input*/
-void parseInput(const std::string &input) {
+void parseInput(const std::string &input, std::vector<Token> &tokens, std::vector<int> &lineIndices) {
     size_t i = 0;
-    // std::cout << input.length() << std::endl;
+    // Iterating through characters
     while (i < input.length()) {
         char ch = input[i];
-        // std::cout << "PARse input: index " << i << " | ch: " << ch << std::endl;
-        if (true) {
+        if (true) { // TODO: refactor
+            // Creating token
             Token t = identifyToken(input, i);
-            std::cout << t.getIndex() << " | " << t.toString() << std::endl;
+
+            // Finding line num, relative index
+            auto it = std::upper_bound(lineIndices.begin(), lineIndices.end(), i);
+            int lineNum = std::distance(lineIndices.begin(), it); // No -1 to adjust to 1-based indexing
+            int relIndex = i - lineIndices[lineNum-1] + 1; // Adjusting to 1-based indexing
+            t.setIndices(lineNum+1, relIndex); // Updating indexes
+
+            tokens.push_back(t); // Adding token to vector
             i += t.getLength(); // Increment by length of token
         }
         else i++; // Increment by 1
     }
 }
 
+void printTokens(const std::vector<Token> &tokens) {
+    for (Token t : tokens) std::cout << "Line " << t.getLine() << " Char " << t.getIndex() << " | " << t.toString() << std::endl;
+}
 
-int main() {
-    std::string input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
-    parseInput(input);
+int main(int argc, char *argv[]) {
+    // Confirming proper number of arguments
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+        return 1;
+    }
+
+    // Opening file
+    std::ifstream file(argv[1]);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open file " << argv[1] << std::endl;
+        return 1;
+    }
+
+    // Reading file into string
+    std::vector<int> lineIndices; // lineIndices.at(x) = index of first character of line x+1
+    std::string input;
+    std::string line;
+    while (std::getline(file, line)) {
+        input += line;
+        lineIndices.push_back(input.length());
+    }
+    file.close();
+
+    // Printing lineIndices
+    for (int i : lineIndices) std::cout << i << std::endl;
+
+    // Hardcoding input
+    // input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
+
+    // Performing process
+    std::vector<Token> tokens;
+    parseInput(input, tokens, lineIndices);
+    printTokens(tokens);
+
     return 0;
 }

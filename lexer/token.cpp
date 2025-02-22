@@ -1,7 +1,7 @@
 #include "token.h"
 
 // Static variables
-std::set<std::string> Token::keywords = {"class", "for", "private", "std", "int", "string", "char", "bool", "void", "if", "else", "while", "do", "switch", "case", "default", "return", "break", "continue", "true", "false", "nullptr", "new", "delete", "this", "static", "virtual", "friend", "const", "inline", "template", "typename", "namespace", "using", "public", "protected", "operator", "sizeof", "auto", "register", "extern", "volatile", "mutable", "explicit", "typedef", "struct", "union", "enum", "goto", "try", "catch", "throw", "volatile", "asm", "__asm", "__asm__", "__volatile__", "__volatile", "__volatile", "__volatile", "__volatile", "__volatile"};
+std::set<std::string> Token::keywords = {"main", "class", "for", "private", "std", "int", "string", "char", "bool", "void", "if", "else", "while", "do", "switch", "case", "default", "return", "break", "continue", "true", "false", "nullptr", "new", "delete", "this", "static", "virtual", "friend", "const", "inline", "template", "typename", "namespace", "using", "public", "protected", "operator", "sizeof", "auto", "register", "extern", "volatile", "mutable", "explicit", "typedef", "struct", "union", "enum", "goto", "try", "catch", "throw", "volatile", "asm", "__asm", "__asm__", "__volatile__", "__volatile", "__volatile", "__volatile", "__volatile", "__volatile"};
 
 // Constructors
 Token::Token() {
@@ -52,6 +52,11 @@ void Token::setVal(int val) {
 void Token::setVal(std::string val) {
     sVal = val;
     iVal = -1;
+}
+
+void Token::setIndices(int line, int index) {
+    this->line = line;
+    this->index = index;
 }
 
 // MUST MANUALLY UPDATE FOR NEW TOKEN TYPES

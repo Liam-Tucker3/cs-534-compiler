@@ -55,6 +55,7 @@ public:
 
     void setVal(int val);
     void setVal(std::string val);
+    void setIndices(int line, int index);
 };
 
 #endif // TOKEN_H
