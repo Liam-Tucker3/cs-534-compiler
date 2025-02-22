@@ -107,7 +107,6 @@ Token identifyToken(const std::string &input, int index) {
     if (ch == '~') return Token(XNOT, index);
 
     // INT
-    // std::cout << ch << " isdigit " << std::isdigit(ch) << std::endl;
     if (std::isdigit(ch)) {
         int s = index; // Start index
         int e = index; // End index
@@ -116,6 +115,29 @@ Token identifyToken(const std::string &input, int index) {
         t.setVal(std::stoi(input.substr(s, e-s))); // Storing value of s
         return t;
     }
+
+    // VAR, KEYWORD
+    if (std::isalpha(ch)) {
+        // Getting string
+        int s = index; // Start index
+        int e = index; // End index
+        while (isalpha(input[e]) || std::isdigit(input[e]) || '_' == input[e]) e++;
+        std::string val = input.substr(s, e-s);
+
+        // Checking if keyword or variable name
+        if (Token::keywords.find(val) != Token::keywords.end()) { // Case: Keyword
+            Token t = Token(KEYWORD, s);
+            t.setVal(val); // Storing value of s
+            return t;
+        } else { // Case: VAR
+            Token t = Token(VAR, s);
+            t.setVal(input.substr(s, e-s)); // Storing value of s
+            return t;
+        }
+    }
+    
+    // Check for whitespace
+    if (std::isspace(ch)) return Token(WHITESPACE, index);
 
     return Token(UNKNOWN, index);
 }
@@ -139,7 +161,7 @@ void parseInput(const std::string &input) {
 
 
 int main() {
-    std::string input = "+-*/<=<=>==!=<>/***//123?.45";
+    std::string input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic publica public ab_cD12094 3a.";
     parseInput(input);
     return 0;
 }

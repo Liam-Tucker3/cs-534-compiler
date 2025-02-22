@@ -1,5 +1,8 @@
 #include "token.h"
 
+// Static variables
+std::set<std::string> Token::keywords = {"class", "for", "private", "std", "int", "string", "char", "bool", "void", "if", "else", "while", "do", "switch", "case", "default", "return", "break", "continue", "true", "false", "nullptr", "new", "delete", "this", "static", "virtual", "friend", "const", "inline", "template", "typename", "namespace", "using", "public", "protected", "operator", "sizeof", "auto", "register", "extern", "volatile", "mutable", "explicit", "typedef", "struct", "union", "enum", "goto", "try", "catch", "throw", "volatile", "asm", "__asm", "__asm__", "__volatile__", "__volatile", "__volatile", "__volatile", "__volatile", "__volatile"};
+
 // Constructors
 Token::Token() {
     token = UNKNOWN;
@@ -67,6 +70,8 @@ int Token::getLength() {
     else if (t == BITAND || t == BITOR || t == XOR || t == XNOT) return 1; // Bitwise op, 1 char
     else if (t == AND || t == OR) return 2; // Bitwise op, 2 char
     else if (t == INT) return std::to_string(iVal).length(); // INT
+    else if (t == VAR || t == KEYWORD) return sVal.length(); // VAR or KEYWORD
+    else if (t == WHITESPACE) return 1; // Whitespace
     else return 0; // Unknown 
 }
  
@@ -201,6 +206,15 @@ std::string Token::toString() {
             break;
         case INT:
             tokenString = "INT: " + std::to_string(iVal);
+            break;
+        case VAR:
+            tokenString = "VAR: " + sVal;
+            break;
+        case KEYWORD:
+            tokenString = "KEYWORD: " + sVal;
+            break;
+        case WHITESPACE:
+            tokenString = "WHITESPACE";
             break;
         case UNKNOWN:
             tokenString = "UNKNOWN";
