@@ -6,18 +6,6 @@
 #include <set>
 #include "token.h"
 
-/*
-enum TokenType {
-    PLUS, MINUS, TIMES, DIVIDE, // Basic arithmetic
-    PLUSEQUALS, MINUSEQUALS, TIMESEQUALS, DIVIDEEQUALS, // Compound assignment
-    PLUSPLUS, MINUSMINUS, // Increment, decrement
-    LE, GE, LT, GT, EE, NE, NOT, EQUALS, // Comparison
-    COMMA, SEMICOLON, COLON,
-    OPARENTHESES, CPARENTHESES, OCURLY, CCURLY, OBRACKET, CBRACKET,
-    UNKNOWN
-};
-*/
-
 std::set<char> delimiters = {
     '(', ')', '{', '}', '[', ']', // Braces
     ',', ';', ':', // Punctuation
@@ -42,11 +30,20 @@ std::set<std::string, TokenType> keywords = {
 
 Token identifyToken(const std::string &input, int index) {
     char ch = input[index];
+    // std::cout << "index: " << index << " | ch: " << ch << std::endl;
 
     // Punctuation
     if (ch == ',') return Token(COMMA, index); 
     if (ch == ';') return Token(SEMICOLON, index);
     if (ch == ':') return Token(COLON, index);
+    if (ch == '.') return Token(DOT, index);
+    if (ch == '?' ) return Token(QUESTION, index);
+    if (ch == '/') {
+        if (input[index+1] == '/') return Token(LINECOMMENT, index);
+        else if (input[index+1] == '*') return Token(BLOCKCOMMENTOPEN, index);
+        else return Token(SLASH, index);
+    }
+    if (ch == '\\') return Token(BACKSLASH, index); // TODO: Fix
 
     // Braces
     if (ch == '(') return Token(OPARENTHESES, index);
@@ -69,12 +66,15 @@ Token identifyToken(const std::string &input, int index) {
     }
     if (ch == '*') {
         if (input[index+1] == '=') return Token(TIMESEQUALS, index);
+        else if (input[index+1] == '*') return Token(POWER, index);
+        else if (input[index+1] == '/') return Token(BLOCKCOMMENTCLOSE, index);
         else return Token(TIMES, index);
     }
     if (ch == '/')  {
         if (input[index+1] == '=') return Token(DIVIDEEQUALS, index);
         else return Token(DIVIDE, index);
     }
+    if (ch == '%') return Token(MOD, index);
 
     // Comparison operators
     if (ch == '<') {
@@ -94,6 +94,29 @@ Token identifyToken(const std::string &input, int index) {
         else return Token(NOT, index);
     }
 
+    // AND, OR
+    if (ch == '&') {
+        if (input[index+1] == '&') return Token(AND, index);
+        else return Token(BITAND, index);
+    }
+    if (ch == '|') {
+        if (input[index+1] == '|') return Token(OR, index);
+        else return Token(BITOR, index);
+    }
+    if (ch == '^') return Token(XOR, index);
+    if (ch == '~') return Token(XNOT, index);
+
+    // INT
+    // std::cout << ch << " isdigit " << std::isdigit(ch) << std::endl;
+    if (std::isdigit(ch)) {
+        int s = index; // Start index
+        int e = index; // End index
+        while (isdigit(input[e])) e++;
+        Token t = Token(INT, s);
+        t.setVal(std::stoi(input.substr(s, e-s))); // Storing value of s
+        return t;
+    }
+
     return Token(UNKNOWN, index);
 }
 
@@ -101,9 +124,11 @@ Token identifyToken(const std::string &input, int index) {
 /* Iterates through input, finds delimiters, and calls function to identify input*/
 void parseInput(const std::string &input) {
     size_t i = 0;
+    // std::cout << input.length() << std::endl;
     while (i < input.length()) {
         char ch = input[i];
-        if (delimiters.find(ch) != delimiters.end()) {
+        // std::cout << "PARse input: index " << i << " | ch: " << ch << std::endl;
+        if (true) {
             Token t = identifyToken(input, i);
             std::cout << t.getIndex() << " | " << t.toString() << std::endl;
             i += t.getLength(); // Increment by length of token
@@ -114,7 +139,7 @@ void parseInput(const std::string &input) {
 
 
 int main() {
-    std::string input = "+-*/<=<=>==!=<>";
+    std::string input = "+-*/<=<=>==!=<>/***//123?.45";
     parseInput(input);
     return 0;
 }

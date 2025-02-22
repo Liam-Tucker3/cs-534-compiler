@@ -40,19 +40,36 @@ int Token::getIndex() {
     return index;
 }
 
+
+void Token::setVal(int val) {
+    iVal = val;
+    sVal = "";
+}
+
+void Token::setVal(std::string val) {
+    sVal = val;
+    iVal = -1;
+}
+
+// MUST MANUALLY UPDATE FOR NEW TOKEN TYPES
+
 int Token::getLength() {
     TokenType t = this->token;
 
-    if (t == PLUS || t == MINUS || t == TIMES || t == DIVIDE) return 1; // Arithmetic
+    if (t == PLUS || t == MINUS || t == TIMES || t == DIVIDE || t == POWER || t == MOD) return 1; // Arithmetic
     else if (t == PLUSEQUALS || t == MINUSEQUALS || t == TIMESEQUALS || t == DIVIDEEQUALS) return 2; // Compound assignment
     else if (t == PLUSPLUS || t == MINUSMINUS) return 2; // Increment, decrement
     else if (t == LE || t == GE || t == EE || t == NE) return 2; // Comparison, 2 char
     else if (t == LT || t == GT || t == NOT || t == EQUALS) return 1; // Comparison, 1 char
-    else if (t == COMMA || t == SEMICOLON || t == COLON) return 1; // Punctuation
+    else if (t == COMMA || t == SEMICOLON || t == COLON || t == DOT || t == SLASH || t == BACKSLASH || t == QUESTION) return 1; // Punctuation
     else if (t == OPARENTHESES || t == CPARENTHESES || t == OCURLY || t == CCURLY || t == OBRACKET || t == CBRACKET) return 1; // Braces
+    else if (t == LINECOMMENT || t == BLOCKCOMMENTOPEN || t == BLOCKCOMMENTCLOSE) return 2; // Comments
+    else if (t == BITAND || t == BITOR || t == XOR || t == XNOT) return 1; // Bitwise op, 1 char
+    else if (t == AND || t == OR) return 2; // Bitwise op, 2 char
+    else if (t == INT) return std::to_string(iVal).length(); // INT
     else return 0; // Unknown 
 }
-   
+ 
 std::string Token::toString() {
     std::string tokenString = "";
     switch (token) {
@@ -67,6 +84,12 @@ std::string Token::toString() {
             break;
         case DIVIDE:
             tokenString = "DIVIDE";
+            break;
+        case POWER:
+            tokenString = "POWER";
+            break;
+        case MOD:
+            tokenString == "MOD";
             break;
         case PLUSEQUALS:
             tokenString = "PLUSEQUALS";
@@ -136,6 +159,48 @@ std::string Token::toString() {
             break;
         case CBRACKET:
             tokenString = "CBRACKET";
+            break;
+        case DOT:
+            tokenString = "DOT";
+            break;
+        case SLASH:
+            tokenString = "SLASH";
+            break;
+        case BACKSLASH:
+            tokenString = "BACKSLASH";
+            break;
+        case QUESTION:
+            tokenString = "QUESTION";
+            break;
+        case LINECOMMENT:
+            tokenString = "LINECOMMENT";
+            break;
+        case BLOCKCOMMENTOPEN:
+            tokenString = "BLOCKCOMMENTOPEN";
+            break;
+        case BLOCKCOMMENTCLOSE:
+            tokenString = "BLOCKCOMMENTCLOSE";
+            break;
+        case AND:
+            tokenString = "AND";
+            break;
+        case BITAND:
+            tokenString = "BITAND";
+            break;
+        case OR:
+            tokenString = "OR";
+            break;
+        case BITOR:
+            tokenString = "BITOR";
+            break;
+        case XOR:
+            tokenString = "XOR";
+            break;
+        case XNOT:
+            tokenString = "XNOT";
+            break;
+        case INT:
+            tokenString = "INT: " + std::to_string(iVal);
             break;
         case UNKNOWN:
             tokenString = "UNKNOWN";
