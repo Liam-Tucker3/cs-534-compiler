@@ -38,12 +38,47 @@ Token identifyToken(const std::string &input, int index) {
     if (ch == ':') return Token(COLON, index);
     if (ch == '.') return Token(DOT, index);
     if (ch == '?' ) return Token(QUESTION, index);
-    if (ch == '/') {
-        if (input[index+1] == '/') return Token(LINECOMMENT, index);
-        else if (input[index+1] == '*') return Token(BLOCKCOMMENTOPEN, index);
-        else return Token(SLASH, index);
+    if (ch == '/') { // Can be divide, comment, or backslash
+        if (input[index+1] == '=') return Token(DIVIDEEQUALS, index); // Divide equals
+        else if (input[index+1] != '/' && input[index+1] != '*') return Token(DIVIDE, index); // Divide
+        else { // Comment
+            if (input[index+1] == '/') { // Line comment: lasts until next newline
+                int s = index; // Start index
+                int e = index+2; // End index
+                while (input[e] != '\n') e++;
+                Token t = Token(LINECOMMENT, s);
+                t.setVal(input.substr(s+2, e-(s+2))); // Storing value of s
+                return t;
+            }
+            else if (input[index+1] == '*') { // Block comment: lasts until next '*/'
+                int s = index; // Start index
+                int e = index+2; // End index
+                while (input[e] != '*' || input[e+1] != '/') e++;
+                Token t = Token(BLOCKCOMMENT, s);
+                t.setVal(input.substr(s+2, e-(s+2))); // Storing value of s
+                return t;
+            }
+        }
     }
     if (ch == '\\') return Token(BACKSLASH, index); // TODO: Fix
+    
+    // Quotes
+    if (ch == '"') { // STRING
+        int s = index; // Start index
+        int e = index+1; // End index
+        while (input[e] != '"') e++;
+        Token t = Token(STRING, s);
+        t.setVal(input.substr(s+1, e-(s+1))); // Excluding quotation marks from stored value
+        return t;
+    }
+    if (ch == '\'') { // CHAR
+        int s = index; // Start index
+        int e = index+1; // End index
+        while (input[e] != '\'') e++;
+        Token t = Token(CHAR, s);
+        t.setVal(input.substr(s+1, e-(s+1))); // Excluding quotation marks from stored value
+        return t;
+    }
 
     // Braces
     if (ch == '(') return Token(OPARENTHESES, index);
@@ -67,12 +102,7 @@ Token identifyToken(const std::string &input, int index) {
     if (ch == '*') {
         if (input[index+1] == '=') return Token(TIMESEQUALS, index);
         else if (input[index+1] == '*') return Token(POWER, index);
-        else if (input[index+1] == '/') return Token(BLOCKCOMMENTCLOSE, index);
         else return Token(TIMES, index);
-    }
-    if (ch == '/')  {
-        if (input[index+1] == '=') return Token(DIVIDEEQUALS, index);
-        else return Token(DIVIDE, index);
     }
     if (ch == '%') return Token(MOD, index);
 
@@ -161,7 +191,7 @@ void parseInput(const std::string &input) {
 
 
 int main() {
-    std::string input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic publica public ab_cD12094 3a.";
+    std::string input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
     parseInput(input);
     return 0;
 }

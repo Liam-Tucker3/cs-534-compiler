@@ -65,12 +65,14 @@ int Token::getLength() {
     else if (t == LE || t == GE || t == EE || t == NE) return 2; // Comparison, 2 char
     else if (t == LT || t == GT || t == NOT || t == EQUALS) return 1; // Comparison, 1 char
     else if (t == COMMA || t == SEMICOLON || t == COLON || t == DOT || t == SLASH || t == BACKSLASH || t == QUESTION) return 1; // Punctuation
+    else if (t == CHAR || t == STRING) return sVal.length() + 2; // Quotes; +2 for "" or ''
     else if (t == OPARENTHESES || t == CPARENTHESES || t == OCURLY || t == CCURLY || t == OBRACKET || t == CBRACKET) return 1; // Braces
-    else if (t == LINECOMMENT || t == BLOCKCOMMENTOPEN || t == BLOCKCOMMENTCLOSE) return 2; // Comments
     else if (t == BITAND || t == BITOR || t == XOR || t == XNOT) return 1; // Bitwise op, 1 char
     else if (t == AND || t == OR) return 2; // Bitwise op, 2 char
     else if (t == INT) return std::to_string(iVal).length(); // INT
     else if (t == VAR || t == KEYWORD) return sVal.length(); // VAR or KEYWORD
+    else if (t == LINECOMMENT) return sVal.length() + 3; // Comments; +3 for '//' and '\n'
+    else if (t == BLOCKCOMMENT) return sVal.length() + 4; // Comments; +4 for '/*' and '*/'
     else if (t == WHITESPACE) return 1; // Whitespace
     else return 0; // Unknown 
 }
@@ -147,6 +149,12 @@ std::string Token::toString() {
         case COLON:
             tokenString = "COLON";
             break;
+        case CHAR: // TODO: insert check to see if char is valid
+            tokenString = "CHAR: " + sVal;
+            break;
+        case STRING:
+            tokenString = "STRING: " + sVal;
+            break;
         case OPARENTHESES:
             tokenString = "OPARENTHESES";
             break;
@@ -177,15 +185,6 @@ std::string Token::toString() {
         case QUESTION:
             tokenString = "QUESTION";
             break;
-        case LINECOMMENT:
-            tokenString = "LINECOMMENT";
-            break;
-        case BLOCKCOMMENTOPEN:
-            tokenString = "BLOCKCOMMENTOPEN";
-            break;
-        case BLOCKCOMMENTCLOSE:
-            tokenString = "BLOCKCOMMENTCLOSE";
-            break;
         case AND:
             tokenString = "AND";
             break;
@@ -212,6 +211,12 @@ std::string Token::toString() {
             break;
         case KEYWORD:
             tokenString = "KEYWORD: " + sVal;
+            break;
+        case LINECOMMENT:
+            tokenString = "COMMENT: " + sVal;
+            break;
+        case BLOCKCOMMENT:
+            tokenString = "COMMENT: " + sVal;
             break;
         case WHITESPACE:
             tokenString = "WHITESPACE";

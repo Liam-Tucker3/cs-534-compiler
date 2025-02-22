@@ -13,11 +13,12 @@ enum TokenType {
     PLUSPLUS, MINUSMINUS, // Increment, decrement
     LE, GE, LT, GT, EE, NE, NOT, EQUALS, // Comparison
     COMMA, SEMICOLON, COLON, DOT, SLASH, BACKSLASH, QUESTION, // Punctuation
+    CHAR, STRING, // Quotes
     OPARENTHESES, CPARENTHESES, OCURLY, CCURLY, OBRACKET, CBRACKET, // Braces
     AND, BITAND, OR, BITOR, XOR, XNOT, // Bitwise
-    LINECOMMENT, BLOCKCOMMENTOPEN, BLOCKCOMMENTCLOSE, // Comments
     INT, VAR, KEYWORD, // Types
     WHITESPACE, //Whitespace
+    LINECOMMENT, BLOCKCOMMENT, // Seperate comments
     UNKNOWN
 };
 
