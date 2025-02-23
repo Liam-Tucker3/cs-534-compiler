@@ -8,6 +8,7 @@
 #include <vector>
 #include "token.h"
 
+// Not currently used
 std::set<char> delimiters = {
     '(', ')', '{', '}', '[', ']', // Braces
     ',', ';', ':', // Punctuation
@@ -16,20 +17,8 @@ std::set<char> delimiters = {
     '<', '>', '=', '!' // Comparison operators
 };
 
-/*
-std::set<std::string, TokenType> keywords = {
-    {"+", PLUS},
-    {"-", MINUS},
-    {"*", TIMES},
-    {"/", DIVIDE},
-    {"<=", LE},
-    {">=", GE},
-    {"<", LT},
-    {">", GT}
-};
-*/
-
-
+// Identifies next token from input
+// LL parser; no backtracking
 Token identifyToken(const std::string &input, int index) {
     char ch = input[index];
     // std::cout << "index: " << index << " | ch: " << ch << std::endl;
@@ -174,6 +163,20 @@ Token identifyToken(const std::string &input, int index) {
     return Token(UNKNOWN, index);
 }
 
+/* Returns next Token */
+Token lex(const std::string &input, std::vector<int> &lineIndices, int index) {
+    Token t = identifyToken(input, index);
+            
+    // Finding line num, relative index
+    auto it = std::upper_bound(lineIndices.begin(), lineIndices.end(), index);
+    int lineNum = std::distance(lineIndices.begin(), it); // No -1 to adjust to 1-based indexing
+    int relIndex = index - lineIndices[lineNum-1] + 1; // Adjusting to 1-based indexing
+    t.setIndices(lineNum+1, relIndex); // Updating indexes
+
+    return t;
+
+}
+
 
 /* Iterates through input, finds delimiters, and calls function to identify input*/
 void parseInput(const std::string &input, std::vector<Token> &tokens, std::vector<int> &lineIndices) {
@@ -198,6 +201,7 @@ void parseInput(const std::string &input, std::vector<Token> &tokens, std::vecto
     }
 }
 
+// Prints list of tokens
 void printTokens(const std::vector<Token> &tokens) {
     for (Token t : tokens) {
         if (t.getToken() == WHITESPACE) continue;
