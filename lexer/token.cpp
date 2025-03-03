@@ -59,6 +59,14 @@ void Token::setIndices(int line, int index) {
     this->index = index;
 }
 
+int Token::getIntVal() {
+    return iVal;
+}
+
+std::string Token::getStrVal() {
+    return sVal;
+}
+
 // MUST MANUALLY UPDATE FOR NEW TOKEN TYPES
 
 int Token::getLength() {

@@ -2,15 +2,18 @@
 #include <string>
 #include <cstring>
 #include <iostream>
+#include <algorithm>
 
 /* TODO
-* 1. Modify implemented functions to access stack relative to stackTop and stackPointer
+X 0. Implement comment functionality 
+X 1. Modify implemented functions to access stack relative to stackTop and stackPointer
 * 2. Implement CALL, RET, RETV to handle stack pointer appropriately
 X 3. Implement LABEL function to iterate through stack, find label, return index
 * 4. Overwrite CALL function to handle labels
 X 4. Overwrite BRT, BRZ, and JUMP functions to handle labels
-* 5. Implement helper functions to call appropriate functions from function name, parameter
-* 6. Modify execInstruction to parse and call helper function
+X 5. Implement helper functions to call appropriate functions from function name, parameter
+* 5. Add CALL, RET, RETV to helper functions from (5)
+X 6. Modify execInstruction to parse and call helper function
 * 7. Write main function to allow for running program
 * 8. Modify provided assembly to work with my code
 * 9. Test program
@@ -37,7 +40,7 @@ private:
     // Helper functions
 
     /* Returns index of label, -1 if does not exist*/
-    int LABEL(char* label) {
+    int LABEL(std::string label) {
         for (int i = 0; i < 1024; i++) {
             if (instructions[i] == label) return i;
         }
@@ -47,6 +50,59 @@ private:
     /* Put top value from the stack onto general purpose register without altering stack*/
     void PEEK() {
         this->gpr = stack[stackTop - 1];
+    }
+
+    /* Calls appropriate function based on parameters provided */
+    /* std::string f: function name*/
+    /* std::string s: string parameter */
+    /* int i: int parameter */
+    void execINSTRUCTION(std::string f, std::string s, int i) {
+        // Functions with no parameters
+        if (s == "" and i == -1) {
+            if (f == "CALL") CALL();
+            else if (f == "RET") RET();
+            else if (f == "RETV") RETV();
+            else if (f == "PUSH") PUSH();
+            else if (f == "POP") POP();
+            else if (f == "DUP") DUP();
+            else if (f == "LOAD") LOAD();
+            else if (f == "SAVE") SAVE();
+            else if (f == "STORE") STORE();
+            else if (f == "ADD") ADD();
+            else if (f == "SUB") SUB();
+            else if (f == "MUL") MUL();
+            else if (f == "DIV") DIV();
+            else if (f == "REM") REM();
+            else if (f == "EQ") EQ();
+            else if (f == "NE") NE();
+            else if (f == "LE") LE();
+            else if (f == "GE") GE();
+            else if (f == "LT") LT();
+            else if (f == "GT") GT();
+            else if (f == "BRT") BRT();
+            else if (f == "BRZ") BRZ();
+            else if (f == "JUMP") JUMP();
+            else if (f == "PRINT") PRINT();
+            else if (f == "READ") READ();
+            else if (f == "END") END();
+        }
+
+        // Functions with string parameters
+        else if (s != "" and i == -1) {
+            if (f == "PRINT") PRINT(s);
+            if (f == "BRT") BRT(s);
+            if (f == "BRZ") BRZ(s);
+            if (f == "JUMP") JUMP(s);
+        } 
+
+        // Functions with int parameters
+        else if (s == "" and i != -1) {
+            if (f == "PUSH") PUSH(i);
+            if (f == "BRT") BRT(i);
+            if (f == "BRZ") BRZ(i);
+            if (f == "JUMP") JUMP(i);
+        }
+
     }
 
 public:
@@ -86,9 +142,21 @@ public:
     }
 
     /* Parses instruction, executes appropriate */
-    void execInstruction(std::string instruction) {
+    void parseInstruction(std::string instruction) {
 
-        // Finding parantheses
+        // Ignoring everything after a semicolon
+        size_t semicolonPos = instruction.find(';');
+        if (semicolonPos != std::string::npos) {
+            instruction = instruction.substr(0, semicolonPos);
+        }
+
+        // Removing whitespace
+        instruction.erase(std::remove_if(instruction.begin(), instruction.end(), ::isspace), instruction.end());
+        if (instruction.empty()) {
+            return;
+        }
+
+        // Finding parantheses, potential parameter
         size_t openParen = instruction.find('(');
         size_t closeParen = instruction.find(')');
         if (openParen != std::string::npos && closeParen != std::string::npos) {
@@ -98,18 +166,14 @@ public:
             if (!params.empty()) {
                 if (params[0] == '"' && params[params.length() - 1] == '"') { // Case: String parameter
                     // Parsing string parameter
-                    char* param = new char[params.length() - 1];
-                    strncpy(param, params.c_str() + 1, params.length() - 2);
-                    param[params.length() - 2] = '\0';
-                    std::cout << "Function: " << functionName << ", Parameter: " << param << " (char*)" << std::endl;
-                    delete[] param;
+                    std::string param = params.substr(1, params.length() - 2);
+                    execINSTRUCTION(functionName, param, -1);
                 } else { // Case: Integer parameter
-                    // Parameter is an integer
                     int param = std::stoi(params);
-                    std::cout << "Function: " << functionName << ", Parameter: " << param << " (int)" << std::endl;
+                    execINSTRUCTION(functionName, "", param);
                 }
             } else { // Case: No Parameters
-                std::cout << "Function: " << functionName << ", No parameters" << std::endl;
+                execINSTRUCTION(functionName, "", -1);
             }
         }
         else {
@@ -121,7 +185,35 @@ public:
 
     /* FUNCTIONS */
 
+    /* Calls function. Places return address on stack, updates stack pointer */
+    /* Top of stack: Function address
+    /* Second on stack: number of parameters*/
     void CALL() {
+        // Getting this function parameters
+        int address = this->POP();
+        int numParams = this->POP();
+
+        // Putting return address on stack
+        this->PUSH(programCounter);
+
+        // Save current stack pointer
+        int oldStackPointer = stackPointer;
+
+        // Update stack pointer to new frame
+        stackPointer = stackTop;
+
+        // Save current program counter and stack pointer
+        this->PUSH(oldStackPointer);
+        this->PUSH(programCounter);
+
+        // Update program counter to function address
+        programCounter = address;
+
+        // Loading parameters for function to be called
+        for (int i = 0; i < numParams; i++) {
+            this->LOAD();
+        }
+
         // pass
     }
 
@@ -161,7 +253,7 @@ public:
     /* Loading value from specified location in memory into gpr*/
     void LOAD() {
         this->POP(); // Loading address into gpr
-        this->gpr = stack[this->gpr]; // Accessing value from specified address in stack
+        this->gpr = stack[this->gpr + this->stackPointer]; // AIndex is relative to current frame
         this->PUSH(); // Pushing value onto stack
     }
 
@@ -170,7 +262,7 @@ public:
     void SAVE() {
         int address = this->POP();
         this->PEEK();
-        stack[address] = this->gpr;
+        stack[address + this->stackPointer] = this->gpr;
 
         // pass
     }
@@ -180,7 +272,7 @@ public:
     void STORE() {
         int address = this->POP();
         this->POP();
-        stack[address] = this->gpr;
+        stack[address + this->stackPointer] = this->gpr;
     }
 
     /* Pops two values from stack and pushes their sum onto stack*/
@@ -290,7 +382,7 @@ public:
 
     /* Updates program counter to specified location if value is not 0*/
     /* Note: top element on stack is value; removes value*/
-    void BRT(char* label) {
+    void BRT(std::string label) {
         this->POP(); // Sets gpr to value
         if (this->gpr != 0) programCounter = this->LABEL(label); // Sets program counter to label
     }
@@ -312,7 +404,7 @@ public:
 
     /* Updates program counter to specified location if value is not 0*/
     /* Note: top element on stack is value; removes value*/
-    void BRZ(char* label) {
+    void BRZ(std::string label) {
         this->POP(); // Sets gpr to value
         if (this->gpr == 0) programCounter = this->LABEL(label); // Sets program counter to label
     }
@@ -331,7 +423,7 @@ public:
     }
 
     /* Sets program counter to specified location. Stack remains unchanged*/
-    void JUMP(char* label) {
+    void JUMP(std::string label) {
         programCounter = this->LABEL(label);
     }
 
@@ -342,11 +434,11 @@ public:
 
     /* Prints top value from stack*/
     void PRINT() {
-        std::cout << stack[stackPointer] << std::endl;
+        std::cout << stack[stackTop] << std::endl;
     }
 
     /* PRINT OVERLOAD: Prints message passed as parameter*/
-    void PRINT(char* message) {
+    void PRINT(std::string message) {
         std::cout << message << std::endl;
     }
 

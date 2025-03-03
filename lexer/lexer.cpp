@@ -6,7 +6,9 @@
 #include <algorithm>
 #include <set>
 #include <vector>
+
 #include "token.h"
+#include "ast.h"
 
 // Not currently used
 std::set<char> delimiters = {
@@ -209,8 +211,203 @@ void printTokens(const std::vector<Token> &tokens) {
     }
 }
 
+/* CODE BELOW FOR LL - RDP*/
+/* Converts vector of tokens into vector of AST elements*/
+std::vector<AST> tokensToAST(std::vector<Token> &tokens) {
+    std::vector<AST> asts;
+    for (int i = 0; i < tokens.size(); i++) {
+        Token t = tokens.at(i);
+        if (t.getToken() == OPARENTHESES) asts.push_back(AST(AST_OPARAN));
+        else if (t.getToken() == CPARENTHESES) asts.push_back(AST(AST_CPARAN));
+        else if (t.getToken() == INT) asts.push_back(AST(AST_INT, t.getIntVal()));
+        else if (t.getToken() == PLUS) asts.push_back(AST(AST_PLUS));
+        else if (t.getToken() == MINUS) asts.push_back(AST(AST_MINUS));
+        else if (t.getToken() == TIMES) asts.push_back(AST(AST_TIMES));
+        else if (t.getToken() == DIVIDE) asts.push_back(AST(AST_DIVIDE));
+    }
+    return asts;
+}
+
+
+std::pair<int, int> findParantheses(std::vector<AST> &asts) {
+    for (int i = 0; i < asts.size(); i++) {
+        if (*asts.at(i).type != AST_OPARAN) continue; // Not open parantheses
+
+        // Case: open parantheses
+        int o = 0; // Starting at index i
+        int c = 0;
+        for (int j = i; j < asts.size(); j++) {
+            if (*asts.at(j).type == AST_OPARAN) o++;
+            else if (*asts.at(j).type == AST_CPARAN) c++;
+            if (o == c) return std::pair<int, int>(i, j); // Found matching parantheses
+        }
+
+    }
+    return std::pair<int, int>(-1, -1); // Base case: no more parantheses
+}
+
+/* Returns index of next (, +, -, or -1)*/
+/* An expr in parantheses will evaluate to a num, so this does not count, even if root is + or -*/
+int findPlusMinusParan(std::vector<AST> *asts) {
+    for (int i = 0; i < asts->size(); i++) {
+        ASTType t = *asts->at(i).type;
+        if (t == AST_OPARAN) return i;
+        if (t == AST_PLUS || t == AST_MINUS) {
+            if (asts->at(i).left == nullptr && asts->at(i).right == nullptr) return i;
+        }
+    }
+    return -1;
+}
+
+AST makeTreeRecursive(std::vector<AST> &asts) {
+    // Finding next item to reduce
+    int i = findPlusMinusParan(&asts);
+    if (i == -1) { // Base case: Only expr, *, and / remaining
+
+        if (asts.size() == 1) return asts.at(0); // Base case: only one element
+        else if (asts.size() == 3) { // Base case: 2nd element is * or /
+            AST root = asts.at(1); // No children
+            // root.val = AST_TREE; // Setting type to tree
+            root.left = &asts.at(0); // No children
+            std::vector<AST> rightAsts(asts.begin() + 2, asts.end());
+            AST* rightSubTree = new AST(makeTreeRecursive(rightAsts));
+            root.right = rightSubTree;
+            return root;
+        }
+    }
+
+    // Recursive case: parantheses
+    if (*asts.at(i).type == AST_OPARAN) {
+        // Getting AST for values inside parantheses
+        std::pair<int, int> p = findParantheses(asts);
+        std::vector<AST> paranAsts(asts.begin() + p.first + 1, asts.begin() + p.second);
+        AST paranRoot = makeTreeRecursive(paranAsts);
+
+        // Replacing all values from parantheses with new value
+        std::vector<AST> newAsts;
+        for (int j = 0; j < asts.size(); j++) {
+            if (j < p.first || j > p.second) newAsts.push_back(asts.at(j));
+            else if (j == p.first) newAsts.push_back(paranRoot);
+        }
+
+        return makeTreeRecursive(newAsts);
+    }
+
+    // Recursive case: + or -
+    if (*asts.at(i).type == AST_PLUS || *asts.at(i).type == AST_MINUS) {
+        AST root = asts.at(i);
+        // root.val = AST_TREE; // Setting type to tree
+
+        // Getting left, right portions of arraylist
+        std::vector<AST> leftAsts(asts.begin(), asts.begin() + i);
+        std::vector<AST> rightAsts(asts.begin() + i + 1, asts.end());
+        AST* leftSubTree = new AST(makeTreeRecursive(leftAsts));
+        AST* rightSubTree = new AST(makeTreeRecursive(rightAsts));
+        root.left = leftSubTree;
+        root.right = rightSubTree;
+        
+        return root;
+    }
+
+    else {
+        std::cerr << "Error: Invalid ASTType" << std::endl;
+        return AST(AST_NULL);
+    }
+}
+
+/* Returns 1 if expr is valid, 0 if not*/
+int validateExpr(std::vector<AST> asts) {
+    int pCount = 0;
+    std::string nextType = "int";
+    for (int i = 0; i < asts.size(); i++) {
+        ASTType t = *asts.at(i).type;
+
+        if (nextType == "int") {
+            if (t != AST_INT && t != AST_OPARAN && t != AST_CPARAN) return -1; // op in invalid location
+            else if (t == AST_INT) nextType = "op";
+            else if (t == AST_OPARAN) {
+                nextType = "int";
+                pCount ++;
+            }
+            else { // if t == AST_CPARAN
+                nextType = "op";
+                pCount--;
+                if (pCount < 0) return -1; // Too many closing parantheses
+            }
+        }
+        else if (nextType == "op") {
+            if (t != AST_PLUS && t != AST_MINUS && t != AST_TIMES && t != AST_DIVIDE) return -1;
+            else nextType = "int";
+        }
+    }
+    if (pCount != 0) return -1; // Mismatched parantheses
+    return 1; // Valid expression
+}
+
+std::string astElemToCode(AST a) {
+    if (*a.type == AST_INT) return "LOAD(" + std::to_string(a.val) + ");";
+    else if (*a.type == AST_PLUS) return "ADD();";
+    else if (*a.type == AST_MINUS) return "SUB();";
+    else if (*a.type == AST_TIMES) return "MUL();";
+    else if (*a.type == AST_DIVIDE) return "DIV();";
+    else {
+        std::cerr << "Error: Invalid ASTType" << std::endl;
+        return "";
+    }
+}
+
+void getStackMachineCode(AST root, std::vector<std::string> &code) {
+    if (root.left != nullptr) getStackMachineCode(*root.left, code);
+    if (root.right != nullptr) getStackMachineCode(*root.right, code);
+    code.push_back(astElemToCode(root));
+}
+
+void printStackMachineCodeToFile(std::vector<std::string> code, std::string filename) {
+    std::ofstream file(filename);
+    for (std::string s : code) file << s << std::endl;
+    file.close();
+}
+
+
 int main(int argc, char *argv[]) {
+    
     // Confirming proper number of arguments
+    // if (argc != 2) {
+    //     std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+    //     return 1;
+    // }
+
+    // // Opening file
+    // std::ifstream file(argv[1]);
+    // if (!file.is_open()) {
+    //     std::cerr << "Error: Could not open file " << argv[1] << std::endl;
+    //     return 1;
+    // }
+
+    // // Reading file into string
+    // std::vector<int> lineIndices; // lineIndices.at(x) = index of first character of line x+1
+    // std::string input;
+    // std::string line;
+    // while (std::getline(file, line)) {
+    //     input += line;
+    //     lineIndices.push_back(input.length());
+    // }
+    // file.close();
+
+    // // Printing lineIndices
+    // for (int i : lineIndices) std::cout << i << std::endl;
+
+    // // Hardcoding input
+    // // input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
+
+    // // Performing process
+    // std::vector<Token> tokens;
+    // parseInput(input, tokens, lineIndices);
+    // printTokens(tokens);
+    
+
+    // AST WORK
+// Confirming proper number of arguments
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
         return 1;
@@ -233,16 +430,23 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    // Printing lineIndices
-    for (int i : lineIndices) std::cout << i << std::endl;
-
-    // Hardcoding input
-    // input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
-
-    // Performing process
-    std::vector<Token> tokens;
-    parseInput(input, tokens, lineIndices);
-    printTokens(tokens);
+    std::cout << "Starting AST WORK" << std::endl;
+    // std::string astExpr = "10 + (8 - 6 / 4) * 2";
+    std::vector<Token> astTokens;
+    parseInput(input, astTokens, lineIndices);
+    std::cout << "Parsed AST INPUT" << std::endl;
+    std::vector<AST> asts = tokensToAST(astTokens);
+    std::cout << "Called Tokens to AST" << std::endl;
+    for (const auto& ast : asts) {
+        std::cout << "AST Type: " << *ast.type << ", Value: " << ast.val << std::endl;
+    }
+    AST root = makeTreeRecursive(asts);
+    std::cout << "Called makeTreeRecursive" << std::endl;
+    std::vector<std::string> code;
+    getStackMachineCode(root, code);
+    std::cout << "Got stack machine code" << std::endl;
+    printStackMachineCodeToFile(code, "output.txt");
+    std::cout << "Printed stack machine code to file" << std::endl;
 
     return 0;
 }

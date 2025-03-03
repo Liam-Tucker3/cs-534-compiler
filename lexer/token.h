@@ -52,6 +52,9 @@ public:
     int getIndex();
     int getLength();
     std::string toString();
+        
+    int getIntVal();
+    std::string getStrVal();
 
     void setVal(int val);
     void setVal(std::string val);
