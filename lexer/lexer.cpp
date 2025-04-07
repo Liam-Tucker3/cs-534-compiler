@@ -465,7 +465,7 @@ void getStackMachineCode(const AST& root, std::vector<std::string>& code) {
 std::string astElemToCode(const AST& a) {
     switch (a.type) {
         case AST_INT:
-            return "LOAD(" + std::to_string(a.val) + ");";
+            return "PUSH(" + std::to_string(a.val) + ");";
         case AST_PLUS:
             return "ADD();";
         case AST_MINUS:
