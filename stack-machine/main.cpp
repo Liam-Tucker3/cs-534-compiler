@@ -1,32 +1,29 @@
-#include <stdio.h>
-#include <string.h>
+#include <iostream>
+#include <string>
+#include "functions.cpp"
 
-#define MAX_INSTRUCTIONS 100
-#define END "end"
-
-char instructions[MAX_INSTRUCTIONS][10];
-int pc = 0;
-int top = 0;
-int gpr = 0;
-
-void execute(char *instruction) {
-    // Add your instruction execution logic here
-    printf("Executing: %s\n", instruction);
-}
-
-int main() {
-    // Example instructions, replace with actual instructions
-    strcpy(instructions[0], "LOAD");
-    strcpy(instructions[1], "ADD");
-    strcpy(instructions[2], "STORE");
-    strcpy(instructions[3], END);
-
-    while (strcmp(instructions[pc], END) != 0) {
-        int exec = pc;
-        pc++;
-        execute(instructions[exec]);
+int main(int argc, char* argv[]) {
+    if (argc != 2) {
+        std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
+        return 1;
     }
-    execute(instructions[pc]); // Execute the end statement
 
+    std::string filename = argv[1];
+    
+    Operation stackMachine(filename);
+    stackMachine.run();
+    std::cout << "Program execution completed successfully." << std::endl;
+    
+    /*
+    try {
+        Operation stackMachine(filename);
+        stackMachine.run();
+        std::cout << "Program execution completed successfully." << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error executing program: " << e.what() << std::endl;
+        return 1;
+    }
+        */
+    
     return 0;
 }

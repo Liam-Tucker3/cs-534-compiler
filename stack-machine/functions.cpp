@@ -3,27 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include <algorithm>
-
-/* TODO
-X 0. Implement comment functionality 
-X 1. Modify implemented functions to access stack relative to stackTop and stackPointer
-* 2. Implement CALL, RET, RETV to handle stack pointer appropriately
-X 3. Implement LABEL function to iterate through stack, find label, return index
-* 4. Overwrite CALL function to handle labels
-X 4. Overwrite BRT, BRZ, and JUMP functions to handle labels
-X 5. Implement helper functions to call appropriate functions from function name, parameter
-* 5. Add CALL, RET, RETV to helper functions from (5)
-X 6. Modify execInstruction to parse and call helper function
-* 7. Write main function to allow for running program
-* 8. Modify provided assembly to work with my code
-* 9. Test program
-* 10. PUSH TO GITHUB, SUBMIT
-* 11. Write test cases
-* 12. PUSH TO GITHUB
-* 13. Implement tracing
-* 14. PUSH TO GITHUB
-*/
-
+#include <fstream>
 
 class Operation {
 private:
@@ -31,10 +11,10 @@ private:
     int gpr; // General purpose register
 
     int stack[1024];
-    int stackTop; // Top available slot in memory
-    int stackPointer; // Current frame
+    int stackTop; // Top available slot in memory; last value added at stack[stackTop - 1]
+    int stackPointer; // Current frame; memory slot 0 is in stack[stackPointer + 0]
 
-    int programCounter;
+    int programCounter; // Current instruction being executed
     std::string instructions[1024];
 
     // Helper functions
@@ -42,14 +22,23 @@ private:
     /* Returns index of label, -1 if does not exist*/
     int LABEL(std::string label) {
         for (int i = 0; i < 1024; i++) {
-            if (instructions[i] == label) return i;
+            // Trim any whitespace from the instruction
+            std::string instr = instructions[i];
+            instr.erase(0, instr.find_first_not_of(" \t\n\r"));
+            instr.erase(instr.find_last_not_of(" \t\n\r") + 1);
+            
+            // Check if this is the label we're looking for
+            if (instr == label) {
+                return i;
+            }
         }
         return -1;
     }
 
     /* Put top value from the stack onto general purpose register without altering stack*/
-    void PEEK() {
+    int PEEK() {
         this->gpr = stack[stackTop - 1];
+        return this->gpr;
     }
 
     /* Calls appropriate function based on parameters provided */
@@ -57,6 +46,8 @@ private:
     /* std::string s: string parameter */
     /* int i: int parameter */
     void execINSTRUCTION(std::string f, std::string s, int i) {
+        // std::cout << f << " | " << s << " | " << i << std::endl; // For loggin
+
         // Functions with no parameters
         if (s == "" and i == -1) {
             if (f == "CALL") CALL();
@@ -93,6 +84,7 @@ private:
             if (f == "BRT") BRT(s);
             if (f == "BRZ") BRZ(s);
             if (f == "JUMP") JUMP(s);
+            if (f == "CALL") CALL(s);
         } 
 
         // Functions with int parameters
@@ -102,7 +94,6 @@ private:
             if (f == "BRZ") BRZ(i);
             if (f == "JUMP") JUMP(i);
         }
-
     }
 
 public:
@@ -141,6 +132,34 @@ public:
         }
     }
 
+    /* Runs stack machine*/
+    void run() {
+        // Creating a log file to store debug information
+        std::ofstream logFile("debuglog.txt", std::ios::app);
+
+        while (programCounter < 1024) {
+            // Checking for OOB
+            if (instructions[programCounter].empty()) {
+                break;
+            }
+
+            // Logging current state
+            logFile << "Current stack: " << std::endl;
+            for (int i = 0; i < stackTop; i++) {
+                logFile << stack[i] << " ";
+            }
+            logFile << std::endl;
+            logFile << "Executing instruction: " << programCounter << "|" << instructions[programCounter];
+            
+            // Executing instruction
+            int execPC = programCounter;
+            programCounter++;
+            
+            parseInstruction(instructions[execPC]);
+            logFile << "Stack Top: " << stackTop << "|" << stack[stackTop - 1] << std::endl << std::endl;
+        }
+    }
+
     /* Parses instruction, executes appropriate */
     void parseInstruction(std::string instruction) {
 
@@ -150,11 +169,20 @@ public:
             instruction = instruction.substr(0, semicolonPos);
         }
 
-        // Removing whitespace
-        instruction.erase(std::remove_if(instruction.begin(), instruction.end(), ::isspace), instruction.end());
-        if (instruction.empty()) {
-            return;
+        // Removing whitespace outside of quotes
+        bool inQuotes = false;
+        for (size_t i = 0; i < instruction.size(); ++i) {
+            if (instruction[i] == '"') {
+            inQuotes = !inQuotes;
+            } else if (!inQuotes && std::isspace(instruction[i])) {
+            instruction.erase(i--, 1);
+            }
         }
+
+        // instruction.erase(std::remove_if(instruction.begin(), instruction.end(), ::isspace), instruction.end());
+        // if (instruction.empty()) {
+        //     return;
+        // }
 
         // Finding parantheses, potential parameter
         size_t openParen = instruction.find('(');
@@ -186,43 +214,131 @@ public:
     /* FUNCTIONS */
 
     /* Calls function. Places return address on stack, updates stack pointer */
-    /* Top of stack: Function address
+    /* Top of stack: Function address */
     /* Second on stack: number of parameters*/
     void CALL() {
-        // Getting this function parameters
-        int address = this->POP();
-        int numParams = this->POP();
+        int address = this->POP(); // Get function address from stack
+        int numParams = this->PEEK(); // Get number of parameters from stack; leaves numParams on stack
 
-        // Putting return address on stack
-        this->PUSH(programCounter);
-
-        // Save current stack pointer
-        int oldStackPointer = stackPointer;
-
-        // Update stack pointer to new frame
-        stackPointer = stackTop;
-
-        // Save current program counter and stack pointer
-        this->PUSH(oldStackPointer);
-        this->PUSH(programCounter);
-
-        // Update program counter to function address
-        programCounter = address;
-
-        // Loading parameters for function to be called
-        for (int i = 0; i < numParams; i++) {
-            this->LOAD();
+        // Moving numParams to behind the params
+        for (int i = 1; i <= numParams; i++) {
+            stack[stackTop - i] = stack[stackTop - i - 1];
         }
+        stack[stackTop - numParams - 1] = numParams;
 
-        // pass
+        // Get current values of stackPointer, programCounter
+        int currStackPointer = stackPointer;
+        int currProgramCounter = programCounter;
+        
+        // Save the current stackPointer and programCounter at the top of stack
+        stack[stackTop] = currStackPointer;
+        stack[stackTop + 1] = currProgramCounter; // currProgramCounter already incremented in this.run()
+        stackTop += 2;
+        
+        // Update stack pointer to this new frame
+        stackPointer = stackTop - 2 - numParams; // stack[stackPointer] should point to the first parameter
+                                                 // stack[stackPointer - 1] points to numParams
+        
+        // Jump to the function address
+        programCounter = address;
     }
 
+    /* CALL OVERLOAD: Sets program counter to specified label. Handles stack and frame accordingly */
+    /* Note: Accepts a string parameter for the label name */
+    void CALL(std::string label) {
+        // Find the address of the label
+        int address = this->LABEL(label);
+        if (address == -1) {
+            std::cerr << "Error: Label '" << label << "' not found" << std::endl;
+            exit(1);  // Exit with error code
+        }
+        
+        // Get number of parameters from stack
+        int numParams = this->PEEK(); // Leaves numParams on stack
+
+        // Moving numParams to behind the params
+        for (int i = 1; i <= numParams; i++) {
+            stack[stackTop - i] = stack[stackTop - i - 1];
+        }
+        stack[stackTop - numParams - 1] = numParams;
+        
+        // Get current values of stackPointer, programCounter
+        int currStackPointer = stackPointer;
+        int currProgramCounter = programCounter;
+        
+        // First, save the current stackPointer and programCounter at the top of stack
+        stack[stackTop] = currStackPointer;
+        stack[stackTop + 1] = currProgramCounter; // currProgramCounter already incremented in this.run()
+        stackTop += 2;
+        
+        // Update stack pointer to this new frame
+        stackPointer = stackTop - 2 - numParams; // stack[stackPointer] should point to the first parameter
+                                                  // stack[stackPointer - 1] points to numParams
+
+        // Jump to the function address
+        programCounter = address;
+    }
+
+    /* Return from function without a value
+    * Pre Stack: current frame
+    * Post Stack: previous frame
+    * Side Effect: Stack pointer gets new frame reference.
+    * Description: returns from subroutine. Clears current frame. Stack pointer is reset to calling frame.
+    */
     void RET() {
-        // pass
+        // Get numParams (if not main)
+        int numParams = 0;
+        if (stackPointer != 0) numParams = stack[stackPointer - 1];
+
+        // Get previous stack pointer from current frame
+        int prevStackPointer = stack[stackPointer + numParams];
+        
+        // Get return address from current frame (saved next to stack pointer)
+        int returnAddress = stack[stackPointer + numParams + 1];
+        
+        // Reset stack top to current stack pointer
+        stackTop = stackTop - numParams - 2 - int(numParams != 0); // numParams is stored on stack for all functions except main
+        
+        // Restore stack pointer to previous frame
+        stackPointer = prevStackPointer;
+        
+        // Jump to return address
+        programCounter = returnAddress;
     }
 
+    /* Return from function with a value
+    * Pre Stack: current frame (with return value on top)
+    * Post Stack: previous frame and return value
+    * Side Effect: Stack pointer gets new frame reference. General purpose register is set to return value.
+    * Description: Returns from subroutine with a value. Clears current frame. Stack pointer is reset to calling frame.
+    * Return value is pushed to the memory stack. General purpose register is set to return value.
+    */
     void RETV() {
-        // pass
+        // Save the return value from top of stack
+        int returnValue = this->POP();
+        
+        // Get numParams (if not main)
+        int numParams = 0;
+        if (stackPointer != 0) numParams = stack[stackPointer - 1];
+
+        // Get previous stack pointer from current frame
+        int prevStackPointer = stack[stackPointer + numParams];
+        
+        // Get return address from current frame (saved next to stack pointer)
+        int returnAddress = stack[stackPointer + numParams + 1];
+        
+        // Reset stack top to current stack pointer
+        stackTop = stackTop - numParams - 2 - int(numParams != 0); // numParams is stored on stack for all functions except main
+        
+        // Restore stack pointer to previous frame
+        stackPointer = prevStackPointer;
+        
+        // Jump to return address
+        programCounter = returnAddress;
+        
+        // Push the return value to the stack
+        this->gpr = returnValue;
+        this->PUSH();
     }
 
     /* Puts value from general purpose register onto stack*/
@@ -238,10 +354,12 @@ public:
     }
 
     /* Removes top value from stack, places it on general purpose register*/
+    /* Could be changed to void if every call immediately accessed gpr*/
     int POP() {
         int val = stack[stackTop - 1];
         stackTop -= 1;
         this->gpr = val;
+        return val; 
     }
 
     /* Duplicates value on top of stack*/
@@ -250,29 +368,28 @@ public:
         PUSH();
     }
 
-    /* Loading value from specified location in memory into gpr*/
+    /* Loads value from specified location in memory into top cell of stack*/
     void LOAD() {
-        this->POP(); // Loading address into gpr
-        this->gpr = stack[this->gpr + this->stackPointer]; // AIndex is relative to current frame
-        this->PUSH(); // Pushing value onto stack
+        int address = this->POP(); // Get the address from top of stack
+        // The address is relative to the current frame (stackPointer)
+        this->gpr = stack[stackPointer + address]; 
+        this->PUSH(); // Push the loaded value back to stack
     }
 
-    /* Saves value to specified spot in memory while leaving value on top of stack*/
-    /* Note: Address must be at top of stack; value should be second on stack*/
-    void SAVE() {
+    /* Saves element on stack to specified location without removing element*/
+    /* Note: second value on stack is element; first value on stack is address*/
+    void SAVE() { 
         int address = this->POP();
         this->PEEK();
-        stack[address + this->stackPointer] = this->gpr;
-
-        // pass
+        stack[stackPointer + address] = this->gpr;
     }
 
-    /* Saves value to specified spot in memory while removing value from top of stack*/
-    /* Note: Address must be at top of stack; value should be second on stack*/
+    /* Saves element on stack to specified location while removing element*/
+    /* Note: second value on stack is element; first value on stack is address*/
     void STORE() {
         int address = this->POP();
         this->POP();
-        stack[address + this->stackPointer] = this->gpr;
+        stack[stackPointer + address] = this->gpr;
     }
 
     /* Pops two values from stack and pushes their sum onto stack*/
@@ -312,8 +429,8 @@ public:
     /* Pops two values from stack and pushes the remainder onto stack*/
     /* Note: calculates second value on stack modulus first value on stack*/
     void REM() {
-        int a = this->POP();
         int b = this->POP();
+        int a = this->POP();
         this->gpr = a % b;
         this->PUSH();
     }
@@ -394,7 +511,7 @@ public:
         if (this->gpr != 0) programCounter = loc; // Sets program counter to specified value
     }
 
-    /* Updates program counter to specified location if value is not 0*/
+    /* Updates program counter to specified location if value is 0*/
     /* Note: top element on stack is value; second element is location. Removes both elements*/
     void BRZ() {
         int val = this->POP();
@@ -402,14 +519,14 @@ public:
         if (val == 0) programCounter = this->gpr;
     }
 
-    /* Updates program counter to specified location if value is not 0*/
+    /* Updates program counter to specified location if value is 0*/
     /* Note: top element on stack is value; removes value*/
     void BRZ(std::string label) {
         this->POP(); // Sets gpr to value
         if (this->gpr == 0) programCounter = this->LABEL(label); // Sets program counter to label
     }
 
-    /* Updates program counter to specified location if value is not 0*/
+    /* Updates program counter to specified location if value is 0*/
     /* Note: top element on stack is value; removes value*/
     void BRZ(int loc) {
         this->POP(); // Sets gpr to value
@@ -434,7 +551,7 @@ public:
 
     /* Prints top value from stack*/
     void PRINT() {
-        std::cout << stack[stackTop] << std::endl;
+        std::cout << stack[stackTop-1] << std::endl;
     }
 
     /* PRINT OVERLOAD: Prints message passed as parameter*/

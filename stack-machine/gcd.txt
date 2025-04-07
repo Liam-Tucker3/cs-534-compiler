@@ -1,0 +1,52 @@
+JUMP("MAIN");
+GCD
+    PUSH(1);
+    LOAD();
+    PUSH(0);
+    EQ();
+    BRZ("LABEL1");
+    PUSH(0);
+    LOAD();
+    RETV();
+    JUMP("LABEL2");
+LABEL1
+    PUSH(1);
+    LOAD();
+    PUSH(0);
+    LOAD();
+    PUSH(0);
+    LOAD();
+    PUSH(1);
+    LOAD();
+    DIV();
+    PUSH(1);
+    LOAD();
+    MUL();
+    SUB();
+    PUSH(2);
+    CALL("GCD");
+    RETV();
+LABEL2
+    RETV();
+MAIN
+    PRINT("Euclid's GCD: ");
+    PUSH(0);
+    PUSH(0);
+    PRINT("Enter a number:    ");
+    READ();
+    PUSH(0);
+    STORE();
+    PRINT("Enter a second number:    ");
+    READ();
+    PUSH(1);
+    STORE();
+    PUSH(0);
+    LOAD();
+    PUSH(1);
+    LOAD();
+    PUSH(2);
+    CALL("GCD");
+    PRINT("RESULT:    ");
+    PRINT();
+    PRINT("");
+    END();
