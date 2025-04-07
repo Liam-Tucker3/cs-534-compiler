@@ -1,10 +1,17 @@
-# Lexer
-This project is part one of a semester-long project building a compiler. My goal here is to build a lexer. 
+# LL - RDP
+This project is part one of a semester-long project building a compiler. My goal here is to build a recursive descent parser. 
 
 # Running program
-- Compile: g++ lexer.cpp token.cpp -o l
+- Compile: g++ lexer.cpp ast.cpp token.cpp -o l
 - To execute: ./l.exe filename.txt
-- expected output: a series of lines written to the terminal of the form **Line i Char j | Token t**, where i and j denote the token's location in the file (both 1-indexed) and t is the token (and its value, if the token can have multiple values)
+- expected input: a file containing one line, which is a valid expression in the provided grammar
+- expected output: a series of lines written to a file called "output.txt". This is valid stack machine code. 
+
+# Provided grammar
+The RDP is designed to work for the following grammar:
+- Expr ::= Expr + Term | Expr - Term | Term
+- Term ::= Term * Factor | Term / Factor | Factor
+- Factor ::= ( Expr ) | num
 
 # Language specification
 This lexer supports int, string, and char variable types. It reserves the following keywords:
@@ -32,12 +39,10 @@ This lexer supports int, string, and char variable types. It reserves the follow
 - **auto**, **register**, **volatile**, **mutable**, **explicit**, **typedef**, **asm**, **__asm**, **__asm__**, **__volatile__**, **__volatile**, **__volatile**, **__volatile**, **__volatile**, **__volatile**, **__volatile** (other)
 
 # AI Statement
-For this assignment, I have utilized the **Github Copilot** extention in VSCode, a tool created by **Github**. This uses the **GPT-4o** model created by **OpenAI**. I have used this tool for the following purposes:
+For this assignment, I have utilized the **Github Copilot** extention in VSCode, a tool created by **Github**. This uses the **GPT-4o** model created by **OpenAI**. I also used the Claude AI model. I have used this tool for the following purposes:
 - Automating repetitive tasks (i.e. filling all 20+ lines of a toString() function). This avoids me needing to write the same simple logic 20 times
 - Splitting a token.cpp class into two files, token.h and token.cpp
 - Writing extremely basic templates for certain functions
 - Autocompleting certain lines of code, particularly in simple functions like Token::toString
 - Generating the list of C++ keywords
-
-# TODO
-1. Add extra punctuation to lexer as needed
+- Miscellaneous debugging help

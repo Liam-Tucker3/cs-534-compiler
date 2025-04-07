@@ -27,19 +27,20 @@ Token::Token(TokenType t, std::string filename, int line, int index) {
 }
 
 // Public Methods
-TokenType Token::getToken() {
+// Updated to be constant to avoid potential run-time errors
+TokenType Token::getToken() const {
     return token;
 }
 
-std::string Token::getFilename() {
+std::string Token::getFilename() const {
     return filename;
 }
 
-int Token::getLine() {
+int Token::getLine() const {
     return line;
 }
 
-int Token::getIndex() {
+int Token::getIndex() const {
     return index;
 }
 
@@ -59,17 +60,17 @@ void Token::setIndices(int line, int index) {
     this->index = index;
 }
 
-int Token::getIntVal() {
+int Token::getIntVal() const {
     return iVal;
 }
 
-std::string Token::getStrVal() {
+std::string Token::getStrVal() const {
     return sVal;
 }
 
 // MUST MANUALLY UPDATE FOR NEW TOKEN TYPES
 
-int Token::getLength() {
+int Token::getLength() const {
     TokenType t = this->token;
 
     if (t == PLUS || t == MINUS || t == TIMES || t == DIVIDE || t == POWER || t == MOD) return 1; // Arithmetic
@@ -90,7 +91,7 @@ int Token::getLength() {
     else return 0; // Unknown 
 }
  
-std::string Token::toString() {
+std::string Token::toString() const {
     std::string tokenString = "";
     switch (token) {
         case PLUS:

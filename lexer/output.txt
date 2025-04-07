@@ -1,0 +1,9 @@
+LOAD(10);
+LOAD(8);
+LOAD(6);
+LOAD(4);
+DIV();
+SUB();
+LOAD(2);
+MUL();
+ADD();

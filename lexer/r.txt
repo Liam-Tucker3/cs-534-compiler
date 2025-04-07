@@ -1,0 +1,95 @@
+Starting AST WORK
+Parsed AST INPUT
+Called Tokens to AST
+AST Type: 4 (INT) | Value: 10
+AST Type: 0 (PLUS) | Value: -1
+AST Type: 6 (OPARAN) | Value: -1
+AST Type: 4 (INT) | Value: 8
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+AST Type: 7 (CPARAN) | Value: -1
+AST Type: 2 (TIMES) | Value: -1
+AST Type: 4 (INT) | Value: 2
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 10
+AST Type: 0 (PLUS) | Value: -1
+AST Type: 6 (OPARAN) | Value: -1
+AST Type: 4 (INT) | Value: 8
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+AST Type: 7 (CPARAN) | Value: -1
+AST Type: 2 (TIMES) | Value: -1
+AST Type: 4 (INT) | Value: 2
+Foind plus minus paran: 1
+I is not -1
+Found +- PLUSat1
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 10
+New makeTreeRecursive Call
+AST Type: 6 (OPARAN) | Value: -1
+AST Type: 4 (INT) | Value: 8
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+AST Type: 7 (CPARAN) | Value: -1
+AST Type: 2 (TIMES) | Value: -1
+AST Type: 4 (INT) | Value: 2
+Foind plus minus paran: 0
+I is not -1
+Type: AST_OPARAN
+Oparan values
+AST Type: 6 (OPARAN) | Value: -1
+AST Type: 4 (INT) | Value: 8
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+AST Type: 7 (CPARAN) | Value: -1
+AST Type: 2 (TIMES) | Value: -1
+AST Type: 4 (INT) | Value: 2
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 8
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+Foind plus minus paran: 1
+I is not -1
+Found +- MINUSat1
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 8
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 6
+AST Type: 3 (DIVIDE) | Value: -1
+AST Type: 4 (INT) | Value: 4
+Foind plus minus paran: -1
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 4
+DIVIDE (-1)
+  INT (6)
+  INT (4)
+MINUS (-1)
+  INT (8)
+  DIVIDE (-1)
+    INT (6)
+    INT (4)
+New makeTreeRecursive Call
+AST Type: 1 (MINUS) | Value: -1
+AST Type: 2 (TIMES) | Value: -1
+AST Type: 4 (INT) | Value: 2
+Foind plus minus paran: -1
+New makeTreeRecursive Call
+AST Type: 4 (INT) | Value: 2
+TIMES (-1)
+  MINUS (-1)
+    INT (8)
+    DIVIDE (-1)
+      OPARAN (538976288)
+        UNKNOWN (382704)
+          UNKNOWN (-2144127592)
+            UNKNOWN (0)

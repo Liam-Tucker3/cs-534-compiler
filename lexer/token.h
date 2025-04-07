@@ -46,15 +46,16 @@ public:
     Token(TokenType t, std::string filename, int line, int index);
 
     // Methods
-    TokenType getToken();
-    std::string getFilename();
-    int getLine();
-    int getIndex();
-    int getLength();
-    std::string toString();
+    // Functions are constant to avoid potential run time errors
+    TokenType getToken() const;
+    std::string getFilename() const; 
+    int getLine() const;
+    int getIndex() const;
+    int getLength() const; 
+    std::string toString() const;
         
-    int getIntVal();
-    std::string getStrVal();
+    int getIntVal() const; 
+    std::string getStrVal() const;
 
     void setVal(int val);
     void setVal(std::string val);
