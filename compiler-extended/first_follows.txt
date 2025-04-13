@@ -1,0 +1,63 @@
+FIRST Sets
+
+FIRST(program) = FIRST(declaration-list) ∪ {ε} = {int, void, ε}
+FIRST(declaration-list) = FIRST(type-specifier) = {int, void}
+FIRST(declaration) = FIRST(var-declaration) ∪ FIRST(fun-declaration) = {;, [, (}
+FIRST(var-declaration) = {;, [}
+FIRST(type-specifier) = {int, void}
+FIRST(fun-declaration) = {(}
+FIRST(params) = FIRST(param-list) ∪ {void, ε} = {int, void, ε}
+FIRST(param-list) = FIRST(type-specifier) = {int, void}
+FIRST(param) = {[, ε}
+FIRST(compound-stmt) = {{}
+FIRST(local-declarations) = FIRST(var-declaration) ∪ {ε} = {;, [, ε}
+FIRST(statement-list) = FIRST(statement) ∪ {ε} = {ID, NUM, (, {, if, while, return, ;, ε}
+FIRST(statement) = FIRST(expression-stmt) ∪ FIRST(compound-stmt) ∪ FIRST(selection-stmt) ∪ FIRST(iteration-stmt) ∪ FIRST(return-stmt) = {ID, NUM, (, ;, {, if, while, return}
+FIRST(expression-stmt) = FIRST(expression) ∪ {;} = {ID, NUM, (, ;}
+FIRST(selection-stmt) = {if}
+FIRST(iteration-stmt) = {while}
+FIRST(return-stmt) = {return}
+FIRST(expression) = FIRST(var) ∪ FIRST(simple-expression) = {ID, NUM, (}
+FIRST(var) = {ID}
+FIRST(simple-expression) = FIRST(additive-expression) = {ID, NUM, (}
+FIRST(relop) = {<=, <, >, >=, ==, !=}
+FIRST(additive-expression) = FIRST(term) = {ID, NUM, (}
+FIRST(add-op) = {+, -}
+FIRST(term) = FIRST(factor) = {ID, NUM, (}
+FIRST(mulop) = {*, /}
+FIRST(factor) = {(, ID, NUM}
+FIRST(call) = {ID}
+FIRST(args) = FIRST(arg-list) ∪ {ε} = {ID, NUM, (, ε}
+FIRST(arg-list) = FIRST(expression) = {ID, NUM, (}
+
+FOLLOW Sets
+
+FOLLOW(program) = {$} (end of input)
+FOLLOW(declaration-list) = FOLLOW(program) = {$}
+FOLLOW(declaration) = FIRST(declaration-list) ∪ FOLLOW(declaration-list) = {int, void, $}
+FOLLOW(var-declaration) = FIRST(local-declarations) ∪ FIRST(var-declaration) ∪ FIRST(statement-list) ∪ FOLLOW(local-declarations) = {int, void, ;, [, ID, NUM, (, {, if, while, return, }}
+FOLLOW(type-specifier) = {ID}
+FOLLOW(fun-declaration) = FOLLOW(declaration) = {int, void, $}
+FOLLOW(params) = {)}
+FOLLOW(param-list) = FOLLOW(params) = {)}
+FOLLOW(param) = {,, )}
+FOLLOW(compound-stmt) = FOLLOW(statement) ∪ FOLLOW(fun-declaration) = {int, void, ID, NUM, (, ;, {, if, while, return, }, else, $}
+FOLLOW(local-declarations) = FIRST(statement-list) = {ID, NUM, (, ;, {, if, while, return, }}
+FOLLOW(statement-list) = {}}
+FOLLOW(statement) = FIRST(statement-list) ∪ FOLLOW(statement-list) ∪ {else} = {ID, NUM, (, ;, {, if, while, return, }, else}
+FOLLOW(expression-stmt) = FOLLOW(statement) = {ID, NUM, (, ;, {, if, while, return, }, else}
+FOLLOW(selection-stmt) = FOLLOW(statement) = {ID, NUM, (, ;, {, if, while, return, }, else}
+FOLLOW(iteration-stmt) = FOLLOW(statement) = {ID, NUM, (, ;, {, if, while, return, }, else}
+FOLLOW(return-stmt) = FOLLOW(statement) = {ID, NUM, (, ;, {, if, while, return, }, else}
+FOLLOW(expression) = {;, ), ], ,}
+FOLLOW(var) = {=} ∪ FOLLOW(simple-expression) ∪ FOLLOW(factor) = {=, +, -, *, /, <=, <, >, >=, ==, !=, ;, ), ], ,}
+FOLLOW(simple-expression) = FOLLOW(expression) = {;, ), ], ,}
+FOLLOW(relop) = FIRST(additive-expression) = {ID, NUM, (}
+FOLLOW(additive-expression) = FIRST(relop) ∪ FOLLOW(simple-expression) = {<=, <, >, >=, ==, !=, ;, ), ], ,}
+FOLLOW(add-op) = FIRST(term) = {ID, NUM, (}
+FOLLOW(term) = FIRST(add-op) ∪ FOLLOW(additive-expression) = {+, -, <=, <, >, >=, ==, !=, ;, ), ], ,}
+FOLLOW(mulop) = FIRST(factor) = {(, ID, NUM}
+FOLLOW(factor) = FIRST(mulop) ∪ FOLLOW(term) = {*, /, +, -, <=, <, >, >=, ==, !=, ;, ), ], ,}
+FOLLOW(call) = FOLLOW(factor) = {*, /, +, -, <=, <, >, >=, ==, !=, ;, ), ], ,}
+FOLLOW(args) = {)}
+FOLLOW(arg-list) = FOLLOW(args) = {)}

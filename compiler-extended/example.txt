@@ -1,0 +1,14 @@
+int gcd(int u, int v){
+    if (v == 0) return u;
+    else return gcd(v, u-u/v*v);
+}
+
+void main(void){
+    int x;
+    int y;
+    output("\nEuclid's GCD");
+    x = input("\nEnter a number:\t");
+    y = input("\nEnter a second number:\t");
+    output("\nRESULT:\t");
+    output(gcd(x,y));
+}
