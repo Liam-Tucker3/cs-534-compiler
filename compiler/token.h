@@ -20,7 +20,7 @@ enum TokenType {
     WHITESPACE, //Whitespace
     LINECOMMENT, BLOCKCOMMENT, // Seperate comments
     UNKNOWN, END_OF_FILE, // ENDOFFILE
-    VOID, ID, NUM, IF,ELSE, WHILE, RETURN // NEEDED TO ADD
+    VOID, ID, NUM, IF,ELSE, WHILE, RETURN, INPUT, OUTPUT // NEEDED TO ADD
 };
 
 class Token {

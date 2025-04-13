@@ -1,3 +1,4 @@
+// Updated ast.h
 #ifndef AST_H
 #define AST_H
 
@@ -26,22 +27,25 @@ enum class ASTNodeType {
     LOCAL_DECLARATIONS, // RULE 11
     STATEMENT_LIST, // RULE 12
     STATEMENT, // RULE 13
-    EXPRESSION_STMT, // RULE 14
-    SELECTION_STMT, // RULE 15
-    ITERATION_STMT, // RULE 16
-    RETURN_STMT, // RULE 17
-    EXPRESSION, // RULE 18
-    VAR, // RULE 19
-    SIMPLE_EXPRESSION, // RULE 20
-    REL_OP, // RULE 21
-    ADDITIVE_EXPR, // RULE 22
-    ADD_OP, // RULE 23
-    TERM, // RULE 24
-    MULOP, // RULE 25
-    FACTOR, // RULE 26
-    CALL, // RULE 27
-    ARGS, // RULE 28
-    ARG_LIST // RULE 29
+    IO_STMT, // RULE 14
+    INPUT_STMT, // RULE 15
+    OUTPUT_STMT, // RULE 16
+    EXPRESSION_STMT, // RULE 17
+    SELECTION_STMT, // RULE 18
+    ITERATION_STMT, // RULE 19
+    RETURN_STMT, // RULE 20
+    EXPRESSION, // RULE 21
+    VAR, // RULE 22
+    SIMPLE_EXPRESSION, // RULE 23
+    REL_OP, // RULE 24
+    ADDITIVE_EXPR, // RULE 25
+    ADD_OP, // RULE 26
+    TERM, // RULE 27
+    MULOP, // RULE 28
+    FACTOR, // RULE 29
+    CALL, // RULE 30
+    ARGS, // RULE 31
+    ARG_LIST // RULE 32
 };
  
 // Utility function to get AST node type name
@@ -51,15 +55,26 @@ std::string getNodeTypeName(ASTNodeType type);
 class ASTNode {
     public:
         ASTNodeType type;
-        Token* token; // Associated token
+        
+        // Store token data directly instead of pointers
+        TokenType tokenType;
+        std::string tokenValue;
+        int tokenIntValue;
+        int tokenLine;
+        int tokenIndex;
+        
         std::vector<ASTNode*> *children;
         std::string dataType;  // For type checking during semantic analysis
 
         // Constructor
         ASTNode(ASTNodeType t, Token* tok = nullptr);
+        
+        // Destructor for proper cleanup
+        ~ASTNode();
 
         /* Adds Child */
         void addChild(ASTNode* child);
+        std::string getTokenString();
 
         // Print the AST for debugging purposes
         void print(int indent = 0) const;
@@ -151,6 +166,9 @@ public:
     ASTNode* parseLocalDeclarations();
     ASTNode* parseStatementList();
     ASTNode* parseStatement();
+    ASTNode* parseIOStmt();
+    ASTNode* parseInputStmt();
+    ASTNode* parseOutputStmt();
     ASTNode* parseExpressionStmt();
     ASTNode* parseSelectionStmt();
     ASTNode* parseIterationStmt();

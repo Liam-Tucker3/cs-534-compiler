@@ -92,8 +92,8 @@ int Token::getLength() const {
     else if (t == IF) return 2;
     else if (t == INT) return 3;
     else if (t == VOID || t == ELSE) return 4;
-    else if (t == WHILE) return 5;
-    else if (t == RETURN) return 6;
+    else if (t == WHILE || t == INPUT) return 5;
+    else if (t == RETURN || t == OUTPUT) return 6;
 
     std::cerr << "Warning: Unknown token type in getLength(): " << (int)t << std::endl;
 
@@ -272,6 +272,12 @@ std::string Token::toString() const {
             break;
         case RETURN:
             tokenString = "RETURN";
+            break;
+        case INPUT:
+            tokenString = "INPUT";
+            break;
+        case OUTPUT:
+            tokenString = "OUTPUT";
             break;
         case UNKNOWN:
             tokenString = "UNKNOWN";

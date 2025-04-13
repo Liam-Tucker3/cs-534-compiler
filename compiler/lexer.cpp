@@ -143,7 +143,7 @@ Token identifyToken(const std::string &input, int index) {
         std::string val = input.substr(s, e-s);
 
         // Checking for keywords urrently used
-        if (val == "if" || val == "else" || val == "void" || val == "while" || val == "int" || val == "return") {
+        if (val == "if" || val == "else" || val == "void" || val == "while" || val == "int" || val == "return" || val == "input" || val == "output") {
             Token t;
             if (val == "if") t =  Token(IF, s);
             if (val == "else") t = Token(ELSE, s);
@@ -151,6 +151,8 @@ Token identifyToken(const std::string &input, int index) {
             if (val == "void") t = Token(VOID, s);
             if (val == "while") t = Token(WHILE, s);
             if (val == "return") t = Token(RETURN, s);
+            if (val == "input") t = Token(INPUT, s);
+            if (val == "output") t = Token(OUTPUT, s);
 
             t.setVal(input.substr(s, e-s)); // Storing value of s
             return t;
@@ -239,10 +241,7 @@ void printStackMachineCodeToFile(std::vector<std::string> code, std::string file
     file.close();
 }
 
-/**
- * Creates and prints an AST from a vector of tokens
- * @param tokens The vector of tokens to parse
- */
+// Creates and prints an AST from a vector of tokens
 void createAndPrintAST(const std::vector<Token>& tokens) {
     // Create a parser with the tokens
     Parser parser(tokens);
@@ -256,12 +255,12 @@ void createAndPrintAST(const std::vector<Token>& tokens) {
         std::cout << "====================" << std::endl;
         root->print();
         std::cout << "====================" << std::endl;
+        
+        // Clean up memory
+        delete root;
     } else {
         std::cout << "Failed to create AST - parsing error" << std::endl;
     }
-    
-    // Clean up memory
-    delete root;
 }
 
 

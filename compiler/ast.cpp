@@ -20,6 +20,9 @@ std::string getNodeTypeName(ASTNodeType type) {
         {ASTNodeType::SELECTION_STMT, "SELECTION_STMT"},
         {ASTNodeType::ITERATION_STMT, "ITERATION_STMT"},
         {ASTNodeType::RETURN_STMT, "RETURN_STMT"},
+        {ASTNodeType::IO_STMT, "IO_STMT"},                 // New
+        {ASTNodeType::INPUT_STMT, "INPUT_STMT"},           // New
+        {ASTNodeType::OUTPUT_STMT, "OUTPUT_STMT"},         // New
         {ASTNodeType::EXPRESSION, "EXPRESSION"},
         {ASTNodeType::VAR, "VAR"},
         {ASTNodeType::SIMPLE_EXPRESSION, "SIMPLE_EXPRESSION"},
@@ -44,9 +47,34 @@ std::string getNodeTypeName(ASTNodeType type) {
 // ASTNode implementation
 ASTNode::ASTNode(ASTNodeType t, Token* tok) {
     type = t;
-    token = tok;
+    
+    // Storeing data directly
+    if (tok) {
+        tokenType = tok->getToken();
+        tokenValue = tok->getStrVal();
+        tokenIntValue = tok->getIntVal();
+        tokenLine = tok->getLine();
+        tokenIndex = tok->getIndex();
+    } else {
+        tokenType = UNKNOWN;
+        tokenValue = "";
+        tokenIntValue = 0;
+        tokenLine = -1;
+        tokenIndex = -1;
+    }
+    
     children = new std::vector<ASTNode*>();
     dataType = getNodeTypeName(t);
+}
+
+
+ASTNode::~ASTNode() {
+    if (children) {
+        for (auto child : *children) {
+            delete child;
+        }
+        delete children;
+    }
 }
 
 void ASTNode::addChild(ASTNode* child) {
@@ -55,26 +83,43 @@ void ASTNode::addChild(ASTNode* child) {
     }
 }
 
+std::string ASTNode::getTokenString()  {
+    if (this->tokenType == INT || tokenType == VOID) {
+        return tokenType == INT ? "int" : "void";
+    } else {
+        return tokenValue;
+    }
+}
+
 void ASTNode::print(int indent) const {
-    std::string indentation(indent * 2, ' ');
+    std::string indentation;
+    for (int i = 0; i < indent; i++) {
+        indentation += "| ";
+    }
+    
     std::cout << indentation << getNodeTypeName(type);
     
-    if (token) {
-        std::cout << " [" << token->toString() << "]";
+    // Use stored token data instead of token pointer
+    if (tokenType != UNKNOWN) {
+        std::cout << " [" << tokenValue << "]";
     }
     
     if (!dataType.empty()) {
         std::cout << " (Type: " << dataType << ")";
     }
     
-    if (token && !token->getStrVal().empty()) {
-        std::cout << " = " << token->getStrVal();
+    if (!tokenValue.empty() && tokenType == ID) {
+        std::cout << " = " << tokenValue;
     }
     
     std::cout << std::endl;
     
     for (const auto& child : *children) {
-        child->print(indent + 1);
+        if (child) { // Add null check for safety
+            child->print(indent + 1);
+        } else {
+            std::cout << indentation << "| NULL CHILD" << std::endl;
+        }
     }
 }
 
@@ -296,7 +341,7 @@ ASTNode* Parser::parseVarDeclaration(ASTNode* typeSpecNode, Token idToken) {
     
     // Add variable to symbol table
     std::string dataType = getNodeTypeName(typeSpecNode->type);
-    st.addSymbol(Symbol(idToken.toString(), SymbolType::SYMBOL_VARIABLE, dataType, st.getCurrentScope(), arraySize));
+    st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_VARIABLE, dataType, st.getCurrentScope(), arraySize));
     
     return node;
 }
@@ -324,7 +369,7 @@ ASTNode* Parser::parseFunDeclaration(ASTNode* typeSpecNode, Token idToken) {
     node->addChild(typeSpecNode);
     
     // Add function to symbol table in current scope
-    std::string returnType = typeSpecNode->token->toString();
+    std::string returnType = typeSpecNode->getTokenString();
     st.addSymbol(Symbol(
         idToken.getStrVal(), SymbolType::SYMBOL_FUNCTION, returnType, st.getCurrentScope()));
     
@@ -364,7 +409,14 @@ ASTNode* Parser::parseParams() {
     // Check if params is "void" or empty
     if (currentToken().token == TokenType::VOID) {
         Token voidToken = currentToken();
-        node->token = &voidToken;
+        
+        // Copying token details
+        node->tokenType = voidToken.getToken();
+        node->tokenValue = voidToken.getStrVal();
+        node->tokenIntValue = voidToken.getIntVal();
+        node->tokenLine = voidToken.getLine();
+        node->tokenIndex = voidToken.getIndex();
+        
         match(TokenType::VOID);
         
         // Check if it's "void" followed by more parameters, which would be a param-list starting with void type
@@ -410,7 +462,7 @@ ASTNode* Parser::parseParamList() {
     }
     
     // Add parameter to symbol table - make sure we're using getStrVal() and not toString()
-    std::string dataType = typeSpecNode->token->toString();
+    std::string dataType = typeSpecNode->getTokenString();
     st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_PARAMETER, dataType, st.getCurrentScope(), isArray ? 0 : -1));
     
     // Add param to param-list
@@ -441,7 +493,7 @@ ASTNode* Parser::parseParamList() {
         }
         
         // Add parameter to symbol table
-        dataType = typeSpecNode->token->toString();
+        dataType = typeSpecNode->getTokenString();
         st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_PARAMETER, dataType, st.getCurrentScope(), isArray ? 0 : -1));
         
         // Add param to param-list
@@ -512,7 +564,7 @@ ASTNode* Parser::parseStatementList() {
     return node;
 }
 
-// Rule 13: statement := expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt
+// Rule 13: statement := expression-stmt | compound-stmt | selection-stmt | iteration-stmt | return-stmt | io-stmt
 ASTNode* Parser::parseStatement() {
     ASTNode* node = new ASTNode(ASTNodeType::STATEMENT);
     
@@ -545,6 +597,12 @@ ASTNode* Parser::parseStatement() {
             node->addChild(parseReturnStmt());
             break;
             
+        case TokenType::INPUT:
+        case TokenType::OUTPUT:
+            // IO statement
+            node->addChild(parseIOStmt());
+            break;
+            
         default:
             std::cerr << "SYNTAX ERROR: Unexpected token in statement in Rule 13" << std::endl;
             syntaxError();
@@ -553,7 +611,100 @@ ASTNode* Parser::parseStatement() {
     return node;
 }
 
-// Rule 14: expression-stmt := expression ; | ;
+// Rule 14: io-stmt := input-stmt | output-stmt
+ASTNode* Parser::parseIOStmt() {
+    ASTNode* node = new ASTNode(ASTNodeType::IO_STMT);
+    
+    if (currentToken().token == TokenType::INPUT) {
+        node->addChild(parseInputStmt());
+    } else if (currentToken().token == TokenType::OUTPUT) {
+        node->addChild(parseOutputStmt());
+    } else {
+        std::cerr << "SYNTAX ERROR: Expected 'input' or 'output' in IO statement in Rule 14" << std::endl;
+        syntaxError();
+    }
+    
+    return node;
+}
+
+// Rule 15: input-stmt := input ( STRING ) ;
+ASTNode* Parser::parseInputStmt() {
+    Token inputToken = currentToken();
+    ASTNode* node = new ASTNode(ASTNodeType::INPUT_STMT, &inputToken);
+    
+    // Match 'input'
+    if (!match(TokenType::INPUT)) {
+        std::cerr << "SYNTAX ERROR: Expected 'input' at start of input statement in Rule 15" << std::endl;
+        syntaxError();
+    }
+    
+    // Match '('
+    if (!match(TokenType::OPARENTHESES)) {
+        std::cerr << "SYNTAX ERROR: Expected ( after 'input' in Rule 15" << std::endl;
+        syntaxError();
+    }
+    
+    // Match STRING
+    if (!match(TokenType::STRING)) {
+        std::cerr << "SYNTAX ERROR: Expected string literal in input statement in Rule 15" << std::endl;
+        syntaxError();
+    }
+    
+    // Save STRING token
+    Token stringToken = tokens.at(currentTokenIndex - 1);
+    ASTNode* stringNode = new ASTNode(ASTNodeType::FACTOR, &stringToken);
+    node->addChild(stringNode);
+    
+    // Match ')'
+    if (!match(TokenType::CPARENTHESES)) {
+        std::cerr << "SYNTAX ERROR: Expected ) after string in input statement in Rule 15" << std::endl;
+        syntaxError();
+    }
+    
+    return node;
+}
+
+// Rule 16: output-stmt := output ( STRING ) ; | output ( expression ) ;
+ASTNode* Parser::parseOutputStmt() {
+    Token outputToken = currentToken();
+    ASTNode* node = new ASTNode(ASTNodeType::OUTPUT_STMT, &outputToken);
+    
+    // Match 'output'
+    if (!match(TokenType::OUTPUT)) {
+        std::cerr << "SYNTAX ERROR: Expected 'output' at start of output statement in Rule 16" << std::endl;
+        syntaxError();
+    }
+    
+    // Match '('
+    if (!match(TokenType::OPARENTHESES)) {
+        std::cerr << "SYNTAX ERROR: Expected ( after 'output' in Rule 16" << std::endl;
+        syntaxError();
+    }
+    
+    // Check if the next token is a STRING
+    if (currentToken().token == TokenType::STRING) {
+        // Match STRING
+        match(TokenType::STRING);
+        
+        // Save STRING token
+        Token stringToken = tokens.at(currentTokenIndex - 1);
+        ASTNode* stringNode = new ASTNode(ASTNodeType::FACTOR, &stringToken);
+        node->addChild(stringNode);
+    } else {
+        // Parse expression
+        node->addChild(parseExpression());
+    }
+    
+    // Match ')'
+    if (!match(TokenType::CPARENTHESES)) {
+        std::cerr << "SYNTAX ERROR: Expected ) after expression or string in output statement in Rule 16" << std::endl;
+        syntaxError();
+    }
+    
+    return node;
+}
+
+// Rule 17: expression-stmt := expression ; | ;
 ASTNode* Parser::parseExpressionStmt() {
     ASTNode* node = new ASTNode(ASTNodeType::EXPRESSION_STMT);
     
@@ -566,26 +717,26 @@ ASTNode* Parser::parseExpressionStmt() {
     node->addChild(parseExpression());
     
     if (!match(TokenType::SEMICOLON)) {
-        std::cerr << "SYNTAX ERROR: Expected ; after expression in Rule 14" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ; after expression in Rule 17" << std::endl;
         syntaxError();
     }
     
     return node;
 }
 
-// Rule 15: selection-stmt := if ( simple-expression ) statement | if ( simple-expression ) statement else statement
+// Rule 18: selection-stmt := if ( simple-expression ) statement | if ( simple-expression ) statement else statement
 ASTNode* Parser::parseSelectionStmt() {
     ASTNode* node = new ASTNode(ASTNodeType::SELECTION_STMT);
     
     // Match 'if'
     if (!match(TokenType::IF)) {
-        std::cerr << "SYNTAX ERROR: Expected 'if' at start of selection statement in Rule 15" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected 'if' at start of selection statement in Rule 18" << std::endl;
         syntaxError();
     }
     
     // Match '('
     if (!match(TokenType::OPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ( after 'if' in Rule 15" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ( after 'if' in Rule 18" << std::endl;
         syntaxError();
     }
     
@@ -594,7 +745,7 @@ ASTNode* Parser::parseSelectionStmt() {
     
     // Match ')'
     if (!match(TokenType::CPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ) after expression in 'if' statement in Rule 15" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ) after expression in 'if' statement in Rule 18" << std::endl;
         syntaxError();
     }
     
@@ -610,19 +761,19 @@ ASTNode* Parser::parseSelectionStmt() {
     return node;
 }
 
-// Rule 16: iteration-stmt := while ( expression ) statement
+// Rule 19: iteration-stmt := while ( expression ) statement
 ASTNode* Parser::parseIterationStmt() {
     ASTNode* node = new ASTNode(ASTNodeType::ITERATION_STMT);
     
     // Match 'while'
     if (!match(TokenType::WHILE)) {
-        std::cerr << "SYNTAX ERROR: Expected 'while' at start of iteration statement in Rule 16" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected 'while' at start of iteration statement in Rule 19" << std::endl;
         syntaxError();
     }
     
     // Match '('
     if (!match(TokenType::OPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ( after 'while' in Rule 16" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ( after 'while' in Rule 19" << std::endl;
         syntaxError();
     }
     
@@ -631,7 +782,7 @@ ASTNode* Parser::parseIterationStmt() {
     
     // Match ')'
     if (!match(TokenType::CPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ) after expression in 'while' statement in Rule 16" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ) after expression in 'while' statement in Rule 19" << std::endl;
         syntaxError();
     }
     
@@ -641,13 +792,13 @@ ASTNode* Parser::parseIterationStmt() {
     return node;
 }
 
-// Rule 17: return-stmt := return ; | return expression ;
+// Rule 20: return-stmt := return ; | return expression ;
 ASTNode* Parser::parseReturnStmt() {
     ASTNode* node = new ASTNode(ASTNodeType::RETURN_STMT);
     
     // Match 'return'
     if (!match(TokenType::RETURN)) {
-        std::cerr << "SYNTAX ERROR: Expected 'return' at start of return statement in Rule 17" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected 'return' at start of return statement in Rule 20" << std::endl;
         syntaxError();
     }
     
@@ -658,14 +809,14 @@ ASTNode* Parser::parseReturnStmt() {
     
     // Match semicolon
     if (!match(TokenType::SEMICOLON)) {
-        std::cerr << "SYNTAX ERROR: Expected ; after return statement in Rule 17" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ; after return statement in Rule 20" << std::endl;
         syntaxError();
     }
     
     return node;
 }
 
-// Rule 18: expression := var = expression | simple-expression
+// Rule 21: expression := var = expression | simple-expression
 ASTNode* Parser::parseExpression() {
     ASTNode* node = new ASTNode(ASTNodeType::EXPRESSION);
     
@@ -697,11 +848,11 @@ ASTNode* Parser::parseExpression() {
     return node;
 }
 
-// Updated Rule 19: var := ID | ID [ simple-expression ]
+// Updated Rule 22: var := ID | ID [ simple-expression ]
 ASTNode* Parser::parseVar() {
     // Check for ID
     if (!match(TokenType::ID)) {
-        std::cerr << "SYNTAX ERROR: Expected identifier at start of variable in Rule 19" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected identifier at start of variable in Rule 22" << std::endl;
         syntaxError();
     }
     
@@ -711,7 +862,7 @@ ASTNode* Parser::parseVar() {
     // Check if the variable exists in the symbol table - use getStrVal() consistently
     Symbol* varSymbol = st.findSymbol(idToken.getStrVal());
     if (!varSymbol) {
-        std::cerr << "SEMANTIC ERROR: Undeclared variable '" << idToken.getStrVal() << "' in Rule 19" << std::endl;
+        std::cerr << "SEMANTIC ERROR: Undeclared variable '" << idToken.getStrVal() << "' in Rule 22" << std::endl;
         syntaxError();
     }
     
@@ -721,7 +872,7 @@ ASTNode* Parser::parseVar() {
     if (match(TokenType::OBRACKET)) {
         // Make sure the variable is actually an array
         if (varSymbol->arrSize == -1) {
-            std::cerr << "SEMANTIC ERROR: Variable '" << idToken.getStrVal() << "' is not an array in Rule 19" << std::endl;
+            std::cerr << "SEMANTIC ERROR: Variable '" << idToken.getStrVal() << "' is not an array in Rule 22" << std::endl;
             syntaxError();
         }
         
@@ -730,7 +881,7 @@ ASTNode* Parser::parseVar() {
         
         // Match closing bracket
         if (!match(TokenType::CBRACKET)) {
-            std::cerr << "SYNTAX ERROR: Expected ] after array index expression in Rule 19" << std::endl;
+            std::cerr << "SYNTAX ERROR: Expected ] after array index expression in Rule 22" << std::endl;
             syntaxError();
         }
     } else if (varSymbol->arrSize != -1) {
@@ -741,7 +892,7 @@ ASTNode* Parser::parseVar() {
     return node;
 }
 
-// Rule 20: simple-expression := additive-expression relop additive-expression | additive-expression
+// Rule 23: simple-expression := additive-expression relop additive-expression | additive-expression
 ASTNode* Parser::parseSimpleExpression() {
     ASTNode* node = new ASTNode(ASTNodeType::SIMPLE_EXPRESSION);
     
@@ -767,7 +918,7 @@ ASTNode* Parser::parseSimpleExpression() {
     return node;
 }
 
-// Rule 21: relop := <= | < | > | >= | == | !=
+// Rule 24: relop := <= | < | > | >= | == | !=
 ASTNode* Parser::parseRelOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::REL_OP, &opToken);
@@ -778,13 +929,13 @@ ASTNode* Parser::parseRelOp() {
         // Successfully matched a relational operator
         return node;
     } else {
-        std::cerr << "SYNTAX ERROR: Expected relational operator in Rule 21" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected relational operator in Rule 24" << std::endl;
         syntaxError();
         return nullptr; // Unreachable
     }
 }
 
-// Rule 22: additive-expression := additive-expression addop term | term
+// Rule 25: additive-expression := additive-expression addop term | term
 ASTNode* Parser::parseAdditiveExpr() {
     ASTNode* node = new ASTNode(ASTNodeType::ADDITIVE_EXPR);
     
@@ -808,7 +959,7 @@ ASTNode* Parser::parseAdditiveExpr() {
     return node;
 }
 
-// Rule 23: add-op := + | -
+// Rule 26: add-op := + | -
 ASTNode* Parser::parseAddOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::ADD_OP, &opToken);
@@ -817,13 +968,13 @@ ASTNode* Parser::parseAddOp() {
         // Successfully matched an additive operator
         return node;
     } else {
-        std::cerr << "SYNTAX ERROR: Expected additive operator (+ or -) in Rule 23" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected additive operator (+ or -) in Rule 26" << std::endl;
         syntaxError();
         return nullptr; // Unreachable
     }
 }
 
-// Rule 24: term := term mulop factor | factor
+// Rule 27: term := term mulop factor | factor
 ASTNode* Parser::parseTerm() {
     ASTNode* node = new ASTNode(ASTNodeType::TERM);
     
@@ -847,7 +998,7 @@ ASTNode* Parser::parseTerm() {
     return node;
 }
 
-// Rule 25: mulop := * | /
+// Rule 28: mulop := * | /
 ASTNode* Parser::parseMulOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::MULOP, &opToken);
@@ -856,13 +1007,13 @@ ASTNode* Parser::parseMulOp() {
         // Successfully matched a multiplicative operator
         return node;
     } else {
-        std::cerr << "SYNTAX ERROR: Expected multiplicative operator (* or /) in Rule 25" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected multiplicative operator (* or /) in Rule 28" << std::endl;
         syntaxError();
         return nullptr; // Unreachable
     }
 }
 
-// Rule 26: factor := ( simple-expression ) | var | call | NUM
+// Rule 29: factor := ( simple-expression ) | var | call | NUM | input-stmt
 ASTNode* Parser::parseFactor() {
     ASTNode* node = new ASTNode(ASTNodeType::FACTOR);
     
@@ -873,7 +1024,7 @@ ASTNode* Parser::parseFactor() {
             node->addChild(parseSimpleExpression());
             
             if (!match(TokenType::CPARENTHESES)) {
-                std::cerr << "SYNTAX ERROR: Expected ) after expression in factor in Rule 26" << std::endl;
+                std::cerr << "SYNTAX ERROR: Expected ) after expression in factor in Rule 29" << std::endl;
                 syntaxError();
             }
             break;
@@ -907,19 +1058,25 @@ ASTNode* Parser::parseFactor() {
             break;
         }
         
+        case TokenType::INPUT: {
+            // input-stmt
+            node->addChild(parseInputStmt());
+            break;
+        }
+        
         default:
-            std::cerr << "SYNTAX ERROR: Unexpected token in factor in Rule 26" << std::endl;
+            std::cerr << "SYNTAX ERROR: Unexpected token in factor in Rule 29" << std::endl;
             syntaxError();
     }
     
     return node;
 }
 
-// Rule 27: call := ID ( args )
+// Rule 30: call := ID ( args )
 ASTNode* Parser::parseCall() {
     // Check for function ID
     if (!match(TokenType::ID)) {
-        std::cerr << "SYNTAX ERROR: Expected function identifier at start of call in Rule 27" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected function identifier at start of call in Rule 30" << std::endl;
         syntaxError();
     }
     
@@ -929,7 +1086,7 @@ ASTNode* Parser::parseCall() {
     // Check if the function exists in the symbol table
     Symbol* funcSymbol = st.findSymbol(idToken.getStrVal());
     if (!funcSymbol || funcSymbol->type != SymbolType::SYMBOL_FUNCTION) {
-        std::cerr << "SEMANTIC ERROR: Undeclared function '" << idToken.getStrVal() << "' in Rule 27" << std::endl;
+        std::cerr << "SEMANTIC ERROR: Undeclared function '" << idToken.getStrVal() << "' in Rule 30" << std::endl;
         syntaxError();
     }
     
@@ -937,7 +1094,7 @@ ASTNode* Parser::parseCall() {
     
     // Match opening parenthesis
     if (!match(TokenType::OPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ( after function identifier in Rule 27" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ( after function identifier in Rule 30" << std::endl;
         syntaxError();
     }
     
@@ -946,14 +1103,14 @@ ASTNode* Parser::parseCall() {
     
     // Match closing parenthesis
     if (!match(TokenType::CPARENTHESES)) {
-        std::cerr << "SYNTAX ERROR: Expected ) after arguments in function call in Rule 27" << std::endl;
+        std::cerr << "SYNTAX ERROR: Expected ) after arguments in function call in Rule 30" << std::endl;
         syntaxError();
     }
     
     return node;
 }
 
-// Rule 28: args := arg-list | ε
+// Rule 31: args := arg-list | ε
 ASTNode* Parser::parseArgs() {
     ASTNode* node = new ASTNode(ASTNodeType::ARGS);
     
@@ -967,7 +1124,7 @@ ASTNode* Parser::parseArgs() {
     return node;
 }
 
-// Rule 29: arg-list := arg-list , expression | expression
+// Rule 31: arg-list := arg-list , expression | expression
 ASTNode* Parser::parseArgList() {
     ASTNode* node = new ASTNode(ASTNodeType::ARG_LIST);
     
