@@ -9,6 +9,7 @@
 #include <memory>
 #include <stdexcept>
 #include <ostream>
+#include <fstream>
 
 #include "token.h"
 
@@ -47,6 +48,10 @@ enum class ASTNodeType {
     ARGS, // RULE 31
     ARG_LIST // RULE 32
 };
+
+// Forward declarations
+class SymbolTable;
+class CodeGenerator;
  
 // Utility function to get AST node type name
 std::string getNodeTypeName(ASTNodeType type);
@@ -78,6 +83,7 @@ class ASTNode {
 
         // Print the AST for debugging purposes
         void print(int indent = 0) const;
+        void printToFile(std::ofstream& file, int indent);
 };
 
 // Symbol Tables
@@ -127,7 +133,6 @@ public:
 class Parser {
 private:
     // Attributes
-    SymbolTable st;
     std::vector<Token> tokens;
     int currentTokenIndex;
 
@@ -145,6 +150,9 @@ private:
     void syntaxError();
 
 public:
+    // Symbol table (public for access in code generation)
+    SymbolTable st;
+
     // Constructor
     Parser(std::vector<Token> t);
     Parser();
@@ -185,6 +193,9 @@ public:
     ASTNode* parseCall();
     ASTNode* parseArgs();
     ASTNode* parseArgList();
+
+    void printNode(ASTNode* node, int indent, std::ofstream& file);
+    void printToFile(const std::string& filename);
 };
 
 #endif // AST_H

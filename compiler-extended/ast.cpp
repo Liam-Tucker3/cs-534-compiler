@@ -123,6 +123,38 @@ void ASTNode::print(int indent) const {
     }
 }
 
+void ASTNode::printToFile(std::ofstream& file, int indent) {
+    std::string indentation;
+    for (int i = 0; i < indent; i++) {
+        indentation += "| ";
+    }
+    
+    file << indentation << getNodeTypeName(type);
+    
+    // Use stored token data instead of token pointer
+    if (tokenType != UNKNOWN) {
+        file << " [" << tokenValue << "]";
+    }
+    
+    if (!dataType.empty()) {
+        file << " (Type: " << dataType << ")";
+    }
+    
+    if (!tokenValue.empty() && tokenType == ID) {
+        file << " = " << tokenValue;
+    }
+    
+    file << std::endl;
+    
+    for (const auto& child : *children) {
+        if (child) { // Add null check for safety
+            child->printToFile(file, indent + 1);
+        } else {
+            file << indentation << "| NULL CHILD" << std::endl;
+        }
+    }
+}
+
 // Symbol implementation
 Symbol::Symbol(std::string n, SymbolType t, std::string dt, int scope, int arr) {
     name = n;
@@ -169,23 +201,23 @@ bool SymbolTable::addSymbol(const Symbol& symbol) {
 
 Symbol* SymbolTable::findSymbol(const std::string& name) {
     // Debug output to see what's happening
-    std::cout << "Looking for symbol: '" << name << "' in scopes from " << currentScope << " down to 0" << std::endl;
+    // std::cout << "Looking for symbol: '" << name << "' in scopes from " << currentScope << " down to 0" << std::endl;
     
     // Look for symbol in current and outer scopes
     for (int s = currentScope; s >= 0; s--) {
         for (auto& sym : symbols) {
             if (sym.name == name && sym.scopeLevel <= s) {
-                std::cout << "Found symbol '" << name << "' in scope " << sym.scopeLevel << std::endl;
+                // std::cout << "Found symbol '" << name << "' in scope " << sym.scopeLevel << std::endl;
                 return &sym;
             }
         }
     }
     
     // Not found - print the current symbol table for debugging
-    std::cout << "Symbol not found. Current symbol table:" << std::endl;
-    for (const auto& sym : symbols) {
-        std::cout << "Name: '" << sym.name << "', Scope: " << sym.scopeLevel << std::endl;
-    }
+    // std::cout << "Symbol not found. Current symbol table:" << std::endl;
+    // for (const auto& sym : symbols) {
+    //     std::cout << "Name: '" << sym.name << "', Scope: " << sym.scopeLevel << std::endl;
+    // }
     
     return nullptr;  // Not found
 }
@@ -816,7 +848,7 @@ ASTNode* Parser::parseReturnStmt() {
     return node;
 }
 
-// Rule 21: expression := var = expression | simple-expression
+// Rule 21: expression := var = simple-expression | simple-expression
 ASTNode* Parser::parseExpression() {
     ASTNode* node = new ASTNode(ASTNodeType::EXPRESSION);
     
@@ -834,7 +866,7 @@ ASTNode* Parser::parseExpression() {
             node->addChild(varNode);
             
             // Parse the right side of the assignment
-            node->addChild(parseExpression());
+            node->addChild(parseSimpleExpression());
         } else {
             // This is a simple expression, so reset and parse as simple-expression
             currentTokenIndex = savedIndex;
@@ -922,17 +954,33 @@ ASTNode* Parser::parseSimpleExpression() {
 ASTNode* Parser::parseRelOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::REL_OP, &opToken);
-    
-    if (match(TokenType::LE) || match(TokenType::LT) || 
-        match(TokenType::GT) || match(TokenType::GE) || 
-        match(TokenType::EE) || match(TokenType::NE)) {
-        // Successfully matched a relational operator
-        return node;
+
+    if (match(TokenType::LE)) {
+        node->tokenType = TokenType::LE;
+        node->tokenValue = opToken.toString();
+    } else if (match(TokenType::LT)) {
+        node->tokenType = TokenType::LT;
+        node->tokenValue = opToken.toString();
+    } else if (match(TokenType::GT)) {
+        node->tokenType = TokenType::GT;
+        node->tokenValue = opToken.toString();
+    } else if (match(TokenType::GE)) {
+        node->tokenType = TokenType::GE;
+        node->tokenValue = opToken.toString();
+    } else if (match(TokenType::EE)) {
+        node->tokenType = TokenType::EE;
+        node->tokenValue = opToken.toString();
+    } else if (match(TokenType::NE)) {
+        node->tokenType = TokenType::NE;
+        node->tokenValue = opToken.toString();
     } else {
         std::cerr << "SYNTAX ERROR: Expected relational operator in Rule 24" << std::endl;
         syntaxError();
         return nullptr; // Unreachable
     }
+
+    return node; // Only returns if match was found
+
 }
 
 // Rule 25: additive-expression := additive-expression addop term | term
@@ -964,8 +1012,13 @@ ASTNode* Parser::parseAddOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::ADD_OP, &opToken);
     
-    if (match(TokenType::PLUS) || match(TokenType::MINUS)) {
-        // Successfully matched an additive operator
+    if (match(TokenType::PLUS)) {
+        node->tokenType = TokenType::PLUS;
+        node->tokenValue = opToken.toString();
+        return node;
+    } else if (match(TokenType::MINUS)) {
+        node->tokenType = TokenType::MINUS;
+        node->tokenValue = opToken.toString();
         return node;
     } else {
         std::cerr << "SYNTAX ERROR: Expected additive operator (+ or -) in Rule 26" << std::endl;
@@ -1002,9 +1055,14 @@ ASTNode* Parser::parseTerm() {
 ASTNode* Parser::parseMulOp() {
     Token opToken = currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::MULOP, &opToken);
-    
-    if (match(TokenType::TIMES) || match(TokenType::DIVIDE)) {
-        // Successfully matched a multiplicative operator
+
+    if (match(TokenType::TIMES)) {
+        node->tokenType = TokenType::TIMES;
+        node->tokenValue = opToken.toString();
+        return node;
+    } else if (match(TokenType::DIVIDE)) {
+        node->tokenType = TokenType::DIVIDE;
+        node->tokenValue = opToken.toString();
         return node;
     } else {
         std::cerr << "SYNTAX ERROR: Expected multiplicative operator (* or /) in Rule 28" << std::endl;
