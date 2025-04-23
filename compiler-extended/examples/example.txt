@@ -7,9 +7,9 @@ void main(void){
     int x;
     int y;
     int z;
-    output("\nEuclid's GCD");
-    x = input("\nEnter a number:\t");
-    y = input("\nEnter a second number:\t");
-    output("\nRESULT:\t");
+    output("Euclid's GCD");
+    x = input("Enter a number:");
+    y = input("Enter a second number:");
+    output("RESULT:");
     output(gcd(x,y));
 }

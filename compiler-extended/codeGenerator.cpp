@@ -3,6 +3,7 @@
 #include <sstream>
 #include <fstream>
 
+// Code generator constructor
 CodeGenerator::CodeGenerator(SymbolTable& st) : 
     symbolTable(st), 
     labelCounter(0), 
@@ -13,6 +14,7 @@ std::string CodeGenerator::generateLabel() {
     return "L" + std::to_string(labelCounter++);
 }
 
+// Returns text of Stack Machine code corresponding to the opcode
 std::string CodeGenerator::getOpString(OpCode op) const {
     switch (op) {
         case OpCode::PUSH: return "PUSH";
@@ -46,7 +48,8 @@ std::string CodeGenerator::getOpString(OpCode op) const {
     }
 }
 
-// Helper function to add a variable to the frame tracking
+// Tracking variables in stack frame
+// Used for tracking addresses for load, save, and store calls
 void CodeGenerator::addVariableToFrame(const std::string& varName, bool isArray, int arraySize) {
     if (frameVariables.find(varName) == frameVariables.end()) {
         VariableInfo info;
@@ -78,7 +81,7 @@ void CodeGenerator::clearFrameVariables() {
     localVarCount = 0;
 }
 
-// Main: Called to begin generation
+// Entry point for code generation
 void CodeGenerator::generate(ASTNode* root) {
     if (!root) return;
     
@@ -138,7 +141,6 @@ void CodeGenerator::generateDeclaration(ASTNode* node) {
 }
 
 // Rule 4: var-declaration := ; | [ NUM ] ;
-// Modified to track variables in the frame
 void CodeGenerator::generateVarDeclaration(ASTNode* node) {
     if (!node) return;
     
@@ -157,11 +159,10 @@ void CodeGenerator::generateVarDeclaration(ASTNode* node) {
     // Add variable to the frame tracking
     addVariableToFrame(varName, isArray, arraySize);
     
-    // Initialize variable with 0 (optional but good practice)
+    // Initialize variable with 0 
     instructions.push_back(Instruction(OpCode::PUSH, "0"));
     
-    // For arrays, we would create space for each element, but for simplicity
-    // in this implementation we're treating them as a single variable
+    // Current array implementation is incomplete
 }
 
 // Rule 5: type-specifier := int | void 
@@ -270,6 +271,7 @@ void CodeGenerator::generateStatement(ASTNode* node) {
     
     ASTNode* stmtChild = node->children->at(0);
     
+    // Process each type of statement
     switch (stmtChild->type) {
         case ASTNodeType::EXPRESSION_STMT:
             generateExpressionStmt(stmtChild);
@@ -301,6 +303,7 @@ void CodeGenerator::generateIOStmt(ASTNode* node) {
     
     ASTNode* ioChild = node->children->at(0);
     
+    // Process each type of IO statement
     switch (ioChild->type) {
         case ASTNodeType::INPUT_STMT:
             generateInputStmt(ioChild);
@@ -323,7 +326,7 @@ void CodeGenerator::generateInputStmt(ASTNode* node) {
         std::string prompt = node->children->at(0)->tokenValue;
         
         // Push the prompt string
-        instructions.push_back(Instruction(OpCode::PRINT, prompt));
+        instructions.push_back(Instruction(OpCode::PRINT, prompt)); 
     }
     
     // Read input
@@ -355,9 +358,6 @@ void CodeGenerator::generateExpressionStmt(ASTNode* node) {
     // If there's an expression, generate code for it
     if (!node->children->empty()) {
         generateExpression(node->children->at(0));
-        
-        // Pop the result if it's not used (expression statement)
-        instructions.push_back(Instruction(OpCode::POP));
     }
 }
 
@@ -368,6 +368,7 @@ void CodeGenerator::generateSelectionStmt(ASTNode* node) {
     // Generate code for the condition
     generateSimpleExpression(node->children->at(0));
     
+    // Generating labels for branching
     std::string elseLabel = generateLabel();
     std::string endLabel = generateLabel();
     
@@ -396,6 +397,7 @@ void CodeGenerator::generateSelectionStmt(ASTNode* node) {
 void CodeGenerator::generateIterationStmt(ASTNode* node) {
     if (!node || node->children->size() < 2) return;
     
+    // Generating labels for loop control
     std::string startLabel = generateLabel();
     std::string endLabel = generateLabel();
     
@@ -462,12 +464,11 @@ void CodeGenerator::generateExpression(ASTNode* node) {
 }
 
 // Rule 22: var := ID | ID [ expression ]
-// FIXED: Corrected to use parameter and local variable offsets properly
 void CodeGenerator::generateVar(ASTNode* node, bool isStore) {
     if (!node) return;
     
     std::string varName = node->tokenValue;
-    int varOffset = getVariableOffset(varName);
+    int varOffset = getVariableOffset(varName); // Determining where in stack frame the value goes
     
     if (varOffset == -1) {
         std::cerr << "Error: Variable '" << varName << "' not found in frame" << std::endl;
@@ -481,7 +482,7 @@ void CodeGenerator::generateVar(ASTNode* node, bool isStore) {
             instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
             instructions.push_back(Instruction(OpCode::STORE));
             // Leave a copy of the value on the stack for expressions
-            instructions.push_back(Instruction(OpCode::DUP));
+            // instructions.push_back(Instruction(OpCode::DUP));
         } else {
             // Load operation - push the offset, then load
             instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
@@ -598,7 +599,7 @@ void CodeGenerator::generateTerm(ASTNode* node) {
             // Generate code for the factor
             generateFactor(factorNode);
             
-            // Apply the multiplicative operator
+            // Apply the multiplication operator
             std::string mulOp = opNode->tokenValue;
             
             if (mulOp == "TIMES" || mulOp == "*") {
@@ -611,6 +612,7 @@ void CodeGenerator::generateTerm(ASTNode* node) {
 }
 
 // Rule 29: factor := ( simple-expression ) | var | call | input-stmt | NUM
+//TODO: Determine if NUM is being double counted
 void CodeGenerator::generateFactor(ASTNode* node) {
     if (!node) return;
     
@@ -620,6 +622,7 @@ void CodeGenerator::generateFactor(ASTNode* node) {
     } else if (!node->children->empty()) {
         ASTNode* child = node->children->at(0);
         
+        // Generating appropriate expression
         switch (child->type) {
             case ASTNodeType::SIMPLE_EXPRESSION:  // For parenthesized expressions
                 generateSimpleExpression(child);

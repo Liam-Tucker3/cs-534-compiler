@@ -1,0 +1,3796 @@
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("\nEuclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("\nEnter a number:\t");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|125
+
+Current stack: 
+0 0 0 125 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 125 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+125 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+125 0 
+Executing instruction: 40|PRINT("\nEnter a second number:Stack Top: 2|0
+
+Current stack: 
+125 0 
+Executing instruction: 41|\t");
+Stack Top: 2|0
+
+Current stack: 
+125 0 
+Executing instruction: 42|READ();
+Stack Top: 3|60
+
+Current stack: 
+125 0 60 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+125 0 60 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|60
+
+Current stack: 
+125 60 
+Executing instruction: 45|POP();
+Stack Top: 1|125
+
+Current stack: 
+125 
+Executing instruction: 46|PRINT("\nRESULT:\t");
+Stack Top: 1|125
+
+Current stack: 
+125 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+125 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|125
+
+Current stack: 
+125 125 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+125 125 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|125
+
+Current stack: 
+125 125 125 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+125 125 125 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+125 2 125 125 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+125 2 125 125 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+125 2 125 125 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|125
+
+Current stack: 
+125 2 125 125 0 53 125 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+125 2 125 125 0 53 125 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+125 2 125 125 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+125 2 125 125 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+125 2 125 125 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+125 2 125 125 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|125
+
+Current stack: 
+125 2 125 125 0 53 125 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+125 2 125 125 0 53 125 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|125
+
+Current stack: 
+125 2 125 125 0 53 125 125 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+125 2 125 125 0 53 125 125 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|125
+
+Current stack: 
+125 2 125 125 0 53 125 125 125 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+125 2 125 125 0 53 125 125 125 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|125
+
+Current stack: 
+125 2 125 125 0 53 125 125 125 125 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+125 2 125 125 0 53 125 125 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+125 2 125 125 0 53 125 125 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|125
+
+Current stack: 
+125 2 125 125 0 53 125 125 1 125 
+Executing instruction: 23|MUL();
+Stack Top: 9|125
+
+Current stack: 
+125 2 125 125 0 53 125 125 125 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+125 2 125 125 0 53 125 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+125 2 125 125 0 53 125 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|125
+
+Current stack: 
+125 2 125 125 0 53 2 125 0 2 27 125 
+Executing instruction: 9|RETV();
+Stack Top: 7|125
+
+Current stack: 
+125 2 125 125 0 53 125 
+Executing instruction: 27|RETV();
+Stack Top: 2|125
+
+Current stack: 
+125 125 
+Executing instruction: 53|PRINT();
+Stack Top: 2|125
+
+Current stack: 
+125 125 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|10
+
+Current stack: 
+0 0 0 10 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 10 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+10 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+10 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+10 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+10 0 
+Executing instruction: 42|READ();
+Stack Top: 3|5
+
+Current stack: 
+10 0 5 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+10 0 5 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|5
+
+Current stack: 
+10 5 
+Executing instruction: 45|POP();
+Stack Top: 1|10
+
+Current stack: 
+10 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|10
+
+Current stack: 
+10 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+10 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|10
+
+Current stack: 
+10 10 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+10 10 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|10
+
+Current stack: 
+10 10 10 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+10 10 10 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+10 2 10 10 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+10 2 10 10 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+10 2 10 10 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|10
+
+Current stack: 
+10 2 10 10 0 53 10 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+10 2 10 10 0 53 10 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+10 2 10 10 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+10 2 10 10 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+10 2 10 10 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+10 2 10 10 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|10
+
+Current stack: 
+10 2 10 10 0 53 10 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+10 2 10 10 0 53 10 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|10
+
+Current stack: 
+10 2 10 10 0 53 10 10 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+10 2 10 10 0 53 10 10 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|10
+
+Current stack: 
+10 2 10 10 0 53 10 10 10 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+10 2 10 10 0 53 10 10 10 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|10
+
+Current stack: 
+10 2 10 10 0 53 10 10 10 10 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+10 2 10 10 0 53 10 10 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+10 2 10 10 0 53 10 10 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|10
+
+Current stack: 
+10 2 10 10 0 53 10 10 1 10 
+Executing instruction: 23|MUL();
+Stack Top: 9|10
+
+Current stack: 
+10 2 10 10 0 53 10 10 10 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+10 2 10 10 0 53 10 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+10 2 10 10 0 53 10 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|10
+
+Current stack: 
+10 2 10 10 0 53 2 10 0 2 27 10 
+Executing instruction: 9|RETV();
+Stack Top: 7|10
+
+Current stack: 
+10 2 10 10 0 53 10 
+Executing instruction: 27|RETV();
+Stack Top: 2|10
+
+Current stack: 
+10 10 
+Executing instruction: 53|PRINT();
+Stack Top: 2|10
+
+Current stack: 
+10 10 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|5
+
+Current stack: 
+0 0 0 5 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 5 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+5 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+5 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+5 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+5 0 
+Executing instruction: 42|READ();
+Stack Top: 3|10
+
+Current stack: 
+5 0 10 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+5 0 10 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|10
+
+Current stack: 
+5 10 
+Executing instruction: 45|POP();
+Stack Top: 1|5
+
+Current stack: 
+5 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|5
+
+Current stack: 
+5 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+5 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|5
+
+Current stack: 
+5 5 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+5 5 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|5
+
+Current stack: 
+5 5 5 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+5 5 5 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+5 2 5 5 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+5 2 5 5 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+5 2 5 5 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|5
+
+Current stack: 
+5 2 5 5 0 53 5 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+5 2 5 5 0 53 5 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+5 2 5 5 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+5 2 5 5 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+5 2 5 5 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+5 2 5 5 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|5
+
+Current stack: 
+5 2 5 5 0 53 5 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+5 2 5 5 0 53 5 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|5
+
+Current stack: 
+5 2 5 5 0 53 5 5 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+5 2 5 5 0 53 5 5 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|5
+
+Current stack: 
+5 2 5 5 0 53 5 5 5 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+5 2 5 5 0 53 5 5 5 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|5
+
+Current stack: 
+5 2 5 5 0 53 5 5 5 5 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+5 2 5 5 0 53 5 5 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+5 2 5 5 0 53 5 5 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|5
+
+Current stack: 
+5 2 5 5 0 53 5 5 1 5 
+Executing instruction: 23|MUL();
+Stack Top: 9|5
+
+Current stack: 
+5 2 5 5 0 53 5 5 5 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+5 2 5 5 0 53 5 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+5 2 5 5 0 53 5 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|5
+
+Current stack: 
+5 2 5 5 0 53 2 5 0 2 27 5 
+Executing instruction: 9|RETV();
+Stack Top: 7|5
+
+Current stack: 
+5 2 5 5 0 53 5 
+Executing instruction: 27|RETV();
+Stack Top: 2|5
+
+Current stack: 
+5 5 
+Executing instruction: 53|PRINT();
+Stack Top: 2|5
+
+Current stack: 
+5 5 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|32
+
+Current stack: 
+0 0 0 32 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 32 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+32 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+32 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+32 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+32 0 
+Executing instruction: 42|READ();
+Stack Top: 3|8
+
+Current stack: 
+32 0 8 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+32 0 8 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|8
+
+Current stack: 
+32 8 
+Executing instruction: 45|POP();
+Stack Top: 1|32
+
+Current stack: 
+32 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|32
+
+Current stack: 
+32 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+32 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|32
+
+Current stack: 
+32 32 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+32 32 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|32
+
+Current stack: 
+32 32 32 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+32 32 32 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+32 2 32 32 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+32 2 32 32 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+32 2 32 32 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|32
+
+Current stack: 
+32 2 32 32 0 53 32 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+32 2 32 32 0 53 32 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+32 2 32 32 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+32 2 32 32 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+32 2 32 32 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+32 2 32 32 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|32
+
+Current stack: 
+32 2 32 32 0 53 32 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+32 2 32 32 0 53 32 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|32
+
+Current stack: 
+32 2 32 32 0 53 32 32 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+32 2 32 32 0 53 32 32 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|32
+
+Current stack: 
+32 2 32 32 0 53 32 32 32 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+32 2 32 32 0 53 32 32 32 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|32
+
+Current stack: 
+32 2 32 32 0 53 32 32 32 32 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+32 2 32 32 0 53 32 32 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+32 2 32 32 0 53 32 32 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|32
+
+Current stack: 
+32 2 32 32 0 53 32 32 1 32 
+Executing instruction: 23|MUL();
+Stack Top: 9|32
+
+Current stack: 
+32 2 32 32 0 53 32 32 32 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+32 2 32 32 0 53 32 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+32 2 32 32 0 53 32 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|32
+
+Current stack: 
+32 2 32 32 0 53 2 32 0 2 27 32 
+Executing instruction: 9|RETV();
+Stack Top: 7|32
+
+Current stack: 
+32 2 32 32 0 53 32 
+Executing instruction: 27|RETV();
+Stack Top: 2|32
+
+Current stack: 
+32 32 
+Executing instruction: 53|PRINT();
+Stack Top: 2|32
+
+Current stack: 
+32 32 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|8
+
+Current stack: 
+0 0 0 8 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 8 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+8 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+8 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+8 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+8 0 
+Executing instruction: 42|READ();
+Stack Top: 3|32
+
+Current stack: 
+8 0 32 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+8 0 32 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|32
+
+Current stack: 
+8 32 
+Executing instruction: 45|POP();
+Stack Top: 1|8
+
+Current stack: 
+8 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|8
+
+Current stack: 
+8 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+8 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|8
+
+Current stack: 
+8 8 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+8 8 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|8
+
+Current stack: 
+8 8 8 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+8 8 8 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+8 2 8 8 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+8 2 8 8 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+8 2 8 8 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|8
+
+Current stack: 
+8 2 8 8 0 53 8 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+8 2 8 8 0 53 8 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+8 2 8 8 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+8 2 8 8 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+8 2 8 8 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+8 2 8 8 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|8
+
+Current stack: 
+8 2 8 8 0 53 8 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+8 2 8 8 0 53 8 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|8
+
+Current stack: 
+8 2 8 8 0 53 8 8 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+8 2 8 8 0 53 8 8 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|8
+
+Current stack: 
+8 2 8 8 0 53 8 8 8 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+8 2 8 8 0 53 8 8 8 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|8
+
+Current stack: 
+8 2 8 8 0 53 8 8 8 8 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+8 2 8 8 0 53 8 8 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+8 2 8 8 0 53 8 8 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|8
+
+Current stack: 
+8 2 8 8 0 53 8 8 1 8 
+Executing instruction: 23|MUL();
+Stack Top: 9|8
+
+Current stack: 
+8 2 8 8 0 53 8 8 8 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+8 2 8 8 0 53 8 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+8 2 8 8 0 53 8 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|8
+
+Current stack: 
+8 2 8 8 0 53 2 8 0 2 27 8 
+Executing instruction: 9|RETV();
+Stack Top: 7|8
+
+Current stack: 
+8 2 8 8 0 53 8 
+Executing instruction: 27|RETV();
+Stack Top: 2|8
+
+Current stack: 
+8 8 
+Executing instruction: 53|PRINT();
+Stack Top: 2|8
+
+Current stack: 
+8 8 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|15
+
+Current stack: 
+0 0 0 15 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 15 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+15 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+15 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+15 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+15 0 
+Executing instruction: 42|READ();
+Stack Top: 3|12
+
+Current stack: 
+15 0 12 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+15 0 12 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|12
+
+Current stack: 
+15 12 
+Executing instruction: 45|POP();
+Stack Top: 1|15
+
+Current stack: 
+15 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|15
+
+Current stack: 
+15 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+15 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|15
+
+Current stack: 
+15 15 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+15 15 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|15
+
+Current stack: 
+15 15 15 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+15 15 15 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+15 2 15 15 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+15 2 15 15 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+15 2 15 15 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|15
+
+Current stack: 
+15 2 15 15 0 53 15 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+15 2 15 15 0 53 15 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+15 2 15 15 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+15 2 15 15 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+15 2 15 15 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+15 2 15 15 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|15
+
+Current stack: 
+15 2 15 15 0 53 15 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+15 2 15 15 0 53 15 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|15
+
+Current stack: 
+15 2 15 15 0 53 15 15 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+15 2 15 15 0 53 15 15 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|15
+
+Current stack: 
+15 2 15 15 0 53 15 15 15 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+15 2 15 15 0 53 15 15 15 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|15
+
+Current stack: 
+15 2 15 15 0 53 15 15 15 15 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+15 2 15 15 0 53 15 15 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+15 2 15 15 0 53 15 15 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|15
+
+Current stack: 
+15 2 15 15 0 53 15 15 1 15 
+Executing instruction: 23|MUL();
+Stack Top: 9|15
+
+Current stack: 
+15 2 15 15 0 53 15 15 15 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+15 2 15 15 0 53 15 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+15 2 15 15 0 53 15 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|15
+
+Current stack: 
+15 2 15 15 0 53 2 15 0 2 27 15 
+Executing instruction: 9|RETV();
+Stack Top: 7|15
+
+Current stack: 
+15 2 15 15 0 53 15 
+Executing instruction: 27|RETV();
+Stack Top: 2|15
+
+Current stack: 
+15 15 
+Executing instruction: 53|PRINT();
+Stack Top: 2|15
+
+Current stack: 
+15 15 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|12
+
+Current stack: 
+0 0 0 12 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 12 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+12 0 0 
+Executing instruction: 39|POP();
+Stack Top: 2|0
+
+Current stack: 
+12 0 
+Executing instruction: 40|PRINT("Enter a second number:")Stack Top: 2|0
+
+Current stack: 
+12 0 
+Executing instruction: 41|;
+Stack Top: 2|0
+
+Current stack: 
+12 0 
+Executing instruction: 42|READ();
+Stack Top: 3|15
+
+Current stack: 
+12 0 15 
+Executing instruction: 43|PUSH(1);
+Stack Top: 4|1
+
+Current stack: 
+12 0 15 1 
+Executing instruction: 44|STORE();
+Stack Top: 2|15
+
+Current stack: 
+12 15 
+Executing instruction: 45|POP();
+Stack Top: 1|12
+
+Current stack: 
+12 
+Executing instruction: 46|PRINT("RESULT:");
+Stack Top: 1|12
+
+Current stack: 
+12 
+Executing instruction: 47|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+12 0 
+Executing instruction: 48|LOAD();
+Stack Top: 2|12
+
+Current stack: 
+12 12 
+Executing instruction: 49|PUSH(1);
+Stack Top: 3|1
+
+Current stack: 
+12 12 1 
+Executing instruction: 50|LOAD();
+Stack Top: 3|12
+
+Current stack: 
+12 12 12 
+Executing instruction: 51|PUSH(2);
+Stack Top: 4|2
+
+Current stack: 
+12 12 12 2 
+Executing instruction: 52|CALL("gcd");
+Stack Top: 6|53
+
+Current stack: 
+12 2 12 12 0 53 
+Executing instruction: 1|gcd
+Stack Top: 6|53
+
+Current stack: 
+12 2 12 12 0 53 
+Executing instruction: 2|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+12 2 12 12 0 53 1 
+Executing instruction: 3|LOAD();
+Stack Top: 7|12
+
+Current stack: 
+12 2 12 12 0 53 12 
+Executing instruction: 4|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+12 2 12 12 0 53 12 0 
+Executing instruction: 5|EQ();
+Stack Top: 7|0
+
+Current stack: 
+12 2 12 12 0 53 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 6|53
+
+Current stack: 
+12 2 12 12 0 53 
+Executing instruction: 11|L0
+Stack Top: 6|53
+
+Current stack: 
+12 2 12 12 0 53 
+Executing instruction: 12|PUSH(1);
+Stack Top: 7|1
+
+Current stack: 
+12 2 12 12 0 53 1 
+Executing instruction: 13|LOAD();
+Stack Top: 7|12
+
+Current stack: 
+12 2 12 12 0 53 12 
+Executing instruction: 14|PUSH(0);
+Stack Top: 8|0
+
+Current stack: 
+12 2 12 12 0 53 12 0 
+Executing instruction: 15|LOAD();
+Stack Top: 8|12
+
+Current stack: 
+12 2 12 12 0 53 12 12 
+Executing instruction: 16|PUSH(0);
+Stack Top: 9|0
+
+Current stack: 
+12 2 12 12 0 53 12 12 0 
+Executing instruction: 17|LOAD();
+Stack Top: 9|12
+
+Current stack: 
+12 2 12 12 0 53 12 12 12 
+Executing instruction: 18|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+12 2 12 12 0 53 12 12 12 1 
+Executing instruction: 19|LOAD();
+Stack Top: 10|12
+
+Current stack: 
+12 2 12 12 0 53 12 12 12 12 
+Executing instruction: 20|DIV();
+Stack Top: 9|1
+
+Current stack: 
+12 2 12 12 0 53 12 12 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 10|1
+
+Current stack: 
+12 2 12 12 0 53 12 12 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 10|12
+
+Current stack: 
+12 2 12 12 0 53 12 12 1 12 
+Executing instruction: 23|MUL();
+Stack Top: 9|12
+
+Current stack: 
+12 2 12 12 0 53 12 12 12 
+Executing instruction: 24|SUB();
+Stack Top: 8|0
+
+Current stack: 
+12 2 12 12 0 53 12 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 9|2
+
+Current stack: 
+12 2 12 12 0 53 12 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 11|27
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 
+Executing instruction: 1|gcd
+Stack Top: 11|27
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 12|0
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 13|0
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 12|1
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 11|27
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 12|0
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 12|12
+
+Current stack: 
+12 2 12 12 0 53 2 12 0 2 27 12 
+Executing instruction: 9|RETV();
+Stack Top: 7|12
+
+Current stack: 
+12 2 12 12 0 53 12 
+Executing instruction: 27|RETV();
+Stack Top: 2|12
+
+Current stack: 
+12 12 
+Executing instruction: 53|PRINT();
+Stack Top: 2|12
+
+Current stack: 
+12 12 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|10
+
+Current stack: 
+0 0 0 10 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 10 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+10 0 0 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0
+
+Current stack: 
+10 0 0 
+Executing instruction: 40|;
+Stack Top: 3|0
+
+Current stack: 
+10 0 0 
+Executing instruction: 41|READ();
+Stack Top: 4|5
+
+Current stack: 
+10 0 0 5 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+10 0 0 5 1 
+Executing instruction: 43|STORE();
+Stack Top: 3|0
+
+Current stack: 
+10 5 0 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0
+
+Current stack: 
+10 5 0 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0
+
+Current stack: 
+10 5 0 0 
+Executing instruction: 46|LOAD();
+Stack Top: 4|10
+
+Current stack: 
+10 5 0 10 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+10 5 0 10 1 
+Executing instruction: 48|LOAD();
+Stack Top: 5|5
+
+Current stack: 
+10 5 0 10 5 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2
+
+Current stack: 
+10 5 0 10 5 2 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51
+
+Current stack: 
+10 5 0 2 10 5 0 51 
+Executing instruction: 1|gcd
+Stack Top: 8|51
+
+Current stack: 
+10 5 0 2 10 5 0 51 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 1 
+Executing instruction: 3|LOAD();
+Stack Top: 9|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 0 
+Executing instruction: 5|EQ();
+Stack Top: 9|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51
+
+Current stack: 
+10 5 0 2 10 5 0 51 
+Executing instruction: 11|L0
+Stack Top: 8|51
+
+Current stack: 
+10 5 0 2 10 5 0 51 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 1 
+Executing instruction: 13|LOAD();
+Stack Top: 9|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 0 
+Executing instruction: 15|LOAD();
+Stack Top: 10|10
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 0 
+Executing instruction: 17|LOAD();
+Stack Top: 11|10
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 10 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 10 1 
+Executing instruction: 19|LOAD();
+Stack Top: 12|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 10 5 
+Executing instruction: 20|DIV();
+Stack Top: 11|2
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 2 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 2 1 
+Executing instruction: 22|LOAD();
+Stack Top: 12|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 2 5 
+Executing instruction: 23|MUL();
+Stack Top: 11|10
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 10 10 
+Executing instruction: 24|SUB();
+Stack Top: 10|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 
+Executing instruction: 1|gcd
+Stack Top: 13|27
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 14|1
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 14|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 2 5 0 4 27 5 
+Executing instruction: 9|RETV();
+Stack Top: 9|5
+
+Current stack: 
+10 5 0 2 10 5 0 51 5 
+Executing instruction: 27|RETV();
+Stack Top: 4|5
+
+Current stack: 
+10 5 0 5 
+Executing instruction: 51|PRINT();
+Stack Top: 4|5
+
+Current stack: 
+10 5 0 5 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|5
+
+Current stack: 
+0 0 0 5 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 5 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+5 0 0 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0
+
+Current stack: 
+5 0 0 
+Executing instruction: 40|;
+Stack Top: 3|0
+
+Current stack: 
+5 0 0 
+Executing instruction: 41|READ();
+Stack Top: 4|10
+
+Current stack: 
+5 0 0 10 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+5 0 0 10 1 
+Executing instruction: 43|STORE();
+Stack Top: 3|0
+
+Current stack: 
+5 10 0 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0
+
+Current stack: 
+5 10 0 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0
+
+Current stack: 
+5 10 0 0 
+Executing instruction: 46|LOAD();
+Stack Top: 4|5
+
+Current stack: 
+5 10 0 5 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+5 10 0 5 1 
+Executing instruction: 48|LOAD();
+Stack Top: 5|10
+
+Current stack: 
+5 10 0 5 10 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2
+
+Current stack: 
+5 10 0 5 10 2 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51
+
+Current stack: 
+5 10 0 2 5 10 0 51 
+Executing instruction: 1|gcd
+Stack Top: 8|51
+
+Current stack: 
+5 10 0 2 5 10 0 51 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 1 
+Executing instruction: 3|LOAD();
+Stack Top: 9|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 0 
+Executing instruction: 5|EQ();
+Stack Top: 9|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51
+
+Current stack: 
+5 10 0 2 5 10 0 51 
+Executing instruction: 11|L0
+Stack Top: 8|51
+
+Current stack: 
+5 10 0 2 5 10 0 51 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 1 
+Executing instruction: 13|LOAD();
+Stack Top: 9|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 0 
+Executing instruction: 15|LOAD();
+Stack Top: 10|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 0 
+Executing instruction: 17|LOAD();
+Stack Top: 11|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 5 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 5 1 
+Executing instruction: 19|LOAD();
+Stack Top: 12|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 5 10 
+Executing instruction: 20|DIV();
+Stack Top: 11|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 0 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 0 1 
+Executing instruction: 22|LOAD();
+Stack Top: 12|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 0 10 
+Executing instruction: 23|MUL();
+Stack Top: 11|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 0 
+Executing instruction: 24|SUB();
+Stack Top: 10|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2
+
+Current stack: 
+5 10 0 2 5 10 0 51 10 5 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 
+Executing instruction: 1|gcd
+Stack Top: 13|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 14|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 0 
+Executing instruction: 5|EQ();
+Stack Top: 14|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 
+Executing instruction: 11|L0
+Stack Top: 13|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 14|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 0 
+Executing instruction: 15|LOAD();
+Stack Top: 15|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 0 
+Executing instruction: 17|LOAD();
+Stack Top: 16|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 10 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 10 1 
+Executing instruction: 19|LOAD();
+Stack Top: 17|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 10 5 
+Executing instruction: 20|DIV();
+Stack Top: 16|2
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 2 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 2 1 
+Executing instruction: 22|LOAD();
+Stack Top: 17|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 2 5 
+Executing instruction: 23|MUL();
+Stack Top: 16|10
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 10 10 
+Executing instruction: 24|SUB();
+Stack Top: 15|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 
+Executing instruction: 1|gcd
+Stack Top: 18|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 19|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 19|1
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 19|0
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 19|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 2 5 0 9 27 5 
+Executing instruction: 9|RETV();
+Stack Top: 14|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 2 10 5 4 27 5 
+Executing instruction: 27|RETV();
+Stack Top: 9|5
+
+Current stack: 
+5 10 0 2 5 10 0 51 5 
+Executing instruction: 27|RETV();
+Stack Top: 4|5
+
+Current stack: 
+5 10 0 5 
+Executing instruction: 51|PRINT();
+Stack Top: 4|5
+
+Current stack: 
+5 10 0 5 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|63
+
+Current stack: 
+0 0 0 63 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 63 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+63 0 0 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0
+
+Current stack: 
+63 0 0 
+Executing instruction: 40|;
+Stack Top: 3|0
+
+Current stack: 
+63 0 0 
+Executing instruction: 41|READ();
+Stack Top: 4|49
+
+Current stack: 
+63 0 0 49 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+63 0 0 49 1 
+Executing instruction: 43|STORE();
+Stack Top: 3|0
+
+Current stack: 
+63 49 0 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0
+
+Current stack: 
+63 49 0 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0
+
+Current stack: 
+63 49 0 0 
+Executing instruction: 46|LOAD();
+Stack Top: 4|63
+
+Current stack: 
+63 49 0 63 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+63 49 0 63 1 
+Executing instruction: 48|LOAD();
+Stack Top: 5|49
+
+Current stack: 
+63 49 0 63 49 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2
+
+Current stack: 
+63 49 0 63 49 2 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51
+
+Current stack: 
+63 49 0 2 63 49 0 51 
+Executing instruction: 1|gcd
+Stack Top: 8|51
+
+Current stack: 
+63 49 0 2 63 49 0 51 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 1 
+Executing instruction: 3|LOAD();
+Stack Top: 9|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 0 
+Executing instruction: 5|EQ();
+Stack Top: 9|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51
+
+Current stack: 
+63 49 0 2 63 49 0 51 
+Executing instruction: 11|L0
+Stack Top: 8|51
+
+Current stack: 
+63 49 0 2 63 49 0 51 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 1 
+Executing instruction: 13|LOAD();
+Stack Top: 9|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 0 
+Executing instruction: 15|LOAD();
+Stack Top: 10|63
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 0 
+Executing instruction: 17|LOAD();
+Stack Top: 11|63
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 63 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 63 1 
+Executing instruction: 19|LOAD();
+Stack Top: 12|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 63 49 
+Executing instruction: 20|DIV();
+Stack Top: 11|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 12|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 1 49 
+Executing instruction: 23|MUL();
+Stack Top: 11|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 63 49 
+Executing instruction: 24|SUB();
+Stack Top: 10|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 14 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2
+
+Current stack: 
+63 49 0 2 63 49 0 51 49 14 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 
+Executing instruction: 1|gcd
+Stack Top: 13|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 14|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 0 
+Executing instruction: 5|EQ();
+Stack Top: 14|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 
+Executing instruction: 11|L0
+Stack Top: 13|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 14|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 0 
+Executing instruction: 15|LOAD();
+Stack Top: 15|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 0 
+Executing instruction: 17|LOAD();
+Stack Top: 16|49
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 49 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 49 1 
+Executing instruction: 19|LOAD();
+Stack Top: 17|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 49 14 
+Executing instruction: 20|DIV();
+Stack Top: 16|3
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 3 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 3 1 
+Executing instruction: 22|LOAD();
+Stack Top: 17|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 3 14 
+Executing instruction: 23|MUL();
+Stack Top: 16|42
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 49 42 
+Executing instruction: 24|SUB();
+Stack Top: 15|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 7 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 14 7 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 
+Executing instruction: 1|gcd
+Stack Top: 18|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 19|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 0 
+Executing instruction: 5|EQ();
+Stack Top: 19|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 
+Executing instruction: 11|L0
+Stack Top: 18|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 19|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 19|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 
+Executing instruction: 14|PUSH(0);
+Stack Top: 20|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 0 
+Executing instruction: 15|LOAD();
+Stack Top: 20|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 
+Executing instruction: 16|PUSH(0);
+Stack Top: 21|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 0 
+Executing instruction: 17|LOAD();
+Stack Top: 21|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 14 
+Executing instruction: 18|PUSH(1);
+Stack Top: 22|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 14 1 
+Executing instruction: 19|LOAD();
+Stack Top: 22|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 14 7 
+Executing instruction: 20|DIV();
+Stack Top: 21|2
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 2 
+Executing instruction: 21|PUSH(1);
+Stack Top: 22|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 2 1 
+Executing instruction: 22|LOAD();
+Stack Top: 22|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 2 7 
+Executing instruction: 23|MUL();
+Stack Top: 21|14
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 14 14 
+Executing instruction: 24|SUB();
+Stack Top: 20|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 21|2
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 23|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 
+Executing instruction: 1|gcd
+Stack Top: 23|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 24|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 24|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 25|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 24|1
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 23|27
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 24|0
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 24|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 2 7 0 14 27 7 
+Executing instruction: 9|RETV();
+Stack Top: 19|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 2 14 7 9 27 7 
+Executing instruction: 27|RETV();
+Stack Top: 14|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 2 49 14 4 27 7 
+Executing instruction: 27|RETV();
+Stack Top: 9|7
+
+Current stack: 
+63 49 0 2 63 49 0 51 7 
+Executing instruction: 27|RETV();
+Stack Top: 4|7
+
+Current stack: 
+63 49 0 7 
+Executing instruction: 51|PRINT();
+Stack Top: 4|7
+
+Current stack: 
+63 49 0 7 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|0
+
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0
+
+Current stack: 
+0 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0
+
+Current stack: 
+0 0 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0
+
+Current stack: 
+0 0 0 
+Executing instruction: 36|READ();
+Stack Top: 4|49
+
+Current stack: 
+0 0 0 49 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0
+
+Current stack: 
+0 0 0 49 0 
+Executing instruction: 38|STORE();
+Stack Top: 3|0
+
+Current stack: 
+49 0 0 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0
+
+Current stack: 
+49 0 0 
+Executing instruction: 40|;
+Stack Top: 3|0
+
+Current stack: 
+49 0 0 
+Executing instruction: 41|READ();
+Stack Top: 4|63
+
+Current stack: 
+49 0 0 63 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+49 0 0 63 1 
+Executing instruction: 43|STORE();
+Stack Top: 3|0
+
+Current stack: 
+49 63 0 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0
+
+Current stack: 
+49 63 0 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0
+
+Current stack: 
+49 63 0 0 
+Executing instruction: 46|LOAD();
+Stack Top: 4|49
+
+Current stack: 
+49 63 0 49 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1
+
+Current stack: 
+49 63 0 49 1 
+Executing instruction: 48|LOAD();
+Stack Top: 5|63
+
+Current stack: 
+49 63 0 49 63 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2
+
+Current stack: 
+49 63 0 49 63 2 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51
+
+Current stack: 
+49 63 0 2 49 63 0 51 
+Executing instruction: 1|gcd
+Stack Top: 8|51
+
+Current stack: 
+49 63 0 2 49 63 0 51 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 1 
+Executing instruction: 3|LOAD();
+Stack Top: 9|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 0 
+Executing instruction: 5|EQ();
+Stack Top: 9|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51
+
+Current stack: 
+49 63 0 2 49 63 0 51 
+Executing instruction: 11|L0
+Stack Top: 8|51
+
+Current stack: 
+49 63 0 2 49 63 0 51 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 1 
+Executing instruction: 13|LOAD();
+Stack Top: 9|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 0 
+Executing instruction: 15|LOAD();
+Stack Top: 10|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 0 
+Executing instruction: 17|LOAD();
+Stack Top: 11|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 49 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 49 1 
+Executing instruction: 19|LOAD();
+Stack Top: 12|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 49 63 
+Executing instruction: 20|DIV();
+Stack Top: 11|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 0 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 0 1 
+Executing instruction: 22|LOAD();
+Stack Top: 12|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 0 63 
+Executing instruction: 23|MUL();
+Stack Top: 11|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 0 
+Executing instruction: 24|SUB();
+Stack Top: 10|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2
+
+Current stack: 
+49 63 0 2 49 63 0 51 63 49 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 
+Executing instruction: 1|gcd
+Stack Top: 13|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 14|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 0 
+Executing instruction: 5|EQ();
+Stack Top: 14|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 
+Executing instruction: 11|L0
+Stack Top: 13|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 14|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 0 
+Executing instruction: 15|LOAD();
+Stack Top: 15|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 0 
+Executing instruction: 17|LOAD();
+Stack Top: 16|63
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 63 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 63 1 
+Executing instruction: 19|LOAD();
+Stack Top: 17|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 63 49 
+Executing instruction: 20|DIV();
+Stack Top: 16|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 1 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 1 1 
+Executing instruction: 22|LOAD();
+Stack Top: 17|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 1 49 
+Executing instruction: 23|MUL();
+Stack Top: 16|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 63 49 
+Executing instruction: 24|SUB();
+Stack Top: 15|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 14 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 49 14 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 
+Executing instruction: 1|gcd
+Stack Top: 18|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 19|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 0 
+Executing instruction: 5|EQ();
+Stack Top: 19|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 
+Executing instruction: 11|L0
+Stack Top: 18|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 19|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 19|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 
+Executing instruction: 14|PUSH(0);
+Stack Top: 20|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 0 
+Executing instruction: 15|LOAD();
+Stack Top: 20|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 
+Executing instruction: 16|PUSH(0);
+Stack Top: 21|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 0 
+Executing instruction: 17|LOAD();
+Stack Top: 21|49
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 49 
+Executing instruction: 18|PUSH(1);
+Stack Top: 22|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 49 1 
+Executing instruction: 19|LOAD();
+Stack Top: 22|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 49 14 
+Executing instruction: 20|DIV();
+Stack Top: 21|3
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 3 
+Executing instruction: 21|PUSH(1);
+Stack Top: 22|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 3 1 
+Executing instruction: 22|LOAD();
+Stack Top: 22|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 3 14 
+Executing instruction: 23|MUL();
+Stack Top: 21|42
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 49 42 
+Executing instruction: 24|SUB();
+Stack Top: 20|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 7 
+Executing instruction: 25|PUSH(2);
+Stack Top: 21|2
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 14 7 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 23|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 
+Executing instruction: 1|gcd
+Stack Top: 23|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 24|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 24|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 
+Executing instruction: 4|PUSH(0);
+Stack Top: 25|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 0 
+Executing instruction: 5|EQ();
+Stack Top: 24|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 0 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 23|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 
+Executing instruction: 11|L0
+Stack Top: 23|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 
+Executing instruction: 12|PUSH(1);
+Stack Top: 24|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 1 
+Executing instruction: 13|LOAD();
+Stack Top: 24|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 
+Executing instruction: 14|PUSH(0);
+Stack Top: 25|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 0 
+Executing instruction: 15|LOAD();
+Stack Top: 25|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 
+Executing instruction: 16|PUSH(0);
+Stack Top: 26|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 0 
+Executing instruction: 17|LOAD();
+Stack Top: 26|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 14 
+Executing instruction: 18|PUSH(1);
+Stack Top: 27|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 14 1 
+Executing instruction: 19|LOAD();
+Stack Top: 27|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 14 7 
+Executing instruction: 20|DIV();
+Stack Top: 26|2
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 2 
+Executing instruction: 21|PUSH(1);
+Stack Top: 27|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 2 1 
+Executing instruction: 22|LOAD();
+Stack Top: 27|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 2 7 
+Executing instruction: 23|MUL();
+Stack Top: 26|14
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 14 14 
+Executing instruction: 24|SUB();
+Stack Top: 25|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 0 
+Executing instruction: 25|PUSH(2);
+Stack Top: 26|2
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 0 2 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 28|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 
+Executing instruction: 1|gcd
+Stack Top: 28|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 
+Executing instruction: 2|PUSH(1);
+Stack Top: 29|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 1 
+Executing instruction: 3|LOAD();
+Stack Top: 29|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 0 
+Executing instruction: 4|PUSH(0);
+Stack Top: 30|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 0 0 
+Executing instruction: 5|EQ();
+Stack Top: 29|1
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 1 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 28|27
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 
+Executing instruction: 7|PUSH(0);
+Stack Top: 29|0
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 0 
+Executing instruction: 8|LOAD();
+Stack Top: 29|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 2 7 0 19 27 7 
+Executing instruction: 9|RETV();
+Stack Top: 24|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 2 14 7 14 27 7 
+Executing instruction: 27|RETV();
+Stack Top: 19|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 2 49 14 9 27 7 
+Executing instruction: 27|RETV();
+Stack Top: 14|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 2 63 49 4 27 7 
+Executing instruction: 27|RETV();
+Stack Top: 9|7
+
+Current stack: 
+49 63 0 2 49 63 0 51 7 
+Executing instruction: 27|RETV();
+Stack Top: 4|7
+
+Current stack: 
+49 63 0 7 
+Executing instruction: 51|PRINT();
+Stack Top: 4|7
+
+Current stack: 
+49 63 0 7 

@@ -422,7 +422,6 @@ public:
     void DIV() {
         int b = this->POP();
         int a = this->POP();
-        std::cout << "Dividing " << a << " by " << b << std::endl;
         this->gpr = a / b;
         this->PUSH();
     }

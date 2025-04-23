@@ -328,8 +328,9 @@ int main(int argc, char *argv[]) {
     // }
     
     // Save the code to a file
-    codeGen.printStackMachineCodeToFile("compiled.txt", code);
-    // std::cout << "Just printed code to file" << std::endl;
+    std::string filename = "examples/compiled.txt";
+    codeGen.printStackMachineCodeToFile(filename, code);
+    std::cout << "Just printed code to file " << filename << std::endl;
     
     // Clean up
     delete root;
