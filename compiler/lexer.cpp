@@ -10,6 +10,7 @@
 
 #include "token.h"
 #include "ast.h"
+#include "codeGenerator.h"
 
 // Identifies next token from input
 // LL parser; no backtracking
@@ -209,7 +210,7 @@ void parseInput(const std::string &input, std::vector<Token> &tokens, std::vecto
 
             tokens.push_back(t); // Adding token to vector
 
-            std::cout << i << " | Token: " << t.toString() << " | Len: " << t.getLength() << std::endl;
+            // std::cout << i << " | Token: " << t.toString() << " | Len: " << t.getLength() << std::endl;
 
             i += t.getLength(); // Increment by length of token
             if (t.getLength() == 0) {
@@ -242,12 +243,7 @@ void printStackMachineCodeToFile(std::vector<std::string> code, std::string file
 }
 
 // Creates and prints an AST from a vector of tokens
-void createAndPrintAST(const std::vector<Token>& tokens) {
-    // Create a parser with the tokens
-    Parser parser(tokens);
-    
-    // Parse the tokens to create the AST
-    ASTNode* root = parser.parse();
+void printAST(ASTNode* root) {
     
     // Print the AST
     if (root) {
@@ -255,9 +251,6 @@ void createAndPrintAST(const std::vector<Token>& tokens) {
         std::cout << "====================" << std::endl;
         root->print();
         std::cout << "====================" << std::endl;
-        
-        // Clean up memory
-        delete root;
     } else {
         std::cout << "Failed to create AST - parsing error" << std::endl;
     }
@@ -265,13 +258,13 @@ void createAndPrintAST(const std::vector<Token>& tokens) {
 
 
 int main(int argc, char *argv[]) {
-    
-    /* Code to use executable as lexer */
     // Confirming proper number of arguments
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " <filename>" << std::endl;
         return 1;
     }
+    
+    /* LEXING */
 
     // Opening file
     std::ifstream file(argv[1]);
@@ -285,6 +278,7 @@ int main(int argc, char *argv[]) {
     std::string input;
     std::string line;
 
+    // Iterating through file, getting text
     int lineCount = 0;
     while (std::getline(file, line)) {
         if (lineCount > 0) {
@@ -296,21 +290,50 @@ int main(int argc, char *argv[]) {
     }
     file.close();
 
-    // Printing lineIndices
-    for (int i : lineIndices) std::cout << i << std::endl;
-
-    // Hardcoding input
-    // input = "+-*/ <=class<=>==!=<for >/* int**//123?.45 apublic //publica public\n ab_cD12094 3a. 'abc' \"def\"";
-
-    // Performing process
+    // Creating token list
     std::vector<Token> tokens;
     parseInput(input, tokens, lineIndices);
 
     removeWhitespaceTokens(tokens); // Remove whitespace tokens
-    printTokens(tokens);
+    // printTokens(tokens); // Printing tokens
 
-    // Create and print the AST
-    createAndPrintAST(tokens);
+    /* AST */
+
+    // Create a parser from the tokens
+    Parser parser(tokens);
+    
+    // Parse the tokens to create the AST
+    ASTNode* root = parser.parse();
+    // printAST(root); // Print the AST
+
+    // Printing AST to file
+    std::ofstream astFile("ast.txt");
+    if (astFile.is_open()) {
+        root->printToFile(astFile, 2);
+        astFile.close();
+    } else {
+        std::cerr << "Error: Could not open file ast.txt for writing" << std::endl;
+    }
+    
+
+    /* CODE GENERATION */
+    CodeGenerator codeGen(parser.st); // Create a code generator with the parser's symbol table
+    codeGen.generate(root); // Generate stack machine code
+    std::vector<std::string> code = codeGen.getCode(); // Get the generated code
+    
+    // Print the code to standard output for debugging
+    // std::cout << "\nGenerated Stack Machine Code:" << std::endl;
+    // for (const auto& instruction : code) {
+    //     std::cout << instruction << std::endl;
+    // }
+    
+    // Save the code to a file
+    std::string filename = "examples/compiled.txt";
+    codeGen.printStackMachineCodeToFile(filename, code);
+    std::cout << "Just printed code to file " << filename << std::endl;
+    
+    // Clean up
+    delete root;
     
     return 0;   
 

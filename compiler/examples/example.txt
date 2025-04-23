@@ -6,9 +6,10 @@ int gcd(int u, int v){
 void main(void){
     int x;
     int y;
-    output("\nEuclid's GCD");
-    x = input("\nEnter a number:\t");
-    y = input("\nEnter a second number:\t");
-    output("\nRESULT:\t");
+    int z;
+    output("Euclid's GCD");
+    x = input("Enter a number:");
+    y = input("Enter a second number:");
+    output("RESULT:");
     output(gcd(x,y));
 }

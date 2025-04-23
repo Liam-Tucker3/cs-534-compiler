@@ -55,10 +55,10 @@ public:
     int getLine() const;
     int getIndex() const;
     int getLength() const; 
-    std::string toString() const;
+    std::string toString() const; // For getting string representation of token type
         
     int getIntVal() const; 
-    std::string getStrVal() const;
+    std::string getStrVal() const; // For when token is a string or variable and you want the value being stored
 
     void setVal(int val);
     void setVal(std::string val);

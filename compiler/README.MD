@@ -1,27 +1,42 @@
 # Compiler
-This is my submission for the compiler project.
+This is my submission for the compiler project. This is a fully working compiler. I will extend this compiler in the compiler-extender directory; this can be used as a point of comparison and as a fully functional checkpont.
 
-# Current Progress
-I have not yet completed my compiler. Currently, I have a functioning lexer and a mostly-functioning parser. A function is created for each rule, but there are some outlying problems remaining. Currently, the known issue I am debugging relates to input() and output(). These are not declared functions, but they should be treated as implicit functions of sorts. This may require a rewriting of my grammar.
+# To run file
+- The command **make** will compile the compiler and create an executable called c.exe
+- The command **make stack** will compile the stack machine and create an executable called s.exe
+- To compile using my compiler, use the command: **./c.exe filename.txt**, where **filename.txt** is your program. This will produce a file called **compiled.txt**, which is the compiled output containing valid stack machine code. 
+- To test the stack machine code, use the command **./s.exe compiled.txt**. The output will be printed to standard out.
 
-# Running program
-- Compile: g++ lexer.cpp ast.cpp token.cpp -o c
-- To execute: ./c.exe filename.txt
-- expected input: a file containing a program which is valid in this grammar
-- expected output: a series of lines written to a file called "output.txt". This is valid stack machine code. 
-
-# Useful Supplementary Files
-- LT_Compiler_Grammar.docs: A document defining my compiler
-- example.txt: An example input file 
-- first_follows.txt: A set f the firsts and follows for each identifer
+# Files in this directory
+- **documentation/LT_Compiler_Grammar.docx**: a document defining the language used in generating my Abstract Syntax Tree. Note that the Code Generator uses a slightly different set of rules. For instance, the Code Generator combines Rules 25 and 26 into one.
+- **examples/**: a directory containing a handful of files used as inputs or outputs for tests. **gcd_template.txt** is the GCD stack machine code, adapted in form for my stack machine. **example.txt** is an example program in my language to calculate the GCD, and **compiled.txt** is the stack machine code emitted by my compiler.
+- **ast.h** and **ast.cpp**: Defines the ASTNode, SymbolTable, and Parser classes used in my compiler.
+- **codeGenerator.h** and **codeGenerator.cpp**: Defines the CodeGenerator for my compiler.
+- **token.h** and **token.cpp**: Defines the Token class used in my compiler.
+- **stackMachine.cpp**: Defines the stack machine that serves as the target language.
+- **lexer.cpp**: Conntains code to perform lexing for my compiler. Also contains the main() function called by my compiler.
+- **stackMachineMain.cpp**: Contains the main function for my stack machine
 
 # Language
 The language is defined with the following specification. An example file was provided above.
 
 "Develop a complete compiler that produces stack machinecode for the liittle language of your grammar. You language must resemble B  or the C minus minus I provided. It must support integers and have functions(passing arguments, returning values), variables,expressions, iteration, selection and assignment."
 
+# Valid Stack Machine Commands
+- CALL(), CALL(std::string label)
+- RET(), RETV()
+- PUSH(), PUSH(int value), POP()
+- DUP()
+- LOAD(), SAVE(), STORE()
+- ADD(), SUB(), MUL(), DIV(), REM()
+- EQ(), NE(), LE(), GE(), LT(), GT()
+- BRT(), BRT(std::string label), BRT(int loc), BRZ(), BRZ(std::string label), BRZ(int loc)
+- JUMP(), JUMP(std::string label), JUMP(int loc)
+- PRINT(), PRINT(std::string message)
+- READ()
+- END()
 
-# Language specification
+# Reserved keywords
 This lexer supports int, string, and char variable types. It reserves the following keywords:
 - **main**, **std** (main)
 - **int**, **string**, **char**, **bool** (variable types)
@@ -46,12 +61,18 @@ This lexer supports int, string, and char variable types. It reserves the follow
 - **goto** (jump statement)
 - **auto**, **register**, **volatile**, **mutable**, **explicit**, **typedef**, **asm**, **__asm**, **__asm__**, **__volatile__**, **__volatile**, **__volatile**, **__volatile**, **__volatile**, **__volatile**, **__volatile** (other)
 
+# Version Control
+Were this to be a software development project, this would be saved through version history or as a seperate branch, rather than being copied from compiler-extended. I chose to store duplicate directories in this project to minimize any risk of the wrong portion of the project being viewed or judged.
+
 # AI Statement
 For this assignment, I have utilized the **Github Copilot** extention in VSCode, a tool created by **Github**. This uses the **GPT-4o** model created by **OpenAI**. I also used the Claude AI model. I have used this tool for the following purposes:
 - Automating repetitive tasks (i.e. filling all 20+ lines of a toString() function). This avoids me needing to write the same simple logic 20 times
 - Splitting a token.cpp class into two files, token.h and token.cpp
 - Splitting an ast.cpp file into two files, ast.h and token.h
+- Generating the makefile
 - Writing extremely basic templates for certain functions
 - Autocompleting certain lines of code, particularly in simple functions like Token::toString
 - Generating the list of C++ keywords
 - Miscellaneous debugging help
+
+I have reviewed all code which has appeared in this project and am comfortable accepting full ownership of all code here.
