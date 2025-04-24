@@ -19,8 +19,9 @@ enum class OpCode {
     ADD, SUB, MUL, DIV, REM, // Arithmetic    // Push value onto stack
     EQ, NE, LE, GE, LT, GT, // Comparisons
     BRT, BRZ, JUMP, // Branching
-    PRINT, READ, // IO operations
+    PRINT, READ, READF, // IO operations - added READF for float input
     LABEL, // Labels
+    INT, FLOAT, // Type conversion operations - new!
     END // End program
 };
 
@@ -37,6 +38,7 @@ struct VariableInfo {
     int stackOffset;  // Offset from the current frame's stack pointer
     bool isArray;     // Whether this is an array variable
     int arraySize;    // Size of the array (if isArray is true)
+    bool isFloat;     // Whether this is a float variable
 };
 
 class CodeGenerator {
@@ -56,10 +58,14 @@ private:
     std::string getOpString(OpCode op) const;
 
     // Adds a variable to the frame mapping
-    void addVariableToFrame(const std::string& varName, bool isArray = false, int arraySize = -1);
+    void addVariableToFrame(const std::string& varName, bool isArray = false, int arraySize = -1, bool isFloat = false);
     
     // Gets variable offset in the current frame
     int getVariableOffset(const std::string& varName);
+    
+    // Checks if a variable is a float type
+    bool isVariableFloat(const std::string& varName);
+
 
 public:
     CodeGenerator(SymbolTable& st);

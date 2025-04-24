@@ -125,7 +125,30 @@ Token identifyToken(const std::string &input, int index) {
     if (ch == '^') return Token(XOR, index);
     if (ch == '~') return Token(XNOT, index);
 
-    // NUM
+    // NUM, FLOAT
+    if (std::isdigit(ch)) {
+        int s = index; // Start index
+        int e = index; // End index
+        // Read integer part
+        while (isdigit(input[e])) e++;
+        
+        // Check if it's a float (has a decimal point)
+        if (input[e] == '.') {
+            e++; // Move past decimal point
+            // Read decimal part (if any)
+            while (isdigit(input[e])) e++;
+            
+            Token t = Token(FLOAT_VAL, s);
+            t.setVal(input.substr(s, e-s)); // Store as string for now
+            return t;
+        } else {
+            // Handle integer as before
+            Token t = Token(NUM, s);
+            t.setVal(std::stoi(input.substr(s, e-s)));
+            return t;
+        }
+    }
+
     if (std::isdigit(ch)) {
         int s = index; // Start index
         int e = index; // End index
@@ -135,7 +158,7 @@ Token identifyToken(const std::string &input, int index) {
         return t;
     }
 
-    // VAR, KEYWORD, IMPORTANT KEYWORD (IF, INT, VOID, RETURN, WHILE)
+    // VAR, KEYWORD, IMPORTANT KEYWORD (IF, INT, VOID, RETURN, WHILE, FLOAT, INPUT, OUTPUT)
     if (std::isalpha(ch)) {
         // Getting string
         int s = index; // Start index
@@ -144,11 +167,12 @@ Token identifyToken(const std::string &input, int index) {
         std::string val = input.substr(s, e-s);
 
         // Checking for keywords urrently used
-        if (val == "if" || val == "else" || val == "void" || val == "while" || val == "int" || val == "return" || val == "input" || val == "output") {
+        if (val == "if" || val == "else" || val == "void" || val == "while" || val == "int" || val == "float" || val == "return" || val == "input" || val == "output") {
             Token t;
             if (val == "if") t =  Token(IF, s);
             if (val == "else") t = Token(ELSE, s);
             if (val == "int") t = Token(INT, s);
+            if (val == "float") t = Token(FLOAT_TYPE, s);
             if (val == "void") t = Token(VOID, s);
             if (val == "while") t = Token(WHILE, s);
             if (val == "return") t = Token(RETURN, s);
@@ -314,6 +338,9 @@ int main(int argc, char *argv[]) {
     } else {
         std::cerr << "Error: Could not open file ast.txt for writing" << std::endl;
     }
+
+    // Printing symbol table
+    // parser.st.print(); // Print the symbol table to standard output for debugging
     
 
     /* CODE GENERATION */

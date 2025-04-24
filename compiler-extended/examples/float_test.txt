@@ -1,0 +1,23 @@
+int main() {
+    int a;
+    int b;
+    int c;
+    float x;
+    float y;
+    float z;
+    a = 18;
+    b = 5;
+    c = a / b;
+    output("Should be 3");
+    output(c);
+    x = 18.0;
+    y = 5.0;
+    z = x / y;
+    output("Should be 3.6");
+    output(z);
+    x = c + z;
+    a = c + z;
+    output("Should be 6, 6.6");
+    output(a);
+    output(x);
+}

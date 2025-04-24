@@ -43,6 +43,9 @@ std::string CodeGenerator::getOpString(OpCode op) const {
         case OpCode::RETV: return "RETV";
         case OpCode::PRINT: return "PRINT";
         case OpCode::READ: return "READ";
+        case OpCode::READF: return "READF";
+        case OpCode::INT: return "INT";
+        case OpCode::FLOAT: return "FLOAT";
         case OpCode::END: return "END";
         default: return "UNKNOWN"; // Should never run
     }
@@ -50,12 +53,13 @@ std::string CodeGenerator::getOpString(OpCode op) const {
 
 // Tracking variables in stack frame
 // Used for tracking addresses for load, save, and store calls
-void CodeGenerator::addVariableToFrame(const std::string& varName, bool isArray, int arraySize) {
+void CodeGenerator::addVariableToFrame(const std::string& varName, bool isArray, int arraySize, bool isFloat) {
     if (frameVariables.find(varName) == frameVariables.end()) {
         VariableInfo info;
         info.stackOffset = localVarCount++;
         info.isArray = isArray;
         info.arraySize = arraySize;
+        info.isFloat = isFloat;
         
         // Store the parameter name and its information
         frameVariables[varName] = info;
@@ -73,6 +77,16 @@ int CodeGenerator::getVariableOffset(const std::string& varName) {
     
     std::cerr << "Warning: Variable '" << varName << "' not found in frame" << std::endl;
     return -1; // Error value
+}
+
+// Helper function to check if a variable is a float type
+bool CodeGenerator::isVariableFloat(const std::string& varName) {
+    if (frameVariables.find(varName) != frameVariables.end()) {
+        return frameVariables[varName].isFloat;
+    }
+    
+    std::cerr << "Warning: Variable '" << varName << "' not found in frame" << std::endl;
+    return false; // Default to int
 }
 
 // Clear all variables at the end of a function
@@ -114,6 +128,7 @@ void CodeGenerator::generateProgram(ASTNode* node) {
 // Rule 2: declaration-list := declaration-list type-specifier ID declaration | type-specifier ID declaration
 void CodeGenerator::generateDeclarationList(ASTNode* node) {
     if (!node) return;
+    // node->printNode(); // Debugging line
     
     // Process each declaration
     for (ASTNode* child : *node->children) {
@@ -124,6 +139,7 @@ void CodeGenerator::generateDeclarationList(ASTNode* node) {
 // Rule 3: declaration := var-declaration | fun-declaration
 void CodeGenerator::generateDeclaration(ASTNode* node) {
     if (!node || node->children->empty()) return;
+    // node->printNode(); // Debugging line
     
     ASTNode* declChild = node->children->at(0); // Should only have one child
     
@@ -143,29 +159,36 @@ void CodeGenerator::generateDeclaration(ASTNode* node) {
 // Rule 4: var-declaration := ; | [ NUM ] ;
 void CodeGenerator::generateVarDeclaration(ASTNode* node) {
     if (!node) return;
+    // node->printNode(); // Debugging line
     
     // Get variable name and whether it's an array
     std::string varName = node->tokenValue;
     bool isArray = false;
     int arraySize = -1;
     
-    // Check if this is an array declaration
+    // Check if this is an array declaration and get type info from symbol table
     Symbol* varSymbol = symbolTable.findSymbol(varName);
-    if (varSymbol && varSymbol->arrSize > 0) {
-        isArray = true;
-        arraySize = varSymbol->arrSize;
+    bool isFloat = node->isFloat;  // Default to int
+    
+    if (varSymbol) {
+        // Check if it's an array
+        if (varSymbol->arrSize > 0) {
+            isArray = true;
+            arraySize = varSymbol->arrSize;
+        }
+        
+        // Get the correct type from symbol table
+        isFloat = (varSymbol->dataType == "float");
     }
     
-    // Add variable to the frame tracking
-    addVariableToFrame(varName, isArray, arraySize);
+    // Add variable to the frame tracking with correct type info
+    addVariableToFrame(varName, isArray, arraySize, isFloat);
     
-    // Initialize variable with 0 
+    // Initialize variable with 0 (or 0.0 for float)
     instructions.push_back(Instruction(OpCode::PUSH, "0"));
-    
-    // Current array implementation is incomplete
 }
 
-// Rule 5: type-specifier := int | void 
+// Rule 5: type-specifier := int | void | float
 // EMPTY
 void CodeGenerator::generateTypeSpecifier(ASTNode* node) {
     // Does not directly generate any stack machine code
@@ -228,10 +251,24 @@ void CodeGenerator::generateParam(ASTNode* node) {
     std::string paramName = node->tokenValue;
     
     // Check if this is an array parameter
-    bool isArray = node->children->size() > 1; // Simplified check for this example
+    bool isArray = false;
+    for (ASTNode* child : *node->children) {
+        if (child->type == ASTNodeType::TYPE_SPECIFIER) {
+            isArray = node->children->size() > 1; // Simplified check for this example
+        }
+    }
+
+    // Check if this is a float parameter
+    bool isFloat = node->isFloat; // Check if the parameter is a float type
+    bool isFLoat = isVariableFloat(paramName);
+    // Symbol* paramSymbol = symbolTable.findSymbol(paramName);
+    // if (paramSymbol) {
+    //     std::cout << "PARAM SYMBOL: " << paramSymbol->name << std::endl;
+    //     isFloat = (paramSymbol->dataType == "float");
+    // }
     
     // Add parameter to frame tracking
-    addVariableToFrame(paramName, isArray, isArray ? 0 : -1);
+    addVariableToFrame(paramName, isArray, isArray ? 0 : -1, isFloat);
 }
 
 // Rule 10: compound-stmt := { local-declarations statement-list }
@@ -329,8 +366,20 @@ void CodeGenerator::generateInputStmt(ASTNode* node) {
         instructions.push_back(Instruction(OpCode::PRINT, prompt)); 
     }
     
-    // Read input
-    instructions.push_back(Instruction(OpCode::READ));
+    // Check if we're reading into a float variable
+    // For now, we'll assume we're always reading an int unless specified otherwise
+    Symbol* varSymbol = nullptr;
+    if (node->children->size() > 1 && node->children->at(1)->type == ASTNodeType::VAR) {
+        std::string varName = node->children->at(1)->tokenValue;
+        varSymbol = symbolTable.findSymbol(varName);
+    }
+    
+    // Use appropriate read instruction based on variable type
+    if (varSymbol && varSymbol->dataType == "float") {
+        instructions.push_back(Instruction(OpCode::READF)); // Read float
+    } else {
+        instructions.push_back(Instruction(OpCode::READ)); // Read int
+    }
 }
 
 // Rule 16: output-stmt := output ( STRING ) ; | output ( expression ) ;
@@ -348,6 +397,7 @@ void CodeGenerator::generateOutputStmt(ASTNode* node) {
         
         // Print the result
         instructions.push_back(Instruction(OpCode::PRINT));
+        instructions.push_back(Instruction(OpCode::POP)); // Remove value just added to stack
     }
 }
 
@@ -435,6 +485,17 @@ void CodeGenerator::generateReturnStmt(ASTNode* node) {
     // If there's a return value, generate code for it
     if (!node->children->empty()) {
         generateExpression(node->children->at(0));
+        
+        // Check if function return type is different from expression type
+        Symbol* funcSymbol = symbolTable.findSymbol("current_function"); // Placeholder
+        if (funcSymbol && funcSymbol->dataType == "float") {
+            // Convert return value to float if needed
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        } else if (funcSymbol && funcSymbol->dataType == "int") {
+            // Convert return value to int if needed
+            instructions.push_back(Instruction(OpCode::INT));
+        }
+        
         instructions.push_back(Instruction(OpCode::RETV));
     } else {
         // Return without a value
@@ -452,8 +513,21 @@ void CodeGenerator::generateExpression(ASTNode* node) {
         ASTNode* varNode = node->children->at(0);
         ASTNode* exprNode = node->children->at(1);
         
+        std::string varName = varNode->tokenValue;
+        // bool isVarFloat = varNode->isFloat; // isVariableFloat(varName);
+        bool isVarFloat = isVariableFloat(varName);
+        
         // Generate code for the right-hand side expression
         generateSimpleExpression(exprNode);
+        
+        // Handle type conversion if needed
+        if (isVarFloat) {
+            // If variable is float but expression might be int, convert to float
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        } else {
+            // If variable is int but expression might be float, convert to int
+            instructions.push_back(Instruction(OpCode::INT));
+        }
         
         // Store the result in the variable
         generateVar(varNode, true);  // true indicates store operation
@@ -500,14 +574,15 @@ void CodeGenerator::generateVar(ASTNode* node, bool isStore) {
         // Generate code for the index expression
         generateSimpleExpression(node->children->at(0));
         
+        // If index expression is a float, convert to int
+        instructions.push_back(Instruction(OpCode::INT));
+        
         // Add base offset of the array
         instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
         instructions.push_back(Instruction(OpCode::ADD));
         
         if (isStore) {
-            // For store, we need to swap top two elements
-            // We have [value, index+offset] and need [index+offset, value]
-            // TODO: implement a more robust approach for this
+            // For store, we need the index+offset and value on stack
             instructions.push_back(Instruction(OpCode::STORE));
             // Leave a copy of the value on the stack for expressions
             instructions.push_back(Instruction(OpCode::DUP));
@@ -612,13 +687,17 @@ void CodeGenerator::generateTerm(ASTNode* node) {
 }
 
 // Rule 29: factor := ( simple-expression ) | var | call | input-stmt | NUM
-//TODO: Determine if NUM is being double counted
 void CodeGenerator::generateFactor(ASTNode* node) {
     if (!node) return;
     
-    if (node->children->empty() && node->tokenType == NUM) {
-        // Number literal
-        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(node->tokenIntValue)));
+    if (node->children->empty()) {
+        if (node->tokenType == NUM) {
+            // Number literal - push as int
+            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(node->tokenIntValue)));
+        } else if (node->tokenType == FLOAT_VAL) {
+            // Float literal - push as float
+            instructions.push_back(Instruction(OpCode::PUSH, node->tokenValue));
+        }
     } else if (!node->children->empty()) {
         ASTNode* child = node->children->at(0);
         
@@ -640,6 +719,9 @@ void CodeGenerator::generateFactor(ASTNode* node) {
                 if (child->tokenType == NUM) {
                     // Number literal inside a FACTOR
                     instructions.push_back(Instruction(OpCode::PUSH, std::to_string(child->tokenIntValue)));
+                } else if (child->tokenType == FLOAT_VAL) {
+                    // Float literal inside a FACTOR
+                    instructions.push_back(Instruction(OpCode::PUSH, child->tokenValue));
                 } else {
                     std::cerr << "Unexpected factor type in Rule 29: " << getNodeTypeName(child->type) << std::endl;
                 }
@@ -677,6 +759,13 @@ void CodeGenerator::generateCall(ASTNode* node) {
         // for (int i = numArgs - 1; i >= 0; i--) {
         for (int i = 0; i < numArgs; i++) {
             generateExpression(argListNode->children->at(i));
+            
+            // Check if we need to convert argument type
+            Symbol* funcSymbol = symbolTable.findSymbol(funcName);
+            if (funcSymbol) {
+                // TODO: Need to add function parameter info to properly handle type conversion
+                // For now, we're assuming the stack machine handles type conversions
+            }
         }
     }
     
@@ -728,9 +817,20 @@ std::vector<std::string> CodeGenerator::getCode() const {
                     } 
                 } (instr.arg);
                 
+                // Check if it can be converted to a float
+                bool canBeFloat = [] (const std::string& s) {
+                    try {
+                        size_t p;
+                        std::stof(s, &p);
+                        return p == s.size();
+                    } catch (...) {
+                        return false;
+                    }
+                } (instr.arg);
+                
                 // Adding quotations marks if necessary 
                 if (instr.op == OpCode::PRINT || instr.op == OpCode::BRZ || instr.op == OpCode::BRT || instr.op == OpCode::CALL || instr.op == OpCode::JUMP) {
-                    if (!canBeInt) {
+                    if (!canBeInt && !canBeFloat) {
                         oss << "\"" << instr.arg << "\""; // Add quotes around the string argument
                     } else {
                         oss << instr.arg; // Argument w/o quotes (int) or empty string (no arg)

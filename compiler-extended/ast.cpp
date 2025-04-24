@@ -1,5 +1,15 @@
 #include "ast.h"
 
+void ASTNode::printNode(){
+    std::cout << "Node Type: " << getNodeTypeName(type);
+    std::cout << " | Token Type: " << tokenType;
+    std::cout << " | Token Value: " << tokenValue;
+    std::cout << " | Token Int Value: " << tokenIntValue;
+    std::cout << " | Token Line: " << tokenLine;
+    std::cout << " | Token Index: " << tokenIndex;
+    std::cout << " | Is Float: " << (isFloat ? "true" : "false") << std::endl;
+}
+
 // Utility function to get AST node type name
 std::string getNodeTypeName(ASTNodeType type) {
     static const std::unordered_map<ASTNodeType, std::string> nodeNames = {
@@ -45,7 +55,7 @@ std::string getNodeTypeName(ASTNodeType type) {
 }
 
 // ASTNode implementation
-ASTNode::ASTNode(ASTNodeType t, Token* tok) {
+ASTNode::ASTNode(ASTNodeType t, Token* tok, bool thisIsFloat) {
     type = t;
     
     // Storing data directly
@@ -55,12 +65,14 @@ ASTNode::ASTNode(ASTNodeType t, Token* tok) {
         tokenIntValue = tok->getIntVal();
         tokenLine = tok->getLine();
         tokenIndex = tok->getIndex();
+        isFloat = thisIsFloat;
     } else {
         tokenType = UNKNOWN;
         tokenValue = "";
         tokenIntValue = 0;
         tokenLine = -1;
         tokenIndex = -1;
+        isFloat = false;
     }
     
     children = new std::vector<ASTNode*>();
@@ -85,11 +97,10 @@ void ASTNode::addChild(ASTNode* child) {
 }
 
 std::string ASTNode::getTokenString()  {
-    if (this->tokenType == INT || tokenType == VOID) {
-        return tokenType == INT ? "int" : "void";
-    } else {
-        return tokenValue;
-    }
+    if (this->tokenType == NUM) return "num";
+    else if (this->tokenType == FLOAT_TYPE) return "float";
+    else if (this->tokenType == VOID) return "void";
+    else return tokenValue;
 }
 
 // Prints AST Node and children to standard output
@@ -323,7 +334,7 @@ ASTNode* Parser::parseDeclarationList() {
     ASTNode* node = new ASTNode(ASTNodeType::DECLARATION_LIST);
     
     // Iteration handles left recursion
-    while (currentToken().token == TokenType::INT || currentToken().token == TokenType::VOID) {
+    while (currentToken().token == TokenType::INT || currentToken().token == TokenType::VOID || currentToken().token == TokenType::FLOAT_TYPE) {
 
         // Calling type-specifier parsing
         ASTNode* typeSpecNode = parseTypeSpecifier();
@@ -390,22 +401,29 @@ ASTNode* Parser::parseVarDeclaration(ASTNode* typeSpecNode, Token idToken) {
     }
     
     // Add variable to symbol table
-    std::string dataType = getNodeTypeName(typeSpecNode->type);
+    std::string dataType = typeSpecNode->getTokenString();
     st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_VARIABLE, dataType, st.getCurrentScope(), arraySize));
+    node->isFloat = (dataType == "float"); // Set isFloat flag based on data type
     
     return node;
 }
 
-// Rule 5: type-specifier := int | void
+// Rule 5: type-specifier := int | void | float
 ASTNode* Parser::parseTypeSpecifier() {
     Token currentTok = this->currentToken();
     ASTNode* node = new ASTNode(ASTNodeType::TYPE_SPECIFIER, &currentTok);
 
     // Checking if the current token is a type specifier
     if (match(TokenType::INT) || match(TokenType::VOID)) {
+        node->isFloat = false; // Set isFloat to false for int and void types
         return node;
-    } else {
-        std::cerr << "Expected type specifier ('int' or 'void') in Rule 5" << std::endl;
+    } else if (match(TokenType::FLOAT_TYPE)) {
+        // If it's a float type, we need to set the isFloat flag
+        node->isFloat = true;
+        return node;
+    }
+    else {
+        std::cerr << "Expected type specifier ('int' or 'void' or 'float') in Rule 5" << std::endl;
         syntaxError();
         return nullptr;  // Unreachable, just to satisfy compiler
     }
@@ -421,7 +439,7 @@ ASTNode* Parser::parseFunDeclaration(ASTNode* typeSpecNode, Token idToken) {
     // Add function to symbol table in current scope
     std::string returnType = typeSpecNode->getTokenString();
     st.addSymbol(Symbol(
-        idToken.getStrVal(), SymbolType::SYMBOL_FUNCTION, returnType, st.getCurrentScope()));
+        idToken.getStrVal(), SymbolType::SYMBOL_FUNCTION, returnType, st.getCurrentScope(), -1));
     
     // Check for open parenthesis
     if (!match(TokenType::OPARENTHESES)) {
@@ -475,8 +493,8 @@ ASTNode* Parser::parseParams() {
             currentTokenIndex--; // Move back to reprocess the void token
             node->addChild(parseParamList());
         }
-    } else if (currentToken().token == TokenType::INT) {
-        // We have a param-list starting with an int type
+    } else if (currentToken().token == TokenType::INT || currentToken().token == TokenType::FLOAT_TYPE) {
+        // We have a param-list starting with an int type or float type
         node->addChild(parseParamList());
     }
     // else: empty parameter list
@@ -583,7 +601,7 @@ ASTNode* Parser::parseLocalDeclarations() {
     ASTNode* node = new ASTNode(ASTNodeType::LOCAL_DECLARATIONS);
     
     // Process all variable declarations
-    while (currentToken().token == TokenType::INT || currentToken().token == TokenType::VOID) {
+    while (currentToken().token == TokenType::INT || currentToken().token == TokenType::VOID || currentToken().token == TokenType::FLOAT_TYPE) {
         // Parse type specifier
         ASTNode* typeSpecNode = parseTypeSpecifier();
         
@@ -622,6 +640,7 @@ ASTNode* Parser::parseStatement() {
         case TokenType::SEMICOLON:
         case TokenType::ID:
         case TokenType::NUM:
+        case TokenType::FLOAT_VAL:
         case TokenType::OPARENTHESES:
             // These tokens can start an expression statement
             node->addChild(parseExpressionStmt());
@@ -1089,7 +1108,7 @@ ASTNode* Parser::parseMulOp() {
     }
 }
 
-// Rule 29: factor := ( simple-expression ) | var | call | NUM | input-stmt
+// Rule 29: factor := ( simple-expression ) | var | call | NUM | FLOAT | input-stmt
 ASTNode* Parser::parseFactor() {
     ASTNode* node = new ASTNode(ASTNodeType::FACTOR);
     
@@ -1131,6 +1150,17 @@ ASTNode* Parser::parseFactor() {
             // Create a node for the number with its token
             ASTNode* numNode = new ASTNode(ASTNodeType::FACTOR, &numToken);
             node->addChild(numNode);
+            break;
+        }
+
+        case TokenType::FLOAT_VAL: {
+            // FLOAT
+            Token floatToken = currentToken();
+            match(TokenType::FLOAT_VAL);
+            
+            // Create a node for the float with its token
+            ASTNode* floatNode = new ASTNode(ASTNodeType::FACTOR, &floatToken);
+            node->addChild(floatNode);
             break;
         }
         

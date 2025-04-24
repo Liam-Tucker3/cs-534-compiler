@@ -85,14 +85,14 @@ int Token::getLength() const {
     else if (t == BITAND || t == BITOR || t == XOR || t == XNOT) return 1; // Bitwise op, 1 char
     else if (t == AND || t == OR) return 2; // Bitwise op, 2 char
     else if (t == NUM) return std::to_string(iVal).length(); // INT, NUM
-    else if (t == VAR || t == KEYWORD || t == ID) return sVal.length(); // VAR or KEYWORD or ID
+    else if (t == VAR || t == KEYWORD || t == ID || t == FLOAT_VAL) return sVal.length(); // VAR or KEYWORD or ID
     else if (t == LINECOMMENT) return sVal.length() + 3; // Comments; +3 for '//' and '\n'
     else if (t == BLOCKCOMMENT) return sVal.length() + 4; // Comments; +4 for '/*' and '*/'
     else if (t == WHITESPACE) return 1; // Whitespace
     else if (t == IF) return 2;
     else if (t == INT) return 3;
     else if (t == VOID || t == ELSE) return 4;
-    else if (t == WHILE || t == INPUT) return 5;
+    else if (t == WHILE || t == INPUT || t == FLOAT_TYPE) return 5;
     else if (t == RETURN || t == OUTPUT) return 6;
 
     std::cerr << "Warning: Unknown token type in getLength(): " << (int)t << std::endl;
@@ -235,7 +235,13 @@ std::string Token::toString() const {
             tokenString = "XNOT";
             break;
         case INT:
-            tokenString = "INT: " + std::to_string(iVal);
+            tokenString = "INT";
+            break;
+        case FLOAT_TYPE:
+            tokenString = "FLOAT_TYPE";
+            break;
+        case FLOAT_VAL:
+            tokenString = "FLOAT: " + sVal; // Storing float as string for now
             break;
         case NUM:
             tokenString = "NUM: " + std::to_string(iVal);

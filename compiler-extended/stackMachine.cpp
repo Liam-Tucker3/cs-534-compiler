@@ -84,6 +84,8 @@ private:
             else if (f == "READ") READ();
             else if (f == "READF") READF();
             else if (f == "END") END();
+            else if (f == "INT") INT();
+            else if (f == "FLOAT") FLOAT();
         }
 
         // Functions with string parameters
@@ -169,9 +171,9 @@ public:
             logFile << "Current stack: " << std::endl;
             for (int i = 0; i < stackTop; i++) {
                 if (typeStack[i] == false) { // Integer value
-                    logFile << intStack[i];
+                    logFile << intStack[i] << " ";
                 } else { // Float value
-                    logFile << floatStack[i];
+                    logFile << floatStack[i] << " ";
                 }
             }
             logFile << std::endl;
@@ -225,7 +227,7 @@ public:
                 if (params[0] == '"' && params[params.length() - 1] == '"') { // Case: String parameter
                     // Parsing string parameter
                     std::string param = params.substr(1, params.length() - 2);
-                    execINSTRUCTION(functionName, param);
+                    execINSTRUCTION(functionName, param, -1, -1.0f);
                 } else { // Case: Numeric parameter
                     // Check if it's a float (contains a decimal point)
                     if (params.find('.') != std::string::npos) {
@@ -233,7 +235,7 @@ public:
                         execINSTRUCTION(functionName, "", -1, param);
                     } else { // Integer
                         int param = std::stoi(params);
-                        execINSTRUCTION(functionName, "", param);
+                        execINSTRUCTION(functionName, "", param, -1.0f);
                     }
                 }
             } else { // Case: No Parameters
@@ -429,7 +431,7 @@ public:
     /* PUSH OVERLOAD: Puts specified float value onto stack */
     void PUSH(float value) {
         intStack[stackTop] = 0; // Zero out int value
-        floatStack[stackTop] = value;
+        floatStack[stackTop] = (float) value;
         typeStack[stackTop] = true; // Set type to float
         stackTop += 1;
     }
@@ -942,6 +944,30 @@ public:
         float temp;
         std::cin >> temp;
         this->fGpr = temp;
+        this->tGpr = true;
+        this->PUSH();
+    }
+
+    /* Converts the top value on the stack to an INT*/
+    void INT() {
+        if (typeStack[stackTop-1] == 0) return; // Already an int, no need to convert
+
+        // Need to convert to int
+        std::tuple<int, float, bool> val = this->POP();
+        this->iGpr = (int) std::get<1>(val);
+        this->fGpr = 0.0f; // Zero out float value
+        this->tGpr = false;
+        this->PUSH();
+    }
+
+    /* Converts the top value on the stack to a FLOAT*/
+    void FLOAT() {
+        if (typeStack[stackTop-1] == 1) return; // Already a float, no need to convert
+        
+        // Need to convert to float
+        std::tuple<int, float, bool> val = this->POP();
+        this->fGpr = (float) std::get<0>(val);
+        this->iGpr = 0; // Zero out int value
         this->tGpr = true;
         this->PUSH();
     }

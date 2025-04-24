@@ -1,8 +1,9 @@
 # Compiler
 This is my submission for the compiler project extension. This is the most up-to-date portion of the project. (I understand that generally branches or version history would be used here, but this is the easiest and most explicit way to avoid the wrong thing being graded.)
 
-# Current Progress
-The compiler is fully functioning.
+# Extensions
+In addition to all required functionality, I have added the following extension to my project:
+1. Allowing float data types. This language allows one to declare a float or an int variable type. The language uses C style implicit conversions. In an arithmetic operation between an int and a float, the int is converted to a float before the operation. If an int is assigned to a float (or vice versa), there is an implicit type conversion. When accepting user input, a number is converted to an int or float automatically based on the variable to which it is assigned.
 
 # To run file
 - The command **make** will compile the compiler and create an executable called c.exe
@@ -12,7 +13,7 @@ The compiler is fully functioning.
 
 # Files in this directory
 - **documentation/LT_Compiler_Grammar.docx**: a document defining the language used in generating my Abstract Syntax Tree. Note that the Code Generator uses a slightly different set of rules. For instance, the Code Generator combines Rules 25 and 26 into one.
-- **examples/**: a directory containing a handful of files used as inputs or outputs for tests. **gcd_template.txt** is the GCD stack machine code, adapted in form for my stack machine. **example.txt** is an example program in my language to calculate the GCD, and **compiled.txt** is the stack machine code emitted by my compiler.
+- **examples/**: a directory containing a handful of files used as inputs or outputs for tests. **gcd_template.txt** is the GCD stack machine code, adapted in form for my stack machine. **example.txt** is an example program in my language to calculate the GCD, and **compiled.txt** is the stack machine code emitted by my compiler. **float_test.txt** is a simple program to test that the float data type was implemented correctly.
 - **ast.h** and **ast.cpp**: Defines the ASTNode, SymbolTable, and Parser classes used in my compiler.
 - **codeGenerator.h** and **codeGenerator.cpp**: Defines the CodeGenerator for my compiler.
 - **token.h** and **token.cpp**: Defines the Token class used in my compiler.

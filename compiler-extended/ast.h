@@ -67,12 +67,13 @@ class ASTNode {
         int tokenIntValue;
         int tokenLine;
         int tokenIndex;
+        bool isFloat;
         
         std::vector<ASTNode*> *children;
         std::string dataType;  // For type checking during semantic analysis
 
         // Constructor
-        ASTNode(ASTNodeType t, Token* tok = nullptr);
+        ASTNode(ASTNodeType t, Token* tok = nullptr, bool isFloat = false);
         
         // Destructor for proper cleanup
         ~ASTNode();
@@ -82,6 +83,7 @@ class ASTNode {
         std::string getTokenString();
 
         // Print the AST for debugging purposes
+        void printNode();
         void print(int indent = 0) const;
         void printToFile(std::ofstream& file, int indent);
 };
@@ -97,7 +99,7 @@ class Symbol {
     public:
         std::string name;
         SymbolType type;
-        std::string dataType;  // "int" or "void"
+        std::string dataType;  // "int" or "void" or "float"
         int scopeLevel;
         int arrSize;
 
