@@ -200,7 +200,7 @@ public:
     void parseInstruction(std::string instruction) {
         // Ignoring everything after a semicolon
         size_t semicolonPos = instruction.find(';');
-        if (semicolonPos != std::string::np os) {
+        if (semicolonPos != std::string::npos) {
             instruction = instruction.substr(0, semicolonPos);
         }
 
@@ -253,10 +253,10 @@ public:
     /* Second on stack: number of parameters*/
     void CALL() {
         std::tuple<int, float, bool> addressVal = this->POP(); // Get function address from stack
-        int address = std::get<2>(addressVal) ? static_cast<int>(std::get<1>(addressVal)) : std::get<0>(addressVal);
+        int address = std::get<0>(addressVal); // Address should always be int
         
         std::tuple<int, float, bool> numParamsVal = this->PEEK(); // Get number of parameters from stack
-        int numParams = std::get<2>(numParamsVal) ? static_cast<int>(std::get<1>(numParamsVal)) : std::get<0>(numParamsVal);
+        int numParams = std::get<0>(numParamsVal); // Num params should always be int
 
         // Moving numParams to behind the params
         for (int i = 1; i <= numParams; i++) {
@@ -302,8 +302,8 @@ public:
         }
         
         // Get number of parameters from stack
-        std::tuple<int, float, bool> numParamsVal = this->PEEK();
-        int numParams = std::get<2>(numParamsVal) ? static_cast<int>(std::get<1>(numParamsVal)) : std::get<0>(numParamsVal);
+        std::tuple<int, float, bool> numParamsVal = this->PEEK(); 
+        int numParams = std::get<0>(numParamsVal); // numParams should always be int
 
         // Moving numParams to behind the params
         for (int i = 1; i <= numParams; i++) {
@@ -350,7 +350,7 @@ public:
         if (stackPointer != 0) {
             std::tuple<int, float, bool> numParamsVal;
             numParamsVal = std::make_tuple(intStack[stackPointer - 1], floatStack[stackPointer - 1], typeStack[stackPointer - 1]);
-            numParams = std::get<2>(numParamsVal) ? static_cast<int>(std::get<1>(numParamsVal)) : std::get<0>(numParamsVal);
+            numParams = std::get<0>(numParamsVal); // numParams should always be int
         }
 
         // Get previous stack pointer from current frame
@@ -385,7 +385,7 @@ public:
         if (stackPointer != 0) {
             std::tuple<int, float, bool> numParamsVal;
             numParamsVal = std::make_tuple(intStack[stackPointer - 1], floatStack[stackPointer - 1], typeStack[stackPointer - 1]);
-            numParams = std::get<2>(numParamsVal) ? static_cast<int>(std::get<1>(numParamsVal)) : std::get<0>(numParamsVal);
+            numParams = std::get<0>(numParamsVal); // Address should always be int
         }
 
         // Get previous stack pointer from current frame
@@ -456,7 +456,7 @@ public:
     /* Loads value from specified location in memory into top cell of stack*/
     void LOAD() {
         std::tuple<int, float, bool> vals = this->POP();
-        int address = std::get<2>(vals) ? static_cast<int>(std::get<1>(vals)) : std::get<0>(vals);
+        int address = std::get<0>(vals); // Address should always be int
         
         // The address is relative to the current frame (stackPointer)
         // Updating GPRs
@@ -471,7 +471,7 @@ public:
     /* Note: second value on stack is element; first value on stack is address*/
     void SAVE() { 
         std::tuple<int, float, bool> addressVal = this->POP();
-        int address = std::get<2>(addressVal) ? static_cast<int>(std::get<1>(addressVal)) : std::get<0>(addressVal);
+        int address = std::get<0>(addressVal); // Address should always be int
         
         std::tuple<int, float, bool> value = this->PEEK();
         
@@ -484,7 +484,7 @@ public:
     /* Note: second value on stack is element; first value on stack is address*/
     void STORE() {
         std::tuple<int, float, bool> addressVal = this->POP();
-        int address = std::get<2>(addressVal) ? static_cast<int>(std::get<1>(addressVal)) : std::get<0>(addressVal);
+        int address = std::get<0>(addressVal); // Address should always be int
         
         std::tuple<int, float, bool> value = this->POP();
         
@@ -602,6 +602,7 @@ public:
         std::tuple<int, float, bool> a = this->POP();
         
         // REM is only defined for integers, so we'll convert to int if needed
+        // This should never be called on floats
         int aVal = std::get<2>(a) ? static_cast<int>(std::get<1>(a)) : std::get<0>(a);
         int bVal = std::get<2>(b) ? static_cast<int>(std::get<1>(b)) : std::get<0>(b);
         
@@ -612,6 +613,7 @@ public:
     }
 
     /* Pops two values from stack and pushes 1 if values are equal, 0 otherwise*/
+    // Should only be callde for the same type
     void EQ() {
         std::tuple<int, float, bool> b = this->POP();
         std::tuple<int, float, bool> a = this->POP();
@@ -780,7 +782,7 @@ public:
         if (std::get<2>(destination)) { // Float
             address = static_cast<int>(std::get<1>(destination));
         } else { // Int
-            address = std::get<0>(destination);
+            address = std::get<0>(destination); // Should always be int
         }
         
         if (cond) {
@@ -798,7 +800,7 @@ public:
         if (std::get<2>(condition)) { // Float
             cond = std::get<1>(condition) != 0.0f;
         } else { // Int
-            cond = std::get<0>(condition) != 0;
+            cond = std::get<0>(condition) != 0; // Should always be int
         }
         
         if (cond) {
@@ -816,7 +818,7 @@ public:
         if (std::get<2>(condition)) { // Float
             cond = std::get<1>(condition) != 0.0f;
         } else { // Int
-            cond = std::get<0>(condition) != 0;
+            cond = std::get<0>(condition) != 0; // Should always be int
         }
         
         if (cond) {
@@ -835,7 +837,7 @@ public:
         if (std::get<2>(condition)) { // Float
             cond = std::get<1>(condition) == 0.0f;
         } else { // Int
-            cond = std::get<0>(condition) == 0;
+            cond = std::get<0>(condition) == 0; // Should always be int
         }
         
         // Get the address
@@ -843,7 +845,7 @@ public:
         if (std::get<2>(destination)) { // Float
             address = static_cast<int>(std::get<1>(destination));
         } else { // Int
-            address = std::get<0>(destination);
+            address = std::get<0>(destination); // Address should always be int
         }
         
         if (cond) {
@@ -861,7 +863,7 @@ public:
         if (std::get<2>(condition)) { // Float
             cond = std::get<1>(condition) == 0.0f;
         } else { // Int
-            cond = std::get<0>(condition) == 0;
+            cond = std::get<0>(condition) == 0; // Should always be int
         }
         
         if (cond) {
@@ -879,7 +881,7 @@ public:
         if (std::get<2>(condition)) { // Float
             cond = std::get<1>(condition) == 0.0f;
         } else { // Int
-            cond = std::get<0>(condition) == 0;
+            cond = std::get<0>(condition) == 0; // Should always be int
         }
         
         if (cond) {
@@ -896,7 +898,7 @@ public:
         if (std::get<2>(destination)) { // Float
             address = static_cast<int>(std::get<1>(destination));
         } else { // Int
-            address = std::get<0>(destination);
+            address = std::get<0>(destination); // Address should always be int
         }
         
         programCounter = address;
