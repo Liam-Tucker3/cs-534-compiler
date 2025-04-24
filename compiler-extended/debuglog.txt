@@ -3794,3 +3794,3278 @@ Stack Top: 4|7
 
 Current stack: 
 49 63 0 7 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|10(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 0(int) 0(int) 5(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 0(int) 0(int) 5(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 5(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 5(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 5(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 5(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 5(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 5(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 5(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|5(int)
+Current stack: 
+0(int) 0(int) 0(int) 5(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 5(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|10(int)
+Current stack: 
+5(int) 0(int) 0(int) 10(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+5(int) 0(int) 0(int) 10(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 10(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 10(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 10(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|0.5(float)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0.5(float) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0.5(float) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0.5(float) 10(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|5(float)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(float) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(float)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(float) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(float) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(float)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 10(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 10(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 10(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|25(int)
+Current stack: 
+0(int) 0(int) 0(int) 25(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 25(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 0(int) 0(int) 10(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+25(int) 0(int) 0(int) 10(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 10(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 10(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 10(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|2.5(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 10(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|25(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(float) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(float) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(float) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 10(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 10(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 10(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|15(int)
+Current stack: 
+0(int) 0(int) 0(int) 15(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 15(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+15(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+15(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+15(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|3(int)
+Current stack: 
+15(int) 0(int) 0(int) 3(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+15(int) 0(int) 0(int) 3(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|15(int)
+Current stack: 
+15(int) 3(int) 0(int) 15(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 15(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 15(int) 3(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+15(int) 3(int) 0(int) 15(int) 3(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|15(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|15(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 15(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 15(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 15(int) 3(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|5(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 5(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 5(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 5(int) 3(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|15(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 15(int) 15(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 3(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 2(int) 15(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 3(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|3(int)
+Current stack: 
+15(int) 3(int) 0(int) 3(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|3(int)
+Current stack: 
+0(int) 0(int) 0(int) 3(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 3(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+3(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+3(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+3(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|15(int)
+Current stack: 
+3(int) 0(int) 0(int) 15(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+3(int) 0(int) 0(int) 15(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|3(int)
+Current stack: 
+3(int) 15(int) 0(int) 3(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 3(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 3(int) 15(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+3(int) 15(int) 0(int) 3(int) 15(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|3(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|3(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 3(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 3(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 3(int) 15(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|0.2(float)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 0.2(float) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 0.2(float) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 0.2(float) 15(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|3(float)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 3(int) 3(float) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(float)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 0(float) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 0(float) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(float)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 0(float) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 0(float) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 2(int) 15(int) 0(float) 4(int) 27(int) 15(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 2(int) 3(int) 15(int) 0(int) 51(int) 15(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 15(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|15(int)
+Current stack: 
+3(int) 15(int) 0(int) 15(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|25(int)
+Current stack: 
+0(int) 0(int) 0(int) 25(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 25(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 0(int) 0(int) 10(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+25(int) 0(int) 0(int) 10(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 10(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+25(int) 10(int) 0(int) 25(int) 10(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|25(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(int) 10(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|2.5(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 2.5(float) 10(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|25(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 25(int) 25(float) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(float) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 0(float) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(float)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(float) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 2(int) 10(int) 0(float) 4(int) 27(int) 10(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 2(int) 25(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 10(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|10(int)
+Current stack: 
+25(int) 10(int) 0(int) 10(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|10(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|25(int)
+Current stack: 
+10(int) 0(int) 0(int) 25(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 0(int) 0(int) 25(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|10(int)
+Current stack: 
+10(int) 25(int) 0(int) 10(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 10(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 10(int) 25(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+10(int) 25(int) 0(int) 10(int) 25(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|10(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|10(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 10(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 10(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 10(int) 25(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|0.4(float)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 0.4(float) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 0.4(float) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 0.4(float) 25(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|10(float)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 10(int) 10(float) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(float)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 0(float) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 0(float) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(float)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 0(float) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 0(float) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 2(int) 25(int) 0(float) 4(int) 27(int) 25(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 2(int) 10(int) 25(int) 0(int) 51(int) 25(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 25(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|25(int)
+Current stack: 
+10(int) 25(int) 0(int) 25(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|10(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 10(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 0(int) 0(int) 5(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 0(int) 0(int) 5(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 5(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 10(int) 5(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 5(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 2(int) 5(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|10(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 10(int) 10(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 2(int) 5(int) 0(int) 4(int) 27(int) 5(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 2(int) 10(int) 5(int) 0(int) 51(int) 5(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 5(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|5(int)
+Current stack: 
+10(int) 5(int) 0(int) 5(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|5(int)
+Current stack: 
+0(int) 0(int) 0(int) 5(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 5(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|10(int)
+Current stack: 
+5(int) 0(int) 0(int) 10(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+5(int) 0(int) 0(int) 10(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 10(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 10(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 5(int) 10(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 10(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 0(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 10(int) 5(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 13|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 14|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 15|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 16|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 10(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 10(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 17|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 10(int) 5(int) 
+Executing instruction: 20|DIV();
+Stack Top: 16|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 17|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 2(int) 5(int) 
+Executing instruction: 23|MUL();
+Stack Top: 16|10(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 10(int) 10(int) 
+Executing instruction: 24|SUB();
+Stack Top: 15|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 18|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 19|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 19|1(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 19|0(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 19|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 2(int) 5(int) 0(int) 9(int) 27(int) 5(int) 
+Executing instruction: 9|RETV();
+Stack Top: 14|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 2(int) 10(int) 5(int) 4(int) 27(int) 5(int) 
+Executing instruction: 27|RETV();
+Stack Top: 9|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 2(int) 5(int) 10(int) 0(int) 51(int) 5(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|5(int)
+Current stack: 
+5(int) 10(int) 0(int) 5(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|32(int)
+Current stack: 
+0(int) 0(int) 0(int) 32(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 32(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+32(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+32(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+32(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|12(int)
+Current stack: 
+32(int) 0(int) 0(int) 12(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+32(int) 0(int) 0(int) 12(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|32(int)
+Current stack: 
+32(int) 12(int) 0(int) 32(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 32(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 32(int) 12(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 32(int) 12(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|32(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|32(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 32(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 32(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 32(int) 12(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 2(int) 12(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|24(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 32(int) 24(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 8(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 12(int) 8(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 13|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 14|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 15|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 16|12(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 12(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 12(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 17|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 12(int) 8(int) 
+Executing instruction: 20|DIV();
+Stack Top: 16|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 1(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 1(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 17|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 1(int) 8(int) 
+Executing instruction: 23|MUL();
+Stack Top: 16|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 12(int) 8(int) 
+Executing instruction: 24|SUB();
+Stack Top: 15|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 4(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 8(int) 4(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 18|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 19|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 19|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 18|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 19|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 19|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 20|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 20|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 21|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 21|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 8(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 22|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 8(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 22|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 8(int) 4(int) 
+Executing instruction: 20|DIV();
+Stack Top: 21|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 22|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 22|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 2(int) 4(int) 
+Executing instruction: 23|MUL();
+Stack Top: 21|8(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 8(int) 8(int) 
+Executing instruction: 24|SUB();
+Stack Top: 20|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 21|2(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 23|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 23|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 24|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 24|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 25|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 24|1(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 23|27(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 24|0(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 24|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 2(int) 4(int) 0(int) 14(int) 27(int) 4(int) 
+Executing instruction: 9|RETV();
+Stack Top: 19|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 2(int) 8(int) 4(int) 9(int) 27(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 14|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 2(int) 12(int) 8(int) 4(int) 27(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 9|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 2(int) 32(int) 12(int) 0(int) 51(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 4(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|4(int)
+Current stack: 
+32(int) 12(int) 0(int) 4(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|12(int)
+Current stack: 
+0(int) 0(int) 0(int) 12(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 12(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|3(int)
+Current stack: 
+12(int) 0(int) 0(int) 3(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+12(int) 0(int) 0(int) 3(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|12(int)
+Current stack: 
+12(int) 3(int) 0(int) 12(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 12(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 12(int) 3(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+12(int) 3(int) 0(int) 12(int) 3(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|12(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|12(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 12(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 12(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 12(int) 3(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|4(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 4(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 4(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 4(int) 3(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|12(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 12(int) 12(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|1(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 14|0(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 14|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 2(int) 3(int) 0(int) 4(int) 27(int) 3(int) 
+Executing instruction: 9|RETV();
+Stack Top: 9|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 2(int) 12(int) 3(int) 0(int) 51(int) 3(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 3(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|3(int)
+Current stack: 
+12(int) 3(int) 0(int) 3(int) 
+Current stack: 
+
+Executing instruction: 0|JUMP("main");
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 30|main
+Stack Top: 0|Stack empty
+Current stack: 
+
+Executing instruction: 31|PUSH(0);
+Stack Top: 1|0(int)
+Current stack: 
+0(int) 
+Executing instruction: 32|PUSH(0);
+Stack Top: 2|0(int)
+Current stack: 
+0(int) 0(int) 
+Executing instruction: 33|PUSH(0);
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 34|PRINT("Euclid's GCD");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 35|PRINT("Enter a number:");
+Stack Top: 3|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 
+Executing instruction: 36|READ();
+Stack Top: 4|12(int)
+Current stack: 
+0(int) 0(int) 0(int) 12(int) 
+Executing instruction: 37|PUSH(0);
+Stack Top: 5|0(int)
+Current stack: 
+0(int) 0(int) 0(int) 12(int) 0(int) 
+Executing instruction: 38|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 39|PRINT("Enter a second number:")Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 40|;
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 0(int) 0(int) 
+Executing instruction: 41|READ();
+Stack Top: 4|32(int)
+Current stack: 
+12(int) 0(int) 0(int) 32(int) 
+Executing instruction: 42|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+12(int) 0(int) 0(int) 32(int) 1(int) 
+Executing instruction: 43|STORE();
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 
+Executing instruction: 44|PRINT("RESULT:");
+Stack Top: 3|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 
+Executing instruction: 45|PUSH(0);
+Stack Top: 4|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 0(int) 
+Executing instruction: 46|LOAD();
+Stack Top: 4|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 12(int) 
+Executing instruction: 47|PUSH(1);
+Stack Top: 5|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 12(int) 1(int) 
+Executing instruction: 48|LOAD();
+Stack Top: 5|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 12(int) 32(int) 
+Executing instruction: 49|PUSH(2);
+Stack Top: 6|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 12(int) 32(int) 2(int) 
+Executing instruction: 50|CALL("gcd");
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 
+Executing instruction: 1|gcd
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 9|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 9|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 
+Executing instruction: 11|L0
+Stack Top: 8|51(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 9|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 9|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 10|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 10|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 11|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 11|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 12(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 12(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 12|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 12(int) 32(int) 
+Executing instruction: 20|DIV();
+Stack Top: 11|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 0(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 12|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 0(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 12|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 0(int) 32(int) 
+Executing instruction: 23|MUL();
+Stack Top: 11|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 0(int) 
+Executing instruction: 24|SUB();
+Stack Top: 10|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 11|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 32(int) 12(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 14|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 14|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 13|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 14|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 14|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 15|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 15|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 16|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 16|32(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 32(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 32(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 17|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 32(int) 12(int) 
+Executing instruction: 20|DIV();
+Stack Top: 16|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 17|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 17|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 2(int) 12(int) 
+Executing instruction: 23|MUL();
+Stack Top: 16|24(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 32(int) 24(int) 
+Executing instruction: 24|SUB();
+Stack Top: 15|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 8(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 16|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 12(int) 8(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 18|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 18|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 19|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 19|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 20|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 19|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 18|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 18|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 19|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 19|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 20|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 20|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 21|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 21|12(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 12(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 22|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 12(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 22|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 12(int) 8(int) 
+Executing instruction: 20|DIV();
+Stack Top: 21|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 1(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 22|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 1(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 22|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 1(int) 8(int) 
+Executing instruction: 23|MUL();
+Stack Top: 21|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 12(int) 8(int) 
+Executing instruction: 24|SUB();
+Stack Top: 20|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 4(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 21|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 8(int) 4(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 23|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 23|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 24|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 24|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 25|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 24|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 0(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 23|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 
+Executing instruction: 11|L0
+Stack Top: 23|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 
+Executing instruction: 12|PUSH(1);
+Stack Top: 24|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 1(int) 
+Executing instruction: 13|LOAD();
+Stack Top: 24|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 
+Executing instruction: 14|PUSH(0);
+Stack Top: 25|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 0(int) 
+Executing instruction: 15|LOAD();
+Stack Top: 25|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 
+Executing instruction: 16|PUSH(0);
+Stack Top: 26|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 0(int) 
+Executing instruction: 17|LOAD();
+Stack Top: 26|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 8(int) 
+Executing instruction: 18|PUSH(1);
+Stack Top: 27|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 8(int) 1(int) 
+Executing instruction: 19|LOAD();
+Stack Top: 27|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 8(int) 4(int) 
+Executing instruction: 20|DIV();
+Stack Top: 26|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 2(int) 
+Executing instruction: 21|PUSH(1);
+Stack Top: 27|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 2(int) 1(int) 
+Executing instruction: 22|LOAD();
+Stack Top: 27|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 2(int) 4(int) 
+Executing instruction: 23|MUL();
+Stack Top: 26|8(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 8(int) 8(int) 
+Executing instruction: 24|SUB();
+Stack Top: 25|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 0(int) 
+Executing instruction: 25|PUSH(2);
+Stack Top: 26|2(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 0(int) 2(int) 
+Executing instruction: 26|CALL("gcd");
+Stack Top: 28|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 
+Executing instruction: 1|gcd
+Stack Top: 28|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 
+Executing instruction: 2|PUSH(1);
+Stack Top: 29|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 1(int) 
+Executing instruction: 3|LOAD();
+Stack Top: 29|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 0(int) 
+Executing instruction: 4|PUSH(0);
+Stack Top: 30|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 0(int) 0(int) 
+Executing instruction: 5|EQ();
+Stack Top: 29|1(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 1(int) 
+Executing instruction: 6|BRZ("L0");
+Stack Top: 28|27(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 
+Executing instruction: 7|PUSH(0);
+Stack Top: 29|0(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 0(int) 
+Executing instruction: 8|LOAD();
+Stack Top: 29|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 2(int) 4(int) 0(int) 19(int) 27(int) 4(int) 
+Executing instruction: 9|RETV();
+Stack Top: 24|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 2(int) 8(int) 4(int) 14(int) 27(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 19|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 2(int) 12(int) 8(int) 9(int) 27(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 14|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 2(int) 32(int) 12(int) 4(int) 27(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 9|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 2(int) 12(int) 32(int) 0(int) 51(int) 4(int) 
+Executing instruction: 27|RETV();
+Stack Top: 4|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 4(int) 
+Executing instruction: 51|PRINT();
+Stack Top: 4|4(int)
+Current stack: 
+12(int) 32(int) 0(int) 4(int) 
+Current stack: 
+
+Executing instruction: 0|PUSH(10);
+Stack Top: 1|10(int)
+Current stack: 
+10(int) 
+Executing instruction: 1|PUSH(8);
+Stack Top: 2|8(int)
+Current stack: 
+10(int) 8(int) 
+Executing instruction: 2|PUSH(6);
+Stack Top: 3|6(int)
+Current stack: 
+10(int) 8(int) 6(int) 
+Executing instruction: 3|PUSH(4);
+Stack Top: 4|4(int)
+Current stack: 
+10(int) 8(int) 6(int) 4(int) 
+Executing instruction: 4|DIV();
+Stack Top: 3|1(int)
+Current stack: 
+10(int) 8(int) 1(int) 
+Executing instruction: 5|SUB();
+Stack Top: 2|7(int)
+Current stack: 
+10(int) 7(int) 
+Executing instruction: 6|PUSH(2);
+Stack Top: 3|2(int)
+Current stack: 
+10(int) 7(int) 2(int) 
+Executing instruction: 7|MUL();
+Stack Top: 2|14(int)
+Current stack: 
+10(int) 14(int) 
+Executing instruction: 8|ADD();
+Stack Top: 1|24(int)
+Current stack: 
+24(int) 
+Executing instruction: 9|PRINT();
+Stack Top: 1|24(int)
+Current stack: 
+24(int) 
+Executing instruction: 10|PUSH(5.0);
+Stack Top: 2|5(float)
+Current stack: 
+24(int) 5(float) 
+Executing instruction: 11|PUSH(2.5);
+Stack Top: 3|2.5(float)
+Current stack: 
+24(int) 5(float) 2.5(float) 
+Executing instruction: 12|MUL();
+Stack Top: 2|12.5(float)
+Current stack: 
+24(int) 12.5(float) 
+Executing instruction: 13|PUSH(3.0);
+Stack Top: 3|3(float)
+Current stack: 
+24(int) 12.5(float) 3(float) 
+Executing instruction: 14|ADD();
+Stack Top: 2|15.5(float)
+Current stack: 
+24(int) 15.5(float) 
+Executing instruction: 15|PUSH(5.0);
+Stack Top: 3|5(float)
+Current stack: 
+24(int) 15.5(float) 5(float) 
+Executing instruction: 16|DIV();
+Stack Top: 2|3.1(float)
+Current stack: 
+24(int) 3.1(float) 
+Executing instruction: 17|PRINT();Stack Top: 2|3.1(float)
