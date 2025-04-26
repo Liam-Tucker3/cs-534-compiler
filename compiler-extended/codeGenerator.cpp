@@ -56,7 +56,7 @@ std::string CodeGenerator::getOpString(OpCode op) const {
 void CodeGenerator::addVariableToFrame(const std::string& varName, bool isArray, int arraySize, bool isFloat) {
     if (frameVariables.find(varName) == frameVariables.end()) {
         VariableInfo info;
-        info.stackOffset = localVarCount++;
+        info.stackOffset = localVarCount;
         info.isArray = isArray;
         info.arraySize = arraySize;
         info.isFloat = isFloat;
@@ -64,19 +64,36 @@ void CodeGenerator::addVariableToFrame(const std::string& varName, bool isArray,
         // Store the parameter name and its information
         frameVariables[varName] = info;
         
-        // For debugging
-        // std::cout << "Added variable '" << varName << "' to frame with offset " << info.stackOffset << std::endl;
+        // Debug output - add this temporarily for debugging
+        // std::cout << "Added variable '" << varName << "' to frame. isArray: " 
+        //           << (isArray ? "true" : "false") << ", arraySize: " << arraySize 
+        //           << ", offset: " << info.stackOffset << std::endl;
+        
+        // Increment localVarCount based on variable size
+        if (isArray) {
+            localVarCount += arraySize; // Each array element gets its own offset
+        } else {
+            localVarCount += 1; // Scalar variable only needs one slot
+        }
     }
 }
 
 // Helper function to get a variable's offset in the current frame
 int CodeGenerator::getVariableOffset(const std::string& varName) {
-    if (frameVariables.find(varName) != frameVariables.end()) {
-        return frameVariables[varName].stackOffset;
+    auto it = frameVariables.find(varName);
+    if (it != frameVariables.end()) {
+        return it->second.stackOffset;
     }
     
     std::cerr << "Warning: Variable '" << varName << "' not found in frame" << std::endl;
-    return -1; // Error value
+    // Print all variables in the frame for debugging
+    std::cerr << "Current frame variables:" << std::endl;
+    for (const auto& pair : frameVariables) {
+        std::cerr << "  " << pair.first << " (isArray: " << (pair.second.isArray ? "true" : "false") 
+                  << ", offset: " << pair.second.stackOffset << ")" << std::endl;
+    }
+    
+    return -1;
 }
 
 // Helper function to check if a variable is a float type
@@ -128,7 +145,6 @@ void CodeGenerator::generateProgram(ASTNode* node) {
 // Rule 2: declaration-list := declaration-list type-specifier ID declaration | type-specifier ID declaration
 void CodeGenerator::generateDeclarationList(ASTNode* node) {
     if (!node) return;
-    // node->printNode(); // Debugging line
     
     // Process each declaration
     for (ASTNode* child : *node->children) {
@@ -139,7 +155,6 @@ void CodeGenerator::generateDeclarationList(ASTNode* node) {
 // Rule 3: declaration := var-declaration | fun-declaration
 void CodeGenerator::generateDeclaration(ASTNode* node) {
     if (!node || node->children->empty()) return;
-    // node->printNode(); // Debugging line
     
     ASTNode* declChild = node->children->at(0); // Should only have one child
     
@@ -159,33 +174,59 @@ void CodeGenerator::generateDeclaration(ASTNode* node) {
 // Rule 4: var-declaration := ; | [ NUM ] ;
 void CodeGenerator::generateVarDeclaration(ASTNode* node) {
     if (!node) return;
-    // node->printNode(); // Debugging line
     
-    // Get variable name and whether it's an array
+    // Get variable name from token
     std::string varName = node->tokenValue;
-    bool isArray = false;
-    int arraySize = -1;
     
-    // Check if this is an array declaration and get type info from symbol table
+    // Check if this is an array declaration
     Symbol* varSymbol = symbolTable.findSymbol(varName);
-    bool isFloat = node->isFloat;  // Default to int
-    
-    if (varSymbol) {
-        // Check if it's an array
-        if (varSymbol->arrSize > 0) {
-            isArray = true;
-            arraySize = varSymbol->arrSize;
-        }
+    if (!varSymbol) {
+        std::cerr << "Error: Symbol '" << varName << "' not found in symbol table" << std::endl;
         
-        // Get the correct type from symbol table
-        isFloat = (varSymbol->dataType == "float");
+        // Print out the contents of the symbol table to standard out for debugging
+        std::cerr << "Symbol table contents:" << std::endl;
+        symbolTable.print();
+        
+        return;
     }
     
-    // Add variable to the frame tracking with correct type info
+    bool isArray = (varSymbol->arrSize > 0);
+    int arraySize = varSymbol->arrSize;
+    bool isFloat = (varSymbol->dataType == "float");
+    
+    // Debug output - after symbol lookup
+    // std::cout << "Found symbol '" << varName << "', isArray: " 
+    //           << (isArray ? "true" : "false") << ", arraySize: " << arraySize 
+    //           << ", isFloat: " << (isFloat ? "true" : "false") << std::endl;
+    
+    // Add variable to the frame tracking
     addVariableToFrame(varName, isArray, arraySize, isFloat);
     
-    // Initialize variable with 0 (or 0.0 for float)
-    instructions.push_back(Instruction(OpCode::PUSH, "0"));
+    // Initialize variable(s)
+    if (isArray && arraySize > 0) {
+        // For arrays, initialize each element with 0
+        for (int i = 0; i < arraySize; i++) {
+            instructions.push_back(Instruction(OpCode::PUSH, "0"));
+            if (isFloat) {
+                instructions.push_back(Instruction(OpCode::FLOAT));
+            }
+            
+            // Calculate the array element offset
+            int elementOffset = getVariableOffset(varName) + i;
+            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(elementOffset)));
+            instructions.push_back(Instruction(OpCode::STORE));
+        }
+    } else {
+        // For scalar variables, initialize with 0
+        instructions.push_back(Instruction(OpCode::PUSH, "0"));
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        }
+        
+        // Store the initialization value
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(getVariableOffset(varName))));
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
 }
 
 // Rule 5: type-specifier := int | void | float
@@ -200,6 +241,8 @@ void CodeGenerator::generateFunDeclaration(ASTNode* node) {
     
     // Clear any existing frame variables when entering a new function
     clearFrameVariables();
+
+    symbolTable.enterScope(); // Enter a new scope for the function
     
     std::string funcName = node->tokenValue;
     
@@ -218,6 +261,8 @@ void CodeGenerator::generateFunDeclaration(ASTNode* node) {
     if (funcName != "main" && instructions.back().op != OpCode::RET && instructions.back().op != OpCode::RETV) {
         instructions.push_back(Instruction(OpCode::RET));
     }
+
+    symbolTable.exitScope(); // Exit the function scope
     
     // Clear frame variables after function is done
     clearFrameVariables();
@@ -254,18 +299,13 @@ void CodeGenerator::generateParam(ASTNode* node) {
     bool isArray = false;
     for (ASTNode* child : *node->children) {
         if (child->type == ASTNodeType::TYPE_SPECIFIER) {
-            isArray = node->children->size() > 1; // Simplified check for this example
+            isArray = node->children->size() > 1; // Simple check
         }
     }
 
     // Check if this is a float parameter
-    bool isFloat = node->isFloat; // Check if the parameter is a float type
+    bool isFloat = node->isFloat;
     bool isFLoat = isVariableFloat(paramName);
-    // Symbol* paramSymbol = symbolTable.findSymbol(paramName);
-    // if (paramSymbol) {
-    //     std::cout << "PARAM SYMBOL: " << paramSymbol->name << std::endl;
-    //     isFloat = (paramSymbol->dataType == "float");
-    // }
     
     // Add parameter to frame tracking
     addVariableToFrame(paramName, isArray, isArray ? 0 : -1, isFloat);
@@ -366,8 +406,7 @@ void CodeGenerator::generateInputStmt(ASTNode* node) {
         instructions.push_back(Instruction(OpCode::PRINT, prompt)); 
     }
     
-    // Check if we're reading into a float variable
-    // For now, we'll assume we're always reading an int unless specified otherwise
+    // Check if reading into float variable
     Symbol* varSymbol = nullptr;
     if (node->children->size() > 1 && node->children->at(1)->type == ASTNodeType::VAR) {
         std::string varName = node->children->at(1)->tokenValue;
@@ -397,7 +436,7 @@ void CodeGenerator::generateOutputStmt(ASTNode* node) {
         
         // Print the result
         instructions.push_back(Instruction(OpCode::PRINT));
-        instructions.push_back(Instruction(OpCode::POP)); // Remove value just added to stack
+        // instructions.push_back(Instruction(OpCode::POP)); // Remove value just added to stack
     }
 }
 
@@ -486,15 +525,9 @@ void CodeGenerator::generateReturnStmt(ASTNode* node) {
     if (!node->children->empty()) {
         generateExpression(node->children->at(0));
         
-        // Check if function return type is different from expression type
-        Symbol* funcSymbol = symbolTable.findSymbol("current_function"); // Placeholder
-        if (funcSymbol && funcSymbol->dataType == "float") {
-            // Convert return value to float if needed
-            instructions.push_back(Instruction(OpCode::FLOAT));
-        } else if (funcSymbol && funcSymbol->dataType == "int") {
-            // Convert return value to int if needed
-            instructions.push_back(Instruction(OpCode::INT));
-        }
+        // MISSING: Handling type conversion if needed
+        // Will be handled if function returns to a variable
+        // Only leads to incorrect results in case of output(function());
         
         instructions.push_back(Instruction(OpCode::RETV));
     } else {
@@ -503,7 +536,7 @@ void CodeGenerator::generateReturnStmt(ASTNode* node) {
     }
 }
 
-// Rule 21: expression := var = simple-expression | simple-expression
+// Rule 21: expression := var = array-init-expression | var = simple-expression | simple-expression
 void CodeGenerator::generateExpression(ASTNode* node) {
     if (!node || node->children->empty()) return;
     
@@ -514,26 +547,46 @@ void CodeGenerator::generateExpression(ASTNode* node) {
         ASTNode* exprNode = node->children->at(1);
         
         std::string varName = varNode->tokenValue;
-        // bool isVarFloat = varNode->isFloat; // isVariableFloat(varName);
         bool isVarFloat = isVariableFloat(varName);
         
-        // Generate code for the right-hand side expression
-        generateSimpleExpression(exprNode);
-        
-        // Handle type conversion if needed
-        if (isVarFloat) {
-            // If variable is float but expression might be int, convert to float
-            instructions.push_back(Instruction(OpCode::FLOAT));
-        } else {
-            // If variable is int but expression might be float, convert to int
-            instructions.push_back(Instruction(OpCode::INT));
+        // Check if this is an array initialization
+        if (exprNode->type == ASTNodeType::ARRAY_INIT_EXPRESSION) {
+            // Generate array initialization code
+            generateArrayInitExpression(exprNode, varName);
         }
+        // Check if this is an array operation
+        else if (exprNode->type == ASTNodeType::ARRAY_OPERATION) {
+            // Generate array operation code (with assignment flag set to true)
+            generateArrayOperation(exprNode, varNode);
         
-        // Store the result in the variable
-        generateVar(varNode, true);  // true indicates store operation
+        }
+        else {
+            // Generate code for regular assignment
+            generateSimpleExpression(exprNode);
+            
+            // Handle type conversion if needed
+            if (isVarFloat) {
+                // If variable is float but expression might be int, convert to float
+                instructions.push_back(Instruction(OpCode::FLOAT));
+            } else {
+                // If variable is int but expression might be float, convert to int
+                instructions.push_back(Instruction(OpCode::INT));
+            }
+            
+            // Store the result in the variable
+            generateVar(varNode, true);  // true indicates store operation
+        }
     } else if (node->children->size() == 1) {
         // Simple expression
-        generateSimpleExpression(node->children->at(0));
+        ASTNode* childNode = node->children->at(0);
+        
+        // Check if this is an array operation not part of an assignment
+        if (childNode->type == ASTNodeType::ARRAY_OPERATION) {
+            std::cerr << "Warning: Array operation without assignment" << std::endl;
+            generateArrayOperation(childNode, nullptr); // No assignment, so pass nullptr
+        } else {
+            generateSimpleExpression(childNode);
+        }
     }
 }
 
@@ -542,39 +595,29 @@ void CodeGenerator::generateVar(ASTNode* node, bool isStore) {
     if (!node) return;
     
     std::string varName = node->tokenValue;
-    int varOffset = getVariableOffset(varName); // Determining where in stack frame the value goes
     
-    if (varOffset == -1) {
+    // Check if this variable exists in the frame
+    auto it = frameVariables.find(varName);
+    if (it == frameVariables.end()) {
         std::cerr << "Error: Variable '" << varName << "' not found in frame" << std::endl;
         return;
     }
     
-    if (node->children->empty()) {
-        // Simple variable (not array)
-        if (isStore) {
-            // Store operation - value is already on the stack
-            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
-            instructions.push_back(Instruction(OpCode::STORE));
-            // Leave a copy of the value on the stack for expressions
-            // instructions.push_back(Instruction(OpCode::DUP));
-        } else {
-            // Load operation - push the offset, then load
-            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
-            instructions.push_back(Instruction(OpCode::LOAD));
-        }
-    } else {
-        // Array variable with index
-        // First check if this variable exists and is an array
-        auto it = frameVariables.find(varName);
-        if (it == frameVariables.end() || !it->second.isArray) {
-            std::cerr << "Error: Variable '" << varName << "' is not a valid array" << std::endl;
+    int varOffset = it->second.stackOffset;
+    bool isArray = it->second.isArray;
+    
+    // Check if this is an array access
+    if (!node->children->empty() && node->children->at(0)->type == ASTNodeType::SIMPLE_EXPRESSION) {
+        // Check if this is actually an array
+        if (!isArray) {
+            std::cerr << "Error: Variable '" << varName << "' is not an array but is accessed as one" << std::endl;
             return;
         }
         
         // Generate code for the index expression
         generateSimpleExpression(node->children->at(0));
         
-        // If index expression is a float, convert to int
+        // Convert index to int if needed
         instructions.push_back(Instruction(OpCode::INT));
         
         // Add base offset of the array
@@ -582,12 +625,26 @@ void CodeGenerator::generateVar(ASTNode* node, bool isStore) {
         instructions.push_back(Instruction(OpCode::ADD));
         
         if (isStore) {
-            // For store, we need the index+offset and value on stack
+            // For store, we use the calculated offset
             instructions.push_back(Instruction(OpCode::STORE));
-            // Leave a copy of the value on the stack for expressions
-            instructions.push_back(Instruction(OpCode::DUP));
         } else {
-            // For load, we have [index+offset] on stack
+            // For load, we load from the calculated offset
+            instructions.push_back(Instruction(OpCode::LOAD));
+        }
+    } else {
+        // Simple variable access (not array)
+        if (isArray) {
+            // If this is an array but accessed without an index, use the base address
+            std::cerr << "Warning: Array variable '" << varName << "' accessed without index" << std::endl;
+        }
+        
+        if (isStore) {
+            // Store operation - value is already on stack
+            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
+            instructions.push_back(Instruction(OpCode::STORE));
+        } else {
+            // Load operation
+            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(varOffset)));
             instructions.push_back(Instruction(OpCode::LOAD));
         }
     }
@@ -755,17 +812,9 @@ void CodeGenerator::generateCall(ASTNode* node) {
         ASTNode* argListNode = argsNode->children->at(0);
         numArgs = argListNode->children->size();
         
-        // Push arguments in reverse order (right to left)
-        // for (int i = numArgs - 1; i >= 0; i--) {
+        // Push arguments in normal order (left to right)
         for (int i = 0; i < numArgs; i++) {
             generateExpression(argListNode->children->at(i));
-            
-            // Check if we need to convert argument type
-            Symbol* funcSymbol = symbolTable.findSymbol(funcName);
-            if (funcSymbol) {
-                // TODO: Need to add function parameter info to properly handle type conversion
-                // For now, we're assuming the stack machine handles type conversions
-            }
         }
     }
     
@@ -784,6 +833,220 @@ void CodeGenerator::generateArgs(ASTNode* node) {
 // Rule 32: arg-list := arg-list , expression | expression
 void CodeGenerator::generateArgList(ASTNode* node) {
     // Arguments handled in generateCall
+}
+
+// Rule 33: array-init-expression := { array-elements }
+void CodeGenerator::generateArrayInitExpression(ASTNode* node, const std::string& arrayName) {
+    if (!node || node->children->empty()) return;
+    
+    // Find array in frame variables
+    auto it = frameVariables.find(arrayName);
+    if (it == frameVariables.end() || !it->second.isArray) {
+        std::cerr << "Error: Cannot initialize non-array variable '" << arrayName << "'" << std::endl;
+        return;
+    }
+    
+    int baseOffset = it->second.stackOffset;
+    int arraySize = it->second.arraySize;
+    bool isFloat = it->second.isFloat;
+    
+    // Get array elements node
+    ASTNode* elementsNode = node->children->at(0);
+    if (!elementsNode || elementsNode->children->empty()) {
+        // Empty initialization - set all to 0
+        for (int i = 0; i < arraySize; i++) {
+            instructions.push_back(Instruction(OpCode::PUSH, "0"));
+            if (isFloat) {
+                instructions.push_back(Instruction(OpCode::FLOAT));
+            }
+            instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+            instructions.push_back(Instruction(OpCode::STORE));
+        }
+        return;
+    }
+    
+    // Initialize array elements from the provided values
+    size_t elemCount = elementsNode->children->size();
+    size_t initCount = std::min(static_cast<size_t>(arraySize), elemCount);
+    
+    // Initialize with provided values
+    for (size_t i = 0; i < initCount; i++) {
+        generateExpression(elementsNode->children->at(i));
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        } else {
+            instructions.push_back(Instruction(OpCode::INT));
+        }
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
+    
+    // Initialize remaining elements with 0
+    for (size_t i = initCount; i < static_cast<size_t>(arraySize); i++) {
+        instructions.push_back(Instruction(OpCode::PUSH, "0"));
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        }
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
+    
+    // Check if we have too many initializers
+    if (elemCount > static_cast<size_t>(arraySize)) {
+        std::cerr << "Warning: More initializers than array size for '" << arrayName << "'" << std::endl;
+    }
+}
+
+// Rule 34: array-elements := array-elements , expression | expression
+void CodeGenerator::generateArrayElements(ASTNode* node, const std::string& arrayName, int baseOffset) {
+    if (!node) return;
+    
+    auto it = frameVariables.find(arrayName);
+    if (it == frameVariables.end()) return;
+    
+    int arraySize = it->second.arraySize;
+    bool isFloat = it->second.isFloat;
+    
+    // Check if we have too many elements
+    if (node->children->size() > static_cast<size_t>(arraySize)) {
+        std::cerr << "Warning: More initializers than array size for '" << arrayName << "'" << std::endl;
+    }
+    
+    // Initialize each array element
+    for (size_t i = 0; i < node->children->size() && i < static_cast<size_t>(arraySize); i++) {
+        // Generate the expression value
+        generateExpression(node->children->at(i));
+        
+        // Convert type if needed
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        } else {
+            instructions.push_back(Instruction(OpCode::INT));
+        }
+        
+        // Calculate the array index offset
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+        
+        // Store the value in the array
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
+    
+    // Initialize remaining elements with 0 if needed
+    for (size_t i = node->children->size(); i < static_cast<size_t>(arraySize); i++) {
+        instructions.push_back(Instruction(OpCode::PUSH, "0"));
+        
+        // Convert to float if needed
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        }
+        
+        // Calculate the array index offset
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+        
+        // Store the value in the array
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
+}
+
+// Rule 35: array-operation := var array-op expression
+void CodeGenerator::generateArrayOperation(ASTNode* node, ASTNode* varNode) {
+    if (!node || node->children->size() < 3) {
+        std::cerr << "Error: Invalid array operation structure" << std::endl;
+        return;
+    }
+
+    // Get the nodes for the operation components
+    ASTNode* rightArrayNode = node->children->at(0);  // Left array
+    ASTNode* opNode = node->children->at(1);         // Operator
+    ASTNode* rightExprNode = node->children->at(2);  // Right expression
+   
+    // Get info about the  array
+    std::string arrayName = rightArrayNode->tokenValue;
+    auto it = frameVariables.find(arrayName);
+    if (it == frameVariables.end() || !it->second.isArray) {
+        std::cerr << "Error: Cannot perform array operation on non-array variable '" << arrayName << "'" << std::endl;
+        return;
+    }
+
+    int baseOffset = it->second.stackOffset;
+    int arraySize = it->second.arraySize;
+    bool isFloat = it->second.isFloat;
+
+    // Get info about right array
+    std::string leftArrayName = varNode->tokenValue;
+    auto it2 = frameVariables.find(leftArrayName);
+    if (it2 == frameVariables.end() || !it2->second.isArray) {
+        std::cerr << "Error: Cannot perform array operation on non-array variable '" << leftArrayName << "'" << std::endl;
+        return;
+    }
+    
+    int leftBaseOffset = it2->second.stackOffset;
+    int leftArraySize = it2->second.arraySize;
+    bool leftIsFloat = it2->second.isFloat;
+    
+    // Generate code for the scalar expression (right side)
+    generateSimpleExpression(rightExprNode);
+    
+    // Store the scalar value in a temporary location for reuse
+    int tempLocation = localVarCount++;  // Allocate a temporary location
+    instructions.push_back(Instruction(OpCode::PUSH, std::to_string(tempLocation)));
+    instructions.push_back(Instruction(OpCode::STORE));
+    
+    // Get operator type
+    TokenType opType = opNode->tokenType;
+    
+    // Process each array element
+    for (int i = 0; i < arraySize; i++) {
+        // Load the current array element
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(baseOffset + i)));
+        instructions.push_back(Instruction(OpCode::LOAD));
+        
+        // Load the scalar value
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(tempLocation)));
+        instructions.push_back(Instruction(OpCode::LOAD));
+        
+        // Apply the operation
+        switch (opType) {
+            case TokenType::PLUS:
+                instructions.push_back(Instruction(OpCode::ADD));
+                break;
+            case TokenType::MINUS:
+                instructions.push_back(Instruction(OpCode::SUB));
+                break;
+            case TokenType::TIMES:
+                instructions.push_back(Instruction(OpCode::MUL));
+                break;
+            case TokenType::DIVIDE:
+                instructions.push_back(Instruction(OpCode::DIV));
+                break;
+            case TokenType::MOD:
+                instructions.push_back(Instruction(OpCode::REM));
+                break;
+            default:
+                std::cerr << "Error: Unknown array operation" << std::endl;
+                break;
+        }
+        
+        // Convert to the appropriate type if needed
+        if (isFloat) {
+            instructions.push_back(Instruction(OpCode::FLOAT));
+        } else {
+            instructions.push_back(Instruction(OpCode::INT));
+        }
+        
+        // Store the result back in the array
+        instructions.push_back(Instruction(OpCode::PUSH, std::to_string(leftBaseOffset + i)));
+        instructions.push_back(Instruction(OpCode::STORE));
+    }
+    
+    // Free the temporary location by decrementing localVarCount
+    localVarCount--;
+}
+
+// Rule 36: array-op := + | - | * | /
+// Empty function
+void CodeGenerator::generateArrayOp(ASTNode* node) {
+    // Handled in rule 35
 }
 
 // Return the generated instructions

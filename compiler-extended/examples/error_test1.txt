@@ -1,0 +1,20 @@
+int gcd(int u, int v){
+    if (v == 0) return u;
+    else return gcd(v, u-u/v*v);
+}
+
+void main(void){
+    // Declare variables
+    int a[3];
+    int b[2];
+    int x;
+    int y;
+    int z;
+
+    // a = {1,2}; // Test 1: too short
+    // a = {1,2,3,4}; // Test 2: too long
+    b = {32, 12};
+    
+    output("Done with testing.");
+
+}

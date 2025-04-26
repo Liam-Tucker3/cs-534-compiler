@@ -21,7 +21,7 @@ enum class OpCode {
     BRT, BRZ, JUMP, // Branching
     PRINT, READ, READF, // IO operations - added READF for float input
     LABEL, // Labels
-    INT, FLOAT, // Type conversion operations - new!
+    INT, FLOAT, // Type conversion operations
     END // End program
 };
 
@@ -50,7 +50,7 @@ private:
     std::stack<std::string> continueLabels;  // For continue statements
     
     // Map to track variable locations in the stack frame
-    std::unordered_map<std::string, VariableInfo> frameVariables;
+    std::unordered_map<std::string, VariableInfo> frameVariables; // Could (Should?) be part of symbol table
     int localVarCount;  // Counter for local variables in the current function frame
 
     // Helper methods
@@ -98,12 +98,16 @@ public:
     void generateVar(ASTNode* node, bool isStore = false);   // Modified for stack offsets
     void generateSimpleExpression(ASTNode* node);
     void generateRelOp(ASTNode* node);                          // Empty function
-    void generateAdditiveExpression(ASTNode* node);
+    void generateAdditiveExpression(ASTNode* node);     // 25 and 26
     void generateTerm(ASTNode* node);
     void generateFactor(ASTNode* node);
     void generateCall(ASTNode* node);
-    void generateArgs(ASTNode* node);                          // Empty function
+    void generateArgs(ASTNode* node);                   // 31   // Empty function
     void generateArgList(ASTNode* node);                       // Empty function
+    void generateArrayInitExpression(ASTNode* node, const std::string& arrayName);
+    void generateArrayElements(ASTNode* node, const std::string& arrayName, int baseOffset);
+    void generateArrayOperation(ASTNode* node, ASTNode* varNode);
+    void generateArrayOp(ASTNode* node);                //36     Empty function
     
     // Clear variables at the end of a function
     void clearFrameVariables();

@@ -30,9 +30,9 @@ std::string getNodeTypeName(ASTNodeType type) {
         {ASTNodeType::SELECTION_STMT, "SELECTION_STMT"},
         {ASTNodeType::ITERATION_STMT, "ITERATION_STMT"},
         {ASTNodeType::RETURN_STMT, "RETURN_STMT"},
-        {ASTNodeType::IO_STMT, "IO_STMT"},                 // New
-        {ASTNodeType::INPUT_STMT, "INPUT_STMT"},           // New
-        {ASTNodeType::OUTPUT_STMT, "OUTPUT_STMT"},         // New
+        {ASTNodeType::IO_STMT, "IO_STMT"},                 
+        {ASTNodeType::INPUT_STMT, "INPUT_STMT"},           
+        {ASTNodeType::OUTPUT_STMT, "OUTPUT_STMT"},         
         {ASTNodeType::EXPRESSION, "EXPRESSION"},
         {ASTNodeType::VAR, "VAR"},
         {ASTNodeType::SIMPLE_EXPRESSION, "SIMPLE_EXPRESSION"},
@@ -44,7 +44,11 @@ std::string getNodeTypeName(ASTNodeType type) {
         {ASTNodeType::FACTOR, "FACTOR"},
         {ASTNodeType::CALL, "CALL"},
         {ASTNodeType::ARGS, "ARGS"},
-        {ASTNodeType::ARG_LIST, "ARG_LIST"}
+        {ASTNodeType::ARG_LIST, "ARG_LIST"},
+        {ASTNodeType::ARRAY_INIT_EXPRESSION, "ARRAY_INIT_EXPRESSION"},
+        {ASTNodeType::ARRAY_ELEMENTS, "ARRAY_ELEMENTS"},
+        {ASTNodeType::ARRAY_OPERATION, "ARRAY_OPERATION"},
+        {ASTNodeType::ARRAY_OP, "ARRAY_OP"}
     };
 
     auto it = nodeNames.find(type);
@@ -193,17 +197,8 @@ void SymbolTable::enterScope() {
     currentScope++;
 }
 
-// Remove all symbols from the current scope, decrements scope counter
+// Scope decrementor
 void SymbolTable::exitScope() {
-    // Remove all symbols from the current scope
-    auto it = symbols.begin();
-    while (it != symbols.end()) {
-        if (it->scopeLevel == currentScope) {
-            it = symbols.erase(it);
-        } else {
-            ++it;
-        }
-    }
     currentScope--;
 }
 
@@ -212,21 +207,30 @@ void SymbolTable::exitScope() {
 bool SymbolTable::addSymbol(const Symbol& symbol) {
     // Check if symbol already exists in the current scope
     for (const auto& sym : symbols) {
-        if (sym.name == symbol.name && sym.scopeLevel == currentScope) {
+        if (sym.name == symbol.name && sym.scopeLevel == symbol.scopeLevel) {
+            std::cerr << "Warning: Symbol '" << symbol.name << "' already exists in current scope" << std::endl;
             return false;  // Symbol already exists
         }
     }
     
     symbols.push_back(symbol);
+    
+    // Debug output
+    // std::cout << "Symbol added to table: name=" << symbol.name 
+    //           << ", type=" << (symbol.type == SymbolType::SYMBOL_VARIABLE ? "VAR" : 
+    //                           (symbol.type == SymbolType::SYMBOL_FUNCTION ? "FUNC" : "PARAM"))
+    //           << ", dataType=" << symbol.dataType 
+    //           << ", scope=" << symbol.scopeLevel 
+    //           << ", arrSize=" << symbol.arrSize << std::endl;
+    
     return true;
 }
 
 // Finds symbol in symbol table
 // Returns pointer to symbol if found, nullptr if not found
 Symbol* SymbolTable::findSymbol(const std::string& name) {
-   
     // Look for symbol in current and outer scopes
-    for (int s = currentScope; s >= 0; s--) {
+    for (int s = currentScope+1; s >= 0; s--) {
         for (auto& sym : symbols) {
             if (sym.name == name && sym.scopeLevel <= s) {
                 return &sym;
@@ -235,10 +239,15 @@ Symbol* SymbolTable::findSymbol(const std::string& name) {
     }
     
     // Not found - print the current symbol table for debugging
-    // std::cout << "Symbol not found. Current symbol table:" << std::endl;
-    // for (const auto& sym : symbols) {
-    //     std::cout << "Name: '" << sym.name << "', Scope: " << sym.scopeLevel << std::endl;
-    // }
+    std::cerr << "Symbol '" << name << "' not found. Current symbol table:" << std::endl;
+    for (const auto& sym : symbols) {
+        std::cerr << "Name: '" << sym.name << "', Type: " 
+                  << (sym.type == SymbolType::SYMBOL_VARIABLE ? "VAR" : 
+                     (sym.type == SymbolType::SYMBOL_FUNCTION ? "FUNC" : "PARAM"))
+                  << ", DataType: '" << sym.dataType 
+                  << "', Scope: " << sym.scopeLevel 
+                  << ", ArraySize: " << sym.arrSize << std::endl;
+    }
     
     return nullptr;  // Not found
 }
@@ -262,8 +271,6 @@ void SymbolTable::print() const {
         }
         
         std::cout << sym.dataType << "\t" << sym.scopeLevel << "\t" << sym.arrSize << "\n";
-        
-        std::cout << std::endl;
     }
 }
 
@@ -402,7 +409,13 @@ ASTNode* Parser::parseVarDeclaration(ASTNode* typeSpecNode, Token idToken) {
     
     // Add variable to symbol table
     std::string dataType = typeSpecNode->getTokenString();
-    st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_VARIABLE, dataType, st.getCurrentScope(), arraySize));
+              
+    bool added = st.addSymbol(Symbol(idToken.getStrVal(), SymbolType::SYMBOL_VARIABLE, dataType, st.getCurrentScope(), arraySize));
+    
+    if (!added) {
+        std::cerr << "Warning: Failed to add symbol '" << idToken.getStrVal() << "' to symbol table. Might be a duplicate." << std::endl;
+    }
+    
     node->isFloat = (dataType == "float"); // Set isFloat flag based on data type
     
     return node;
@@ -459,9 +472,8 @@ ASTNode* Parser::parseFunDeclaration(ASTNode* typeSpecNode, Token idToken) {
         syntaxError();
     }
     
-    // Process compound statement - NOTE: compound-stmt will enter and exit its own scope,
-    // but we want parameters to be visible inside the function body, so we DON'T exit the
-    // function scope until after the compound statement is parsed
+    // Process compound statement
+    // Parameters should be visible in function body, so exit scope after
     node->addChild(parseCompoundStmt());
     
     // Exit the function scope
@@ -502,7 +514,7 @@ ASTNode* Parser::parseParams() {
     return node;
 }
 
-// Updated Rule 8: param-list := param-list , type-specifier ID param | type-specifier ID param 
+// Rule 8: param-list := param-list , type-specifier ID param | type-specifier ID param 
 ASTNode* Parser::parseParamList() {
     ASTNode* node = new ASTNode(ASTNodeType::PARAM_LIST);
     
@@ -571,7 +583,7 @@ ASTNode* Parser::parseParamList() {
     return node;
 }
 
-// Updated Rule 10: compound-stmt := { local-declarations statement-list }
+// Rule 10: compound-stmt := { local-declarations statement-list }
 ASTNode* Parser::parseCompoundStmt() {
     ASTNode* node = new ASTNode(ASTNodeType::COMPOUNT_STMT);
     
@@ -885,11 +897,11 @@ ASTNode* Parser::parseReturnStmt() {
     return node;
 }
 
-// Rule 21: expression := var = simple-expression | simple-expression
+// Rule 21: expression := var = array-init-expression | var = simple-expression | simple-expression | var = array-operation
 ASTNode* Parser::parseExpression() {
     ASTNode* node = new ASTNode(ASTNodeType::EXPRESSION);
     
-    // Look ahead to see if this is a variable assignment
+    // Check if this is a variable assignment
     if (currentToken().token == TokenType::ID) {
         // Save current token index
         int savedIndex = currentTokenIndex;
@@ -902,15 +914,88 @@ ASTNode* Parser::parseExpression() {
             // This is an assignment expression
             node->addChild(varNode);
             
-            // Parse the right side of the assignment
-            node->addChild(parseSimpleExpression());
+            // Check if this might be an array initialization
+            if (currentToken().token == TokenType::OCURLY) {
+
+                // ERROR HANDLING: Check that the variable is declared and is an array
+                std::string varName = varNode->tokenValue;
+                Symbol* varSymbol = st.findSymbol(varName);
+                
+                if (!varSymbol) {
+                    std::cerr << "SEMANTIC ERROR: Undeclared variable '" << varName << "' in array initialization" << std::endl;
+                    syntaxError();
+                }
+                
+                // Verify this is an array
+                if (varSymbol->arrSize == -1) {
+                    std::cerr << "SEMANTIC ERROR: Cannot initialize non-array variable '" << varName << "' with array initializer" << std::endl;
+                    syntaxError();
+                }
+
+                // ERROR HANDLING: Check that array is being initialized with the correct size
+                ASTNode* arrayInitNode = parseArrayInitExpression();
+                
+                // Get the number of elements in the initialization
+                ASTNode* elementsNode = arrayInitNode->children->at(0);
+                int initSize = elementsNode->children->size();
+                
+                // Check if the initialization size matches the array declaration
+                if (initSize != varSymbol->arrSize) {
+                    std::cerr << "SEMANTIC ERROR: Array '" << varName << "' of size " << varSymbol->arrSize 
+                              << " initialized with " << initSize << " elements" << std::endl;
+                    syntaxError();
+                }
+
+                node->addChild(arrayInitNode);
+            } 
+            // Check if this might be an array operation
+            else if (currentToken().token == TokenType::ID && 
+                     st.findSymbol(currentToken().getStrVal()) && 
+                     st.findSymbol(currentToken().getStrVal())->arrSize > 0) {
+                // This appears to be an array operation where the right side starts with an array
+                
+                // Create array operation node
+                ASTNode* arrayOpNode = new ASTNode(ASTNodeType::ARRAY_OPERATION);
+                
+                // Parse the right-hand array variable
+                ASTNode* rightVar = parseVar();
+                arrayOpNode->addChild(rightVar);
+                
+                // Check for operation
+                if (currentToken().token == TokenType::PLUS || 
+                    currentToken().token == TokenType::MINUS || 
+                    currentToken().token == TokenType::TIMES || 
+                    currentToken().token == TokenType::DIVIDE ||
+                    currentToken().token == TokenType::MOD) {
+                    
+                    // Parse array operator
+                    Token opToken = currentToken();
+                    match(currentToken().token); // Consume the operator token
+                    
+                    ASTNode* opNode = new ASTNode(ASTNodeType::ARRAY_OP, &opToken);
+                    arrayOpNode->addChild(opNode);
+                    
+                    // Parse the expression after the operator
+                    ASTNode* exprNode = parseSimpleExpression();
+                    arrayOpNode->addChild(exprNode);
+                    
+                    node->addChild(arrayOpNode);
+                } else {
+                    // Just a simple variable assignment, no operation
+                    node->addChild(rightVar);
+                }
+            }
+            else {
+                // Regular assignment
+                node->addChild(parseSimpleExpression());
+            }
         } else {
-            // This is a simple expression, so reset and parse as simple-expression
+            // Reset and handle as simple expression
             currentTokenIndex = savedIndex;
             node->addChild(parseSimpleExpression());
         }
     } else {
-        // This is a simple expression
+        // Simple expression
         node->addChild(parseSimpleExpression());
     }
     
@@ -945,19 +1030,35 @@ ASTNode* Parser::parseVar() {
             syntaxError();
         }
         
-        // Parse the index simple-expression
-        node->addChild(parseSimpleExpression());
+        // Parse the simple-expression
+        ASTNode* indexExpr = parseSimpleExpression();
+
+        // ERROR HANDLING: Array OOB Error if index is a constant
+        if (indexExpr->children->size() == 1 && 
+            indexExpr->children->at(0)->children->size() == 1 &&
+            indexExpr->children->at(0)->children->at(0)->children->size() == 1 &&
+            indexExpr->children->at(0)->children->at(0)->children->at(0)->tokenType == NUM) {
+                
+            // Get the constant index value
+            int indexValue = indexExpr->children->at(0)->children->at(0)->children->at(0)->tokenIntValue;
+                
+            // Check if the index is out of bounds
+            if (indexValue < 0 || indexValue >= varSymbol->arrSize) {
+                std::cerr << "SEMANTIC ERROR: Array index " << indexValue << " out of bounds for array '" 
+                          << idToken.getStrVal() << "' of size " << varSymbol->arrSize << std::endl;
+                syntaxError();
+            }
+        }
+        
+        // Add the index expression as a child of the var node
+        node->addChild(indexExpr);
         
         // Match closing bracket
         if (!match(TokenType::CBRACKET)) {
             std::cerr << "SYNTAX ERROR: Expected ] after array index expression in Rule 22" << std::endl;
             syntaxError();
         }
-    } else if (varSymbol->arrSize != -1) {
-        // If it's an array but not accessed with [], it might be a semantic error
-        // For this compiler, we'll allow it but note it might be an issue
-    }
-    
+    }   
     return node;
 }
 
@@ -1143,7 +1244,6 @@ ASTNode* Parser::parseFactor() {
         }
         
         case TokenType::NUM: {
-            // NUM
             Token numToken = currentToken();
             match(TokenType::NUM);
             
@@ -1203,9 +1303,10 @@ ASTNode* Parser::parseCall() {
         std::cerr << "SYNTAX ERROR: Expected ( after function identifier in Rule 30" << std::endl;
         syntaxError();
     }
-    
+
     // Parse arguments
-    node->addChild(parseArgs());
+    ASTNode* argsNode = parseArgs();
+    node->addChild(argsNode);
     
     // Match closing parenthesis
     if (!match(TokenType::CPARENTHESES)) {
@@ -1230,7 +1331,7 @@ ASTNode* Parser::parseArgs() {
     return node;
 }
 
-// Rule 31: arg-list := arg-list , expression | expression
+// Rule 32: arg-list := arg-list , expression | expression
 ASTNode* Parser::parseArgList() {
     ASTNode* node = new ASTNode(ASTNodeType::ARG_LIST);
     
@@ -1240,6 +1341,93 @@ ASTNode* Parser::parseArgList() {
     // Process additional arguments (comma-separated)
     while (match(TokenType::COMMA)) {
         node->addChild(parseExpression());
+    }
+    
+    return node;
+}
+
+// Rule 33: array-init-expression := { array-elements }
+ASTNode* Parser::parseArrayInitExpression() {
+    ASTNode* node = new ASTNode(ASTNodeType::ARRAY_INIT_EXPRESSION);
+    
+    // Check for opening brace
+    if (!match(TokenType::OCURLY)) {
+        std::cerr << "SYNTAX ERROR: Expected { at start of array initialization in Rule 33" << std::endl;
+        syntaxError();
+    }
+    
+    // Parse array elements
+    node->addChild(parseArrayElements());
+    
+    // Check for closing brace
+    if (!match(TokenType::CCURLY)) {
+        std::cerr << "SYNTAX ERROR: Expected } at end of array initialization in Rule 33" << std::endl;
+        syntaxError();
+    }
+    
+    return node;
+}
+
+// Rule 34: array-elements := array-elements , expression | expression | ε
+ASTNode* Parser::parseArrayElements() {
+    ASTNode* node = new ASTNode(ASTNodeType::ARRAY_ELEMENTS);
+    
+    // Check if there are any elements (empty array case)
+    if (currentToken().token == TokenType::CCURLY) {
+        return node; // Empty array elements
+    }
+    
+    // Parse the first element
+    node->addChild(parseExpression());
+    
+    // Process additional elements (comma-separated)
+    while (match(TokenType::COMMA)) {
+        node->addChild(parseExpression());
+    }
+    
+    return node;
+}
+
+// Rule 35: array-operation := var array-op expression
+ASTNode* Parser::parseArrayOperation() {
+
+    ASTNode* node = new ASTNode(ASTNodeType::ARRAY_OPERATION);
+    
+    // Parse left array
+    ASTNode* leftNode = parseVar();
+    node->addChild(leftNode);
+    
+    // Parse operator
+    ASTNode* opNode = parseArrayOp();
+    node->addChild(opNode);
+    
+    // Parse expression on right side
+    ASTNode* exprNode = parseSimpleExpression();
+    node->addChild(exprNode);
+    
+    return node;
+}
+
+// Rule 36: array-op := + | - | * | /
+ASTNode* Parser::parseArrayOp() {
+    Token opToken = currentToken();
+    ASTNode* node = new ASTNode(ASTNodeType::ARRAY_OP, &opToken);
+    
+    if (match(TokenType::PLUS)) {
+        node->tokenType = TokenType::PLUS;
+        node->tokenValue = "+";
+    } else if (match(TokenType::MINUS)) {
+        node->tokenType = TokenType::MINUS;
+        node->tokenValue = "-";
+    } else if (match(TokenType::TIMES)) {
+        node->tokenType = TokenType::TIMES;
+        node->tokenValue = "*";
+    } else if (match(TokenType::DIVIDE)) {
+        node->tokenType = TokenType::DIVIDE;
+        node->tokenValue = "/";
+    } else {
+        std::cerr << "SYNTAX ERROR: Expected array operator (+, -, *, /) in Rule 36" << std::endl;
+        syntaxError();
     }
     
     return node;

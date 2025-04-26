@@ -1,0 +1,7 @@
+void main(void){
+    int x[2];
+    x[0] = input("Enter a number:");
+    x[1] = input("Enter a second number:");
+    output(x[0]);
+    output(x[1]);
+}

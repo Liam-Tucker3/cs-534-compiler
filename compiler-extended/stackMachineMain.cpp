@@ -14,16 +14,5 @@ int main(int argc, char* argv[]) {
     stackMachine.run();
     std::cout << "Program execution completed successfully." << std::endl;
     
-    /*
-    try {
-        Operation stackMachine(filename);
-        stackMachine.run();
-        std::cout << "Program execution completed successfully." << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error executing program: " << e.what() << std::endl;
-        return 1;
-    }
-        */
-    
     return 0;
 }

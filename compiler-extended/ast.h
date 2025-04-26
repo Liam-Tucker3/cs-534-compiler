@@ -46,7 +46,11 @@ enum class ASTNodeType {
     FACTOR, // RULE 29
     CALL, // RULE 30
     ARGS, // RULE 31
-    ARG_LIST // RULE 32
+    ARG_LIST, // RULE 32
+    ARRAY_INIT_EXPRESSION, // RULE 33
+    ARRAY_ELEMENTS, // RULE 34
+    ARRAY_OPERATION, // Rule 35
+    ARRAY_OP,        // Rule 36
 };
 
 // Forward declarations
@@ -108,10 +112,11 @@ class Symbol {
 
 class SymbolTable {
 private:
-    std::vector<Symbol> symbols;
     int currentScope;
 
 public:
+    std::vector<Symbol> symbols; // Accessed for error checking
+
     SymbolTable();
     
     /* Enter new scope*/
@@ -195,6 +200,10 @@ public:
     ASTNode* parseCall();
     ASTNode* parseArgs();
     ASTNode* parseArgList();
+    ASTNode* parseArrayInitExpression();
+    ASTNode* parseArrayElements();
+    ASTNode* parseArrayOperation();
+    ASTNode* parseArrayOp();
 
     void printNode(ASTNode* node, int indent, std::ofstream& file);
     void printToFile(const std::string& filename);

@@ -7,6 +7,7 @@ void main(void){
     int x;
     int y;
     int z;
+    int a[2];
     output("Euclid's GCD");
     x = input("Enter a number:");
     y = input("Enter a second number:");

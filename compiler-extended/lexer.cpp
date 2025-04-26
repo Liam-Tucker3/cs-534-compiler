@@ -16,7 +16,6 @@
 // LL parser; no backtracking
 Token identifyToken(const std::string &input, int index) {
     char ch = input[index];
-    // std::cout << "index: " << index << " | ch: " << ch << std::endl;
 
     // Punctuation
     if (ch == ',') return Token(COMMA, index); 
@@ -222,7 +221,7 @@ void parseInput(const std::string &input, std::vector<Token> &tokens, std::vecto
     // Iterating through characters
     while (i < input.length()) {
         char ch = input[i];
-        if (true) { // TODO: refactor
+        if (true) {
             // Creating token
             Token t = identifyToken(input, i);
 
@@ -234,12 +233,8 @@ void parseInput(const std::string &input, std::vector<Token> &tokens, std::vecto
 
             tokens.push_back(t); // Adding token to vector
 
-            // std::cout << i << " | Token: " << t.toString() << " | Len: " << t.getLength() << std::endl;
-
             i += t.getLength(); // Increment by length of token
-            if (t.getLength() == 0) {
-                // std::cout << "Error with token " << t.toString() << " at index i: " << i << std::endl;
-                // std::cout << "Length is 0, should  be larger " << std::endl;
+            if (t.getLength() == 0) { // If length is 0, increment by 1 to avoid infinite loop
                 i += 1;
             }
         }
@@ -257,6 +252,10 @@ void printTokens(const std::vector<Token> &tokens) {
 
 void removeWhitespaceTokens(std::vector<Token> &tokens) {
     tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](Token t) { return t.getToken() == WHITESPACE; }), tokens.end());
+}
+
+void removeCommentTokens(std::vector<Token> &tokens) {
+    tokens.erase(std::remove_if(tokens.begin(), tokens.end(), [](Token t) { return t.getToken() == LINECOMMENT || t.getToken() == BLOCKCOMMENT; }), tokens.end());
 }
 
 // Writes stack machine code to file
@@ -319,6 +318,7 @@ int main(int argc, char *argv[]) {
     parseInput(input, tokens, lineIndices);
 
     removeWhitespaceTokens(tokens); // Remove whitespace tokens
+    removeCommentTokens(tokens); // Remove comment tokens
     // printTokens(tokens); // Printing tokens
 
     /* AST */
@@ -340,8 +340,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Printing symbol table
-    // parser.st.print(); // Print the symbol table to standard output for debugging
-    
+    // parser.st.print(); // Print the symbol table to standard output for debugging    
 
     /* CODE GENERATION */
     CodeGenerator codeGen(parser.st); // Create a code generator with the parser's symbol table
@@ -354,10 +353,9 @@ int main(int argc, char *argv[]) {
     //     std::cout << instruction << std::endl;
     // }
     
-    // Save the code to a file
-    std::string filename = "examples/compiled.txt";
+    // Print the code to a file
+    std::string filename = argv[1] + std::string(".vsm"); // Output file name
     codeGen.printStackMachineCodeToFile(filename, code);
-    std::cout << "Just printed code to file " << filename << std::endl;
     
     // Clean up
     delete root;

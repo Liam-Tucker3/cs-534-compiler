@@ -1,0 +1,16 @@
+void main(void){
+    int x[3];
+    int y[3];
+    output("Array testing");
+    x = {1,2,3};
+    y = x * 3;
+    output("Should be 3,6,9");
+    output(y[0]);
+    output(y[1]);
+    output(y[2]);  
+    x = y / 4;
+    output("Should be 0,1,2");
+    output(x[0]);
+    output(x[1]);
+    output(x[2]);  
+}
